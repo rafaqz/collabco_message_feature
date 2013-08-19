@@ -1,0 +1,46 @@
+name = Collabco message feature
+description = Collabco message feature.
+core = 7.x
+package = Collabco
+php = 5.2.4
+version = 7.x-1.9
+project = collabco_message_feature
+dependencies[] = entity
+dependencies[] = entity_token
+dependencies[] = entityreference
+dependencies[] = features
+dependencies[] = list
+dependencies[] = message
+dependencies[] = strongarm
+dependencies[] = token
+dependencies[] = views
+stylesheets[all][] = css/collabco_message_feature.css
+datestamp = 1374541036
+features[ctools][] = strongarm:strongarm:1
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[field_base][] = field_comment_ref
+features[field_base][] = field_node_ref
+features[field_base][] = field_published
+features[field_base][] = message_text
+features[field_instance][] = collabco-message-feature_create_comment-field_comment_ref
+features[field_instance][] = collabco-message-feature_create_comment-field_node_ref
+features[field_instance][] = collabco-message-feature_create_comment-field_published
+features[field_instance][] = collabco-message-feature_create_node-field_node_ref
+features[field_instance][] = collabco-message-feature_create_node-field_published
+features[field_instance][] = collabco-message-feature_user_register-field_published
+features[field_instance][] = message_type-message_type-message_text
+features[message_type][] = create_comment
+features[message_type][] = create_node
+features[message_type][] = user_register
+features[variable][] = field_bundle_settings_message___create_comment
+features[variable][] = field_bundle_settings_message___create_node
+features[variable][] = field_bundle_settings_message___user_register
+features[views_view][] = collabco_message_feature
+
+
+; Information added by drush on 2013-08-19
+version = "unknown"
+project = "collabco_message_feature"
+datestamp = "1376915119"
+
