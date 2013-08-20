@@ -14,16 +14,18 @@ function collabco_message_feature_default_fe_block_settings() {
 
   $export['views-recent_activity-block'] = array(
     'cache' => -1,
-    'css_class' => '',
+    'css_class' => 'iin-feature hidden-phone',
+    'custom' => 0,
     'delta' => 'recent_activity-block',
     'module' => 'views',
     'node_types' => array(),
-    'pages' => '',
+    'pages' => 'innovation-capabilities
+user/regstration',
     'roles' => array(),
     'themes' => array(
       'openhub' => array(
-        'region' => '',
-        'status' => 0,
+        'region' => 'sidebar_first',
+        'status' => 1,
         'theme' => 'openhub',
         'weight' => 0,
       ),
@@ -34,6 +36,8 @@ function collabco_message_feature_default_fe_block_settings() {
         'weight' => 0,
       ),
     ),
+    'title' => '',
+    'visibility' => 0,
   );
 
   return $export;
