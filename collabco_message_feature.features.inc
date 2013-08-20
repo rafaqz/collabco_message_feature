@@ -28,7 +28,7 @@ function collabco_message_feature_default_message_type() {
   $items = array();
   $items['create_comment'] = entity_import('message_type', '{
     "name" : "create_comment",
-    "description" : "Example - Create comment",
+    "description" : "Create comment",
     "argument_keys" : [ "!teaser" ],
     "argument" : [],
     "category" : "message_type",
@@ -60,7 +60,7 @@ function collabco_message_feature_default_message_type() {
   }');
   $items['create_node'] = entity_import('message_type', '{
     "name" : "create_node",
-    "description" : "Example - Create node",
+    "description" : "Create node",
     "argument_keys" : [],
     "argument" : [],
     "category" : "message_type",
@@ -87,7 +87,7 @@ function collabco_message_feature_default_message_type() {
   }');
   $items['user_register'] = entity_import('message_type', '{
     "name" : "user_register",
-    "description" : "Example - User register",
+    "description" : "User register",
     "argument_keys" : [],
     "argument" : [],
     "category" : "message_type",
