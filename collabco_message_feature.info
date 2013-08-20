@@ -44,3 +44,10 @@ version = "unknown"
 project = "collabco_message_feature"
 datestamp = "1376915119"
 
+
+
+; Information added by drush on 2013-08-19
+version = "unknown"
+project = "collabco_message_feature"
+datestamp = "1376967633"
+
