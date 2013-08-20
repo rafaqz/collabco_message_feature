@@ -14,13 +14,11 @@ function collabco_message_feature_default_fe_block_settings() {
 
   $export['views-recent_activity-block'] = array(
     'cache' => -1,
-    'css_class' => 'iin-feature hidden-phone',
-    'custom' => 0,
+    'css_class' => '',
     'delta' => 'recent_activity-block',
     'module' => 'views',
     'node_types' => array(),
-    'pages' => 'innovation-capabilities
-user/regstration',
+    'pages' => '',
     'roles' => array(),
     'themes' => array(
       'openhub' => array(
@@ -36,8 +34,6 @@ user/regstration',
         'weight' => 0,
       ),
     ),
-    'title' => '',
-    'visibility' => 0,
   );
 
   return $export;
