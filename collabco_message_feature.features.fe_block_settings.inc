@@ -20,8 +20,12 @@ function collabco_message_feature_default_fe_block_settings() {
     'module' => 'views',
     'node_types' => array(),
     'pages' => 'innovation-capabilities
-user/regstration',
-    'roles' => array(),
+user/registration
+user/password
+user',
+    'roles' => array(
+      'authenticated user' => 2,
+    ),
     'themes' => array(
       'openhub' => array(
         'region' => 'sidebar_first',
