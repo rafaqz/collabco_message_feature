@@ -288,7 +288,7 @@ function collabco_message_feature_views_default_views() {
   $handler->display->display_options['fields']['message_render_1']['label'] = '';
   $handler->display->display_options['fields']['message_render_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['message_render_1']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['message_render_1']['alter']['text'] = '<div class="commentbubble"></div><div class="bubble_border">[message_render_1]</div>';
+  $handler->display->display_options['fields']['message_render_1']['alter']['text'] = '<div class="commentbubble"></div><div class="bubble_border"><p>[message_render_1]</p></div>';
   $handler->display->display_options['fields']['message_render_1']['alter']['max_length'] = '110';
   $handler->display->display_options['fields']['message_render_1']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['message_render_1']['alter']['html'] = TRUE;
@@ -317,8 +317,8 @@ function collabco_message_feature_views_default_views() {
     <p>[message_render]</p>
     <em class="placeholder">[timestamp]</em>
   </div>
-  [message_render_1]
-  [message_render_2]
+ [message_render_1]
+   <p text-align="right">[message_render_2]</p>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   /* Sort criterion: Message: Timestamp */
