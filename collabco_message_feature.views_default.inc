@@ -318,7 +318,7 @@ function collabco_message_feature_views_default_views() {
     <em class="placeholder">[timestamp]</em>
   </div>
  [message_render_1]
-   <p text-align="right">[message_render_2]</p>
+   <p class="offset3 marginL5">[message_render_2]</p>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   /* Sort criterion: Message: Timestamp */
