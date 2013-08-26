@@ -31,7 +31,7 @@ user',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'openhub',
-        'weight' => 0,
+        'weight' => -19,
       ),
       'seven' => array(
         'region' => '',
