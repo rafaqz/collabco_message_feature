@@ -16,15 +16,20 @@ function collabco_message_feature_node_insert($node) {
   // with another user, we make sure the user is populated with the
   // node's author, instead of the acting user (although in most cases it
   // would be the same user).
+  
+  //only creat messages for certaincontent types
   $type = $node->type;
-  if ($type === 'discussion' or $type === 'event' or $type === 'knowledge_object'){
-    $message = message_create('create_node', array('uid' => $node->uid));
-    // Save reference to the node in the node reference field, and the
-    // "publish" state (i.e. if the node is published or unpublished).
-    $wrapper = entity_metadata_wrapper('message', $message);
-    $wrapper->field_node_ref->set($node);
-    $wrapper->field_published->set($node->status);
-    $wrapper->save();
+  if ($type === 'conversation' or $type === 'event' or $type === 'knowledge_object'){ 
+    $gids = og_get_entity_groups('node', $node);
+    if (empty($gids)) {
+      $message = message_create('create_node', array('uid' => $node->uid));
+      // Save reference to the node in the node reference field, and the
+      // "publish" state (i.e. if the node is published or unpublished).
+      $wrapper = entity_metadata_wrapper('message', $message);
+      $wrapper->field_node_ref->set($node);
+      $wrapper->field_published->set($node->status);
+      $wrapper->save();
+    }
   }
 }
 
@@ -35,18 +40,21 @@ function collabco_message_feature_comment_insert($comment) {
   $account = user_load($comment->uid);
   $node = node_load($comment->nid);
 
-  $message = message_create('create_comment', array(), $account);
-  // Save reference to the node in the node reference field, and the
-  // "publish" state (i.e. if the node is published or unpublished).
-  $wrapper = entity_metadata_wrapper('message', $message);
-  $wrapper->field_node_ref->set($node);
-  $wrapper->field_comment_ref->set($comment);
+  $gids = og_get_entity_groups('node', $node);
+  if (empty($gids)) {
+    $message = message_create('create_comment', array(), $account);
+    // Save reference to the node in the node reference field, and the
+    // "publish" state (i.e. if the node is published or unpublished).
+    $wrapper = entity_metadata_wrapper('message', $message);
+    $wrapper->field_node_ref->set($node);
+    $wrapper->field_comment_ref->set($comment);
 
-  // The message should be published only if the node and the comment are
-  // both published.
-  $published = $node->status && $comment->status;
-  $wrapper->field_published->set($published);
-  $wrapper->save();
+    // The message should be published only if the node and the comment are
+    // both published.
+    $published = $node->status && $comment->status;
+    $wrapper->field_published->set($published);
+    $wrapper->save();
+  }
 }
 
 /**
