@@ -27,11 +27,11 @@ user',
       'authenticated user' => 2,
     ),
     'themes' => array(
-      'openhub' => array(
+      'custom_theme' => array(
         'region' => 'sidebar_first',
         'status' => 1,
-        'theme' => 'openhub',
-        'weight' => -19,
+        'theme' => 'custom_theme',
+        'weight' => 0,
       ),
       'seven' => array(
         'region' => '',

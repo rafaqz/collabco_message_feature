@@ -19,7 +19,7 @@ dependencies[] = text
 dependencies[] = token
 dependencies[] = views
 stylesheets[all][] = css/collabco_message_feature.css
-datestamp = 1377142822
+datestamp = 1377761539
 features[ctools][] = strongarm:strongarm:1
 features[ctools][] = views:views_default:3.0
 features[fe_block_settings][] = views-recent_activity-block
@@ -49,10 +49,3 @@ features_exclude[field][message-create_comment-field_published] = message-create
 features_exclude[field][message-create_node-field_node_ref] = message-create_node-field_node_ref
 features_exclude[field][message-create_node-field_published] = message-create_node-field_published
 features_exclude[field][message-user_register-field_published] = message-user_register-field_published
-
-
-; Information added by drush on 2013-08-26
-version = "unknown"
-project = "collabco_message_feature"
-datestamp = "1377572861"
-
