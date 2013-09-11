@@ -213,7 +213,7 @@ function collabco_message_feature_views_default_views() {
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'admin/content/recent-activity';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Recent Activiy';
+  $handler->display->display_options['menu']['title'] = 'Recent Activity Messages';
   $handler->display->display_options['menu']['description'] = 'View and edit recent activity';
   $handler->display->display_options['menu']['weight'] = '5';
   $handler->display->display_options['menu']['name'] = 'management';
