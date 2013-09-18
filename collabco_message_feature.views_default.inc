@@ -224,7 +224,7 @@ function collabco_message_feature_views_default_views() {
   $view = new view();
   $view->name = 'recent_activity';
   $view->description = 'Show activity stream generated when content and comments are added';
-  $view->tag = 'default';
+  $view->tag = 'Message Feature';
   $view->base_table = 'message';
   $view->human_name = 'Recent Activity';
   $view->core = 7;
