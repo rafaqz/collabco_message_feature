@@ -17,10 +17,11 @@ function collabco_message_feature_node_insert($node) {
   // node's author, instead of the acting user (although in most cases it
   // would be the same user).
   
-  //only creat messages for certaincontent types
+  // Only creat messages for certain content types.
   $type = $node->type;
   if ($type === 'conversation' or $type === 'event' or $type === 'knowledge_object'){ 
     $gids = og_get_entity_groups('node', $node);
+    // Create message.
     if (empty($gids)) {
       $message = message_create('create_node', array('uid' => $node->uid));
       // Save reference to the node in the node reference field, and the
