@@ -310,6 +310,223 @@ function collabco_message_feature_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'message-og_post_in_group-field_node_groups_ref'
+  $field_instances['message-og_post_in_group-field_node_groups_ref'] = array(
+    'bundle' => 'og_post_in_group',
+    'default_value' => NULL,
+    'deleted' => '0',
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'message',
+    'field_name' => 'field_node_groups_ref',
+    'label' => 'Groups reference',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => '60',
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => '0',
+    ),
+  );
+
+  // Exported field_instance: 'message-og_post_in_group-field_node_ref'
+  $field_instances['message-og_post_in_group-field_node_ref'] = array(
+    'bundle' => 'og_post_in_group',
+    'default_value' => NULL,
+    'deleted' => '0',
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'message',
+    'field_name' => 'field_node_ref',
+    'label' => 'Node reference',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => '60',
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => '1',
+    ),
+  );
+
+  // Exported field_instance: 'message-og_post_in_group-field_node_groups_ref'
+  $field_bases['message-og_post_in_group-field_node_groups_ref'] = array(
+    'active' => '1',
+    'cardinality' => '-1',
+    'deleted' => '0',
+    'entity_types' => array(),
+    'field_name' => 'field_node_groups_ref',
+    'foreign keys' => array(
+      'node' => array(
+        'columns' => array(
+          'target_id' => 'nid',
+        ),
+        'table' => 'node',
+      ),
+    ),
+    'indexes' => array(
+      'target_id' => array(
+        0 => 'target_id',
+      ),
+    ),
+    'module' => 'entityreference',
+    'settings' => array(
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'direction' => 'ASC',
+          'field' => 'body:value',
+          'property' => 'nid',
+          'type' => 'none',
+        ),
+        'target_bundles' => array(),
+      ),
+      'handler_submit' => 'Change handler',
+      'target_type' => 'node',
+    ),
+    'translatable' => '0',
+    'type' => 'entityreference',
+  );
+
+  // Exported field_instance: 'message-og_post_in_group-field_published'
+  $field_instances['message-og_post_in_group-field_published'] = array(
+    'bundle' => 'og_post_in_group',
+    'default_value' => NULL,
+    'deleted' => '0',
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'message',
+    'field_name' => 'field_published',
+    'label' => 'Published',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => '2',
+    ),
+  );
+
+  // Exported field_instance: 'message-og_user_membership-field_node_groups_ref'
+  $field_instances['message-og_user_membership-field_node_groups_ref'] = array(
+    'bundle' => 'og_user_membership',
+    'default_value' => NULL,
+    'deleted' => '0',
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'message',
+    'field_name' => 'field_node_groups_ref',
+    'label' => 'Groups reference',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => '60',
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => '0',
+    ),
+  );
+
+  // Exported field_instance: 'message-og_user_membership-field_published'
+  $field_instances['message-og_user_membership-field_published'] = array(
+    'bundle' => 'og_user_membership',
+    'default_value' => NULL,
+    'deleted' => '0',
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'message',
+    'field_name' => 'field_published',
+    'label' => 'Published',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => '1',
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Comment reference');
