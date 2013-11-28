@@ -375,6 +375,32 @@ function collabco_message_feature_views_default_views() {
   $handler->display->display_options['arguments']['user_1']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['user_1']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['user_1']['summary_options']['items_per_page'] = '25';
+
+  /* Display: Group Block */
+  $handler = $view->new_display('block', 'Group Block', 'group_block');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Recent Group Activity';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Message: User uid */
+  $handler->display->display_options['relationships']['user']['id'] = 'user';
+  $handler->display->display_options['relationships']['user']['table'] = 'message';
+  $handler->display->display_options['relationships']['user']['field'] = 'user';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_node_groups_ref_target_id']['id'] = 'field_node_groups_ref_target_id';
+  $handler->display->display_options['relationships']['field_node_groups_ref_target_id']['table'] = 'field_data_field_node_groups_ref';
+  $handler->display->display_options['relationships']['field_node_groups_ref_target_id']['field'] = 'field_node_groups_ref_target_id';
+  $handler->display->display_options['relationships']['field_node_groups_ref_target_id']['required'] = TRUE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['relationship'] = 'field_node_groups_ref_target_id';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'og_context';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
   $export['recent_activity'] = $view;
 
   return $export;
