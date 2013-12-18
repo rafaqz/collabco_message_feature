@@ -89,6 +89,55 @@ function collabco_message_feature_default_message_type() {
     },
     "rdf_mapping" : []
   }');
+  $items['og_post_in_group'] = entity_import('message_type', '{
+    "name" : "og_post_in_group",
+    "description" : "OG post in group",
+    "argument_keys" : [ "!groups" ],
+    "argument" : [],
+    "category" : "message_type",
+    "data" : {
+      "token options" : { "clear" : 0 },
+      "purge" : { "override" : 0, "enabled" : 0, "quota" : "", "days" : "" }
+    },
+    "language" : "en",
+    "arguments" : null,
+    "message_text" : { "und" : [
+        {
+          "value" : "\\r\\n\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E[message:user:name]\\u003C\\/a\\u003E posted \\u003Ca href=\\u0022[message:field-node-ref:url]\\u0022\\u003E[message:field-node-ref:title]\\u003C\\/a\\u003E in !groups.\\r\\n",
+          "format" : "php_code",
+          "safe_value" : "\\n\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E[message:user:name]\\u003C\\/a\\u003E posted \\u003Ca href=\\u0022[message:field-node-ref:url]\\u0022\\u003E[message:field-node-ref:title]\\u003C\\/a\\u003E in !groups.\\n"
+        },
+        {
+          "value" : "[message:field-node-ref:node-teaser]\\r\\n",
+          "format" : "php_code",
+          "safe_value" : "[message:field-node-ref:node-teaser]\\n"
+        }
+      ]
+    },
+    "rdf_mapping" : []
+  }');
+  $items['og_user_membership'] = entity_import('message_type', '{
+    "name" : "og_user_membership",
+    "description" : "OG user membership",
+    "argument_keys" : [],
+    "argument" : [],
+    "category" : "message_type",
+    "data" : {
+      "token options" : { "clear" : 0 },
+      "purge" : { "override" : 0, "enabled" : 0, "quota" : "", "days" : "" }
+    },
+    "language" : "en",
+    "arguments" : null,
+    "message_text" : { "und" : [
+        {
+          "value" : "\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E@{message:user:name}\\u003C\\/a\\u003E joined \\u003Ca href=\\u0022[message:field-node-groups-ref:0:url]\\u0022\\u003E[message:field-node-groups-ref:0:title]\\u003C\\/a\\u003E group.\\r\\n",
+          "format" : "php_code",
+          "safe_value" : "\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E@{message:user:name}\\u003C\\/a\\u003E joined \\u003Ca href=\\u0022[message:field-node-groups-ref:0:url]\\u0022\\u003E[message:field-node-groups-ref:0:title]\\u003C\\/a\\u003E group.\\n"
+        }
+      ]
+    },
+    "rdf_mapping" : []
+  }');
   $items['user_register'] = entity_import('message_type', '{
     "name" : "user_register",
     "description" : "User register",
