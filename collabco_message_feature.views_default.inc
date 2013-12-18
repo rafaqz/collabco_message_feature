@@ -13,7 +13,7 @@ function collabco_message_feature_views_default_views() {
   $view = new view();
   $view->name = 'message_admin';
   $view->description = 'View for deleting messages';
-  $view->tag = 'default';
+  $view->tag = 'Message Feature';
   $view->base_table = 'message';
   $view->human_name = 'Message Admin';
   $view->core = 7;
