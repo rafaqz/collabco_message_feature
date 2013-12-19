@@ -46,7 +46,7 @@ user',
 
   $export['views-recent_activity-group_block'] = array(
     'cache' => -1,
-    'css_class' => 'sidetheme',
+    'css_class' => '',
     'custom' => 0,
     'delta' => 'recent_activity-group_block',
     'module' => 'views',
@@ -67,7 +67,7 @@ user',
         'weight' => 0,
       ),
     ),
-    'title' => '',
+    'title' => 'Activity',
     'visibility' => 0,
   );
 
