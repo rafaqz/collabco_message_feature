@@ -26,6 +26,151 @@ function collabco_message_feature_views_api() {
 }
 
 /**
+ * Implements hook_flag_default_flags().
+ */
+function collabco_message_feature_flag_default_flags() {
+  $flags = array();
+  // Exported flag: "Content".
+  $flags['subscribe_node'] = array(
+    'entity_type' => 'node',
+    'title' => 'Content',
+    'global' => 0,
+    'types' => array(),
+    'flag_short' => 'Subscribe',
+    'flag_long' => '',
+    'flag_message' => 'You are now subscribed to this item.',
+    'unflag_short' => 'Unsubscribe',
+    'unflag_long' => '',
+    'unflag_message' => 'You are no longer subscribed to this item.',
+    'unflag_denied_text' => '',
+    'link_type' => 'toggle',
+    'weight' => 0,
+    'show_in_links' => array(
+      'full' => 0,
+      'teaser' => 0,
+      'rss' => 0,
+      'search_index' => 0,
+      'search_result' => 0,
+      'print' => 0,
+      'diff_standard' => 0,
+      'token' => 0,
+    ),
+    'show_as_field' => 1,
+    'show_on_form' => 0,
+    'access_author' => '',
+    'show_contextual_link' => 0,
+    'i18n' => 0,
+    'module' => 'collabco_message_feature',
+    'locked' => array(
+      0 => 'name',
+    ),
+    'api_version' => 3,
+  );
+  // Exported flag: "Groups".
+  $flags['subscribe_og'] = array(
+    'entity_type' => 'node',
+    'title' => 'Groups',
+    'global' => 0,
+    'types' => array(),
+    'flag_short' => 'Subscribe to Group ',
+    'flag_long' => '',
+    'flag_message' => 'You are now subscribed to this item.',
+    'unflag_short' => 'Unsubscribe from Group',
+    'unflag_long' => '',
+    'unflag_message' => 'You are no longer subscribed to this item.',
+    'unflag_denied_text' => '',
+    'link_type' => 'toggle',
+    'weight' => 0,
+    'show_in_links' => array(
+      'full' => 0,
+      'teaser' => 0,
+      'rss' => 0,
+      'search_index' => 0,
+      'search_result' => 0,
+      'print' => 0,
+      'diff_standard' => 0,
+      'token' => 0,
+    ),
+    'show_as_field' => 1,
+    'show_on_form' => 0,
+    'access_author' => '',
+    'show_contextual_link' => 0,
+    'i18n' => 0,
+    'module' => 'collabco_message_feature',
+    'locked' => array(
+      0 => 'name',
+    ),
+    'api_version' => 3,
+  );
+  // Exported flag: "Terms".
+  $flags['subscribe_term'] = array(
+    'entity_type' => 'taxonomy_term',
+    'title' => 'Terms',
+    'global' => 0,
+    'types' => array(
+      0 => 'category',
+    ),
+    'flag_short' => 'Subscribe',
+    'flag_long' => '',
+    'flag_message' => 'You are now subscribed to this item.',
+    'unflag_short' => 'Unsubscribe',
+    'unflag_long' => '',
+    'unflag_message' => 'You are no longer subscribed to this item.',
+    'unflag_denied_text' => '',
+    'link_type' => 'toggle',
+    'weight' => 0,
+    'show_in_links' => array(
+      'full' => 0,
+      'diff_standard' => 0,
+      'token' => 0,
+    ),
+    'show_as_field' => 1,
+    'show_on_form' => 0,
+    'access_author' => '',
+    'show_contextual_link' => 0,
+    'module' => 'collabco_message_feature',
+    'locked' => array(
+      0 => 'name',
+    ),
+    'api_version' => 3,
+  );
+  // Exported flag: "Users".
+  $flags['subscribe_user'] = array(
+    'entity_type' => 'user',
+    'title' => 'Users',
+    'global' => 0,
+    'types' => array(),
+    'flag_short' => 'Subscribe',
+    'flag_long' => '',
+    'flag_message' => 'You are now subscribed to this item.',
+    'unflag_short' => 'Unsubscribe',
+    'unflag_long' => '',
+    'unflag_message' => 'You are no longer subscribed to this item.',
+    'unflag_denied_text' => '',
+    'link_type' => 'toggle',
+    'weight' => 0,
+    'show_in_links' => array(
+      'full' => 0,
+      'diff_standard' => 0,
+      'token' => 0,
+    ),
+    'show_as_field' => 1,
+    'show_on_form' => 0,
+    'access_author' => '',
+    'show_contextual_link' => 0,
+    'show_on_profile' => 0,
+    'access_uid' => '',
+    'module' => 'collabco_message_feature',
+    'locked' => array(
+      0 => 'name',
+    ),
+    'api_version' => 3,
+  );
+  return $flags;
+
+}
+
+/**
  * Implements hook_default_message_type().
  */
 function collabco_message_feature_default_message_type() {
@@ -76,9 +221,9 @@ function collabco_message_feature_default_message_type() {
     "arguments" : [],
     "message_text" : { "und" : [
         {
-          "value" : "\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E@{message:user:name}\\u003C\\/a\\u003E\\u003Cbr\\u003Ecreated \\u003Ca href=\\u0022[message:field-node-ref:url]\\u0022\\u003E[message:field-node-ref:title]\\u003C\\/a\\u003E",
+          "value" : "\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E@{message:user:name}\\u003C\\/a\\u003E posted [message:field-node-ref:content-type:name] \\u003Ca href=\\u0022[message:field-node-ref:url]\\u0022\\u003E[message:field-node-ref:title]\\u003C\\/a\\u003E",
           "format" : "php_code",
-          "safe_value" : "\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E@{message:user:name}\\u003C\\/a\\u003E\\u003Cbr\\u003Ecreated \\u003Ca href=\\u0022[message:field-node-ref:url]\\u0022\\u003E[message:field-node-ref:title]\\u003C\\/a\\u003E"
+          "safe_value" : "\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E@{message:user:name}\\u003C\\/a\\u003E posted [message:field-node-ref:content-type:name] \\u003Ca href=\\u0022[message:field-node-ref:url]\\u0022\\u003E[message:field-node-ref:title]\\u003C\\/a\\u003E"
         },
         {
           "value" : "\\u003Ca href=\\u0022[message:field-node-ref:url]\\u0022\\u003Eread more\\u003C\\/a\\u003E",
@@ -103,9 +248,9 @@ function collabco_message_feature_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "\\r\\n\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E[message:user:name]\\u003C\\/a\\u003E posted \\u003Ca href=\\u0022[message:field-node-ref:url]\\u0022\\u003E[message:field-node-ref:title]\\u003C\\/a\\u003E in !groups.\\r\\n",
+          "value" : "\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E[message:user:name]\\u003C\\/a\\u003E posted [message:field-node-ref:content-type:name] \\u003Ca href=\\u0022[message:field-node-ref:url]\\u0022\\u003E[message:field-node-ref:title]\\u003C\\/a\\u003E in !groups.",
           "format" : "php_code",
-          "safe_value" : "\\n\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E[message:user:name]\\u003C\\/a\\u003E posted \\u003Ca href=\\u0022[message:field-node-ref:url]\\u0022\\u003E[message:field-node-ref:title]\\u003C\\/a\\u003E in !groups.\\n"
+          "safe_value" : "\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E[message:user:name]\\u003C\\/a\\u003E posted [message:field-node-ref:content-type:name] \\u003Ca href=\\u0022[message:field-node-ref:url]\\u0022\\u003E[message:field-node-ref:title]\\u003C\\/a\\u003E in !groups."
         },
         {
           "value" : "[message:field-node-ref:node-teaser]\\r\\n",
