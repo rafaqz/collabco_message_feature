@@ -67,6 +67,7 @@ features[variable][] = field_bundle_settings_message__create_comment
 features[variable][] = field_bundle_settings_message__create_node
 features[variable][] = field_bundle_settings_message__og_post_in_group
 features[variable][] = field_bundle_settings_message__og_user_membership
+features[variable][] = field_bundle_settings_message__user_register
 features[variable][] = message_subscribe_node
 features[variable][] = message_subscribe_og
 features[variable][] = message_subscribe_term
