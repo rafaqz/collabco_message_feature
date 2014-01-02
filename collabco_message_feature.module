@@ -19,7 +19,7 @@ function collabco_message_feature_node_insert($node) {
   
 
   $node_wrapper = entity_metadata_wrapper('node', $node);
-  if (($node_wrapper->__isset('group_access')) && ($node_wrapper->group_access->value() == '1')) {
+  if (($node_wrapper->__isset(OG_ACCESS_FIELD)) && ($node_wrapper->{OG_ACCESS_FIELD}->value() == '1')) {
     // Dont add messages for the creation of private groups.
     return;
   }
@@ -228,7 +228,7 @@ function collabco_message_feature_node_view_alter(&$build) {
     unset($build['flag_subscribe_node']);
   }
   // Only show group subscription if this is actually a group.
-  if (empty($build['#node']->group_group)) {
+  if (empty($build['#node']->{OG_GROUP_FIELD})) {
     unset($build['flag_subscribe_og']);
   }
 
