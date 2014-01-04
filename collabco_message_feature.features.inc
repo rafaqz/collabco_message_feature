@@ -7,12 +7,10 @@
 /**
  * Implements hook_ctools_plugin_api().
  */
-function collabco_message_feature_ctools_plugin_api() {
-  list($module, $api) = func_get_args();
+function collabco_message_feature_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "context" && $api == "context") {
     return array("version" => "3");
   }
-  list($module, $api) = func_get_args();
   if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => "1");
   }
@@ -21,7 +19,7 @@ function collabco_message_feature_ctools_plugin_api() {
 /**
  * Implements hook_views_api().
  */
-function collabco_message_feature_views_api() {
+function collabco_message_feature_views_api($module = NULL, $api = NULL) {
   return array("api" => "3.0");
 }
 
@@ -36,12 +34,12 @@ function collabco_message_feature_flag_default_flags() {
     'title' => 'Content',
     'global' => 0,
     'types' => array(),
-    'flag_short' => 'Subscribe',
+    'flag_short' => 'Follow',
     'flag_long' => '',
-    'flag_message' => 'You are now subscribed to this item.',
-    'unflag_short' => 'Unsubscribe',
+    'flag_message' => 'You are now following this [node:content-type:name].',
+    'unflag_short' => 'Unfollow',
     'unflag_long' => '',
-    'unflag_message' => 'You are no longer subscribed to this item.',
+    'unflag_message' => 'You are no longer following this [node:content-type:name].',
     'unflag_denied_text' => '',
     'link_type' => 'toggle',
     'weight' => 0,
@@ -72,12 +70,12 @@ function collabco_message_feature_flag_default_flags() {
     'title' => 'Groups',
     'global' => 0,
     'types' => array(),
-    'flag_short' => 'Subscribe',
+    'flag_short' => 'Follow',
     'flag_long' => '',
-    'flag_message' => 'You are now subscribed to this item.',
-    'unflag_short' => 'Unsubscribe',
+    'flag_message' => 'You are now following this group.',
+    'unflag_short' => 'Unfollow',
     'unflag_long' => '',
-    'unflag_message' => 'You are no longer subscribed to this item.',
+    'unflag_message' => 'You are no longer following this group.',
     'unflag_denied_text' => '',
     'link_type' => 'toggle',
     'weight' => 0,
@@ -108,12 +106,12 @@ function collabco_message_feature_flag_default_flags() {
     'title' => 'Terms',
     'global' => 0,
     'types' => array(),
-    'flag_short' => 'Subscribe',
+    'flag_short' => 'Follow',
     'flag_long' => '',
-    'flag_message' => 'You are now subscribed to this item.',
-    'unflag_short' => 'Unsubscribe',
+    'flag_message' => 'You are now following this term.',
+    'unflag_short' => 'Unfollow',
     'unflag_long' => '',
-    'unflag_message' => 'You are no longer subscribed to this item.',
+    'unflag_message' => 'You are no longer following this term.',
     'unflag_denied_text' => '',
     'link_type' => 'toggle',
     'weight' => 0,
@@ -138,12 +136,12 @@ function collabco_message_feature_flag_default_flags() {
     'title' => 'Users',
     'global' => 0,
     'types' => array(),
-    'flag_short' => 'Subscribe',
+    'flag_short' => 'Follow',
     'flag_long' => '',
-    'flag_message' => 'You are now subscribed to this item.',
-    'unflag_short' => 'Unsubscribe',
+    'flag_message' => 'You are now following this user.',
+    'unflag_short' => 'Unfollow',
     'unflag_long' => '',
-    'unflag_message' => 'You are no longer subscribed to this item.',
+    'unflag_message' => 'You are no longer following this user.',
     'unflag_denied_text' => '',
     'link_type' => 'toggle',
     'weight' => 0,
@@ -156,7 +154,7 @@ function collabco_message_feature_flag_default_flags() {
     'show_on_form' => 0,
     'access_author' => '',
     'show_contextual_link' => 0,
-    'show_on_profile' => 0,
+    'show_on_profile' => 1,
     'access_uid' => '',
     'module' => 'collabco_message_feature',
     'locked' => array(
