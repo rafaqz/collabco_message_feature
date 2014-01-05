@@ -15,7 +15,23 @@ function collabco_message_feature_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_message__create_comment';
   $strongarm->value = array(
-    'view_modes' => array(),
+    'view_modes' => array(
+      'full' => array(
+        'custom_settings' => TRUE,
+      ),
+      'message_notify_email_subject' => array(
+        'custom_settings' => TRUE,
+      ),
+      'message_notify_email_body' => array(
+        'custom_settings' => TRUE,
+      ),
+      'diff_standard' => array(
+        'custom_settings' => FALSE,
+      ),
+      'token' => array(
+        'custom_settings' => FALSE,
+      ),
+    ),
     'extra_fields' => array(
       'form' => array(),
       'display' => array(
@@ -28,6 +44,14 @@ function collabco_message_feature_strongarm() {
             'weight' => '0',
             'visible' => TRUE,
           ),
+          'default' => array(
+            'weight' => '0',
+            'visible' => TRUE,
+          ),
+          'full' => array(
+            'weight' => '0',
+            'visible' => TRUE,
+          ),
         ),
         'message__message_text__1' => array(
           'message_notify_email_subject' => array(
@@ -35,6 +59,14 @@ function collabco_message_feature_strongarm() {
             'visible' => FALSE,
           ),
           'message_notify_email_body' => array(
+            'weight' => '1',
+            'visible' => TRUE,
+          ),
+          'default' => array(
+            'weight' => '1',
+            'visible' => TRUE,
+          ),
+          'full' => array(
             'weight' => '1',
             'visible' => TRUE,
           ),
@@ -48,6 +80,14 @@ function collabco_message_feature_strongarm() {
             'weight' => '2',
             'visible' => FALSE,
           ),
+          'default' => array(
+            'weight' => '2',
+            'visible' => TRUE,
+          ),
+          'full' => array(
+            'weight' => '2',
+            'visible' => TRUE,
+          ),
         ),
       ),
     ),
@@ -59,7 +99,23 @@ function collabco_message_feature_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_message__create_node';
   $strongarm->value = array(
-    'view_modes' => array(),
+    'view_modes' => array(
+      'message_notify_email_subject' => array(
+        'custom_settings' => TRUE,
+      ),
+      'message_notify_email_body' => array(
+        'custom_settings' => TRUE,
+      ),
+      'full' => array(
+        'custom_settings' => TRUE,
+      ),
+      'diff_standard' => array(
+        'custom_settings' => FALSE,
+      ),
+      'token' => array(
+        'custom_settings' => FALSE,
+      ),
+    ),
     'extra_fields' => array(
       'form' => array(),
       'display' => array(
@@ -68,11 +124,27 @@ function collabco_message_feature_strongarm() {
             'weight' => '0',
             'visible' => TRUE,
           ),
+          'default' => array(
+            'weight' => '0',
+            'visible' => TRUE,
+          ),
+          'full' => array(
+            'weight' => '0',
+            'visible' => TRUE,
+          ),
         ),
         'message__message_text__1' => array(
           'message_notify_email_subject' => array(
             'weight' => '1',
             'visible' => FALSE,
+          ),
+          'default' => array(
+            'weight' => '1',
+            'visible' => TRUE,
+          ),
+          'full' => array(
+            'weight' => '1',
+            'visible' => TRUE,
           ),
         ),
       ),
@@ -85,7 +157,23 @@ function collabco_message_feature_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_message__og_post_in_group';
   $strongarm->value = array(
-    'view_modes' => array(),
+    'view_modes' => array(
+      'full' => array(
+        'custom_settings' => TRUE,
+      ),
+      'message_notify_email_subject' => array(
+        'custom_settings' => TRUE,
+      ),
+      'message_notify_email_body' => array(
+        'custom_settings' => TRUE,
+      ),
+      'diff_standard' => array(
+        'custom_settings' => FALSE,
+      ),
+      'token' => array(
+        'custom_settings' => FALSE,
+      ),
+    ),
     'extra_fields' => array(
       'form' => array(),
       'display' => array(
@@ -94,9 +182,25 @@ function collabco_message_feature_strongarm() {
             'weight' => '0',
             'visible' => TRUE,
           ),
+          'default' => array(
+            'weight' => '0',
+            'visible' => TRUE,
+          ),
+          'full' => array(
+            'weight' => '0',
+            'visible' => TRUE,
+          ),
         ),
         'message__message_text__1' => array(
           'message_notify_email_body' => array(
+            'weight' => '1',
+            'visible' => TRUE,
+          ),
+          'default' => array(
+            'weight' => '1',
+            'visible' => TRUE,
+          ),
+          'full' => array(
             'weight' => '1',
             'visible' => TRUE,
           ),
@@ -111,12 +215,36 @@ function collabco_message_feature_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_message__og_user_membership';
   $strongarm->value = array(
-    'view_modes' => array(),
+    'view_modes' => array(
+      'full' => array(
+        'custom_settings' => TRUE,
+      ),
+      'message_notify_email_subject' => array(
+        'custom_settings' => TRUE,
+      ),
+      'message_notify_email_body' => array(
+        'custom_settings' => TRUE,
+      ),
+      'diff_standard' => array(
+        'custom_settings' => FALSE,
+      ),
+      'token' => array(
+        'custom_settings' => FALSE,
+      ),
+    ),
     'extra_fields' => array(
       'form' => array(),
       'display' => array(
         'message__message_text__0' => array(
           'message_notify_email_subject' => array(
+            'weight' => '0',
+            'visible' => TRUE,
+          ),
+          'default' => array(
+            'weight' => '0',
+            'visible' => TRUE,
+          ),
+          'full' => array(
             'weight' => '0',
             'visible' => TRUE,
           ),
@@ -131,7 +259,23 @@ function collabco_message_feature_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_message__user_register';
   $strongarm->value = array(
-    'view_modes' => array(),
+    'view_modes' => array(
+      'full' => array(
+        'custom_settings' => TRUE,
+      ),
+      'message_notify_email_subject' => array(
+        'custom_settings' => TRUE,
+      ),
+      'message_notify_email_body' => array(
+        'custom_settings' => TRUE,
+      ),
+      'diff_standard' => array(
+        'custom_settings' => FALSE,
+      ),
+      'token' => array(
+        'custom_settings' => FALSE,
+      ),
+    ),
     'extra_fields' => array(
       'form' => array(),
       'display' => array(
@@ -144,6 +288,14 @@ function collabco_message_feature_strongarm() {
             'visible' => FALSE,
             'weight' => 0,
           ),
+          'default' => array(
+            'weight' => '0',
+            'visible' => TRUE,
+          ),
+          'full' => array(
+            'weight' => '0',
+            'visible' => TRUE,
+          ),
         ),
         'message__message_text__1' => array(
           'message_notify_email_subject' => array(
@@ -154,6 +306,7 @@ function collabco_message_feature_strongarm() {
             'visible' => TRUE,
             'weight' => 0,
           ),
+          'full' => NULL,
         ),
       ),
     ),
