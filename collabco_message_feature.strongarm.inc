@@ -78,7 +78,7 @@ function collabco_message_feature_strongarm() {
           ),
           'message_notify_email_body' => array(
             'weight' => '2',
-            'visible' => FALSE,
+            'visible' => TRUE,
           ),
           'default' => array(
             'weight' => '2',
@@ -190,6 +190,10 @@ function collabco_message_feature_strongarm() {
             'weight' => '0',
             'visible' => TRUE,
           ),
+          'message_notify_email_subject' => array(
+            'weight' => '0',
+            'visible' => TRUE,
+          ),
         ),
         'message__message_text__1' => array(
           'message_notify_email_body' => array(
@@ -203,6 +207,10 @@ function collabco_message_feature_strongarm() {
           'full' => array(
             'weight' => '1',
             'visible' => TRUE,
+          ),
+          'message_notify_email_subject' => array(
+            'weight' => '1',
+            'visible' => FALSE,
           ),
         ),
       ),
