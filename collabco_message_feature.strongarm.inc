@@ -484,28 +484,28 @@ function collabco_message_feature_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'message_subscribe_node';
-  $strongarm->value = 'subscribe_node_email:default';
+  $strongarm->value = 'subscribe_node:default';
   $export['message_subscribe_node'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'message_subscribe_og';
-  $strongarm->value = 'subscribe_node_email:default';
+  $strongarm->value = 'subscribe_group:default';
   $export['message_subscribe_og'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'message_subscribe_term';
-  $strongarm->value = 'subscribe_taxonomy_term_email:default';
+  $strongarm->value = 'subscribe_taxonomy_term:default';
   $export['message_subscribe_term'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'message_subscribe_user';
-  $strongarm->value = 'subscribe_user_email:default';
+  $strongarm->value = 'subscribe_user:default';
   $export['message_subscribe_user'] = $strongarm;
 
   return $export;

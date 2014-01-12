@@ -81,6 +81,7 @@ features[variable][] = message_subscribe_term
 features[variable][] = message_subscribe_user
 features[views_view][] = message_admin
 features[views_view][] = recent_activity
+features[views_view][] = subscribe_group
 features_exclude[field][message-create_comment-field_comment_ref] = message-create_comment-field_comment_ref
 features_exclude[field][message-create_comment-field_node_ref] = message-create_comment-field_node_ref
 features_exclude[field][message-create_comment-field_published] = message-create_comment-field_published
