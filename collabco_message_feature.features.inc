@@ -147,14 +147,14 @@ function collabco_message_feature_flag_default_flags() {
     'weight' => 0,
     'show_in_links' => array(
       'full' => 'full',
-      'token' => 'token',
       'diff_standard' => 0,
+      'token' => 0,
     ),
     'show_as_field' => 0,
     'show_on_form' => 0,
     'access_author' => '',
     'show_contextual_link' => 0,
-    'show_on_profile' => 1,
+    'show_on_profile' => 0,
     'access_uid' => '',
     'module' => 'collabco_message_feature',
     'locked' => array(
