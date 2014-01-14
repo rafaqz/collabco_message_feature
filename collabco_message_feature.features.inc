@@ -29,7 +29,7 @@ function collabco_message_feature_views_api($module = NULL, $api = NULL) {
 function collabco_message_feature_flag_default_flags() {
   $flags = array();
   // Exported flag: "Content".
-  $flags['subscribe_node'] = array(
+  $flags['subscribe_node_off'] = array(
     'entity_type' => 'node',
     'title' => 'Content',
     'global' => 0,
@@ -65,7 +65,7 @@ function collabco_message_feature_flag_default_flags() {
     'api_version' => 3,
   );
   // Exported flag: "Groups".
-  $flags['subscribe_og'] = array(
+  $flags['subscribe_og_off'] = array(
     'entity_type' => 'node',
     'title' => 'Groups',
     'global' => 0,
@@ -101,7 +101,7 @@ function collabco_message_feature_flag_default_flags() {
     'api_version' => 3,
   );
   // Exported flag: "Terms".
-  $flags['subscribe_term'] = array(
+  $flags['subscribe_term_off'] = array(
     'entity_type' => 'taxonomy_term',
     'title' => 'Terms',
     'global' => 0,
@@ -131,7 +131,7 @@ function collabco_message_feature_flag_default_flags() {
     'api_version' => 3,
   );
   // Exported flag: "Users".
-  $flags['subscribe_user'] = array(
+  $flags['subscribe_user_off'] = array(
     'entity_type' => 'user',
     'title' => 'Users',
     'global' => 0,
