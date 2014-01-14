@@ -225,14 +225,14 @@ function collabco_message_feature_group_list(Message $message) {
 function collabco_message_feature_node_view_alter(&$build) {
   // Only allow subscription if comments are open.
   if (($build['#node']->comment !== '2')) {
-    unset($build['links']['flag']['#links']['flag-subscribe_node_off']);
+    unset($build['links']['flag']['#links']['flag-follow_node']);
   }
   // Only show group subscription if this is actually a group.
   if (empty($build['#node']->{OG_GROUP_FIELD})) {
-    unset($build['links']['flag']['#links']['flag-subscribe_og_off']);
+    unset($build['links']['flag']['#links']['flag-follow_og']);
   }
   else {
-    unset($build['links']['flag']['#links']['flag-subscribe_node_off']);
+    unset($build['links']['flag']['#links']['flag-follow_node']);
   }
 
   $a = 1;

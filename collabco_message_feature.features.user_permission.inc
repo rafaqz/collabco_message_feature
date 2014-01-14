@@ -26,9 +26,9 @@ function collabco_message_feature_user_default_permissions() {
     'module' => 'message_subscribe',
   );
 
-  // Exported permission: 'flag subscribe_node_off'.
-  $permissions['flag subscribe_node_off'] = array(
-    'name' => 'flag subscribe_node_off',
+  // Exported permission: 'flag follow_node'.
+  $permissions['flag follow_node'] = array(
+    'name' => 'flag follow_node',
     'roles' => array(
       'authenticated user' => 'authenticated user',
     ),
@@ -44,9 +44,9 @@ function collabco_message_feature_user_default_permissions() {
     'module' => 'flag',
   );
 
-  // Exported permission: 'flag subscribe_og_off'.
-  $permissions['flag subscribe_og_off'] = array(
-    'name' => 'flag subscribe_og_off',
+  // Exported permission: 'flag follow_og'.
+  $permissions['flag follow_og'] = array(
+    'name' => 'flag follow_og',
     'roles' => array(
       'authenticated user' => 'authenticated user',
     ),
@@ -60,9 +60,9 @@ function collabco_message_feature_user_default_permissions() {
     'module' => 'flag',
   );
 
-  // Exported permission: 'flag subscribe_term_off'.
-  $permissions['flag subscribe_term_off'] = array(
-    'name' => 'flag subscribe_term_off',
+  // Exported permission: 'flag follow_term'.
+  $permissions['flag follow_term'] = array(
+    'name' => 'flag follow_term',
     'roles' => array(),
     'module' => 'flag',
   );
@@ -74,18 +74,18 @@ function collabco_message_feature_user_default_permissions() {
     'module' => 'flag',
   );
 
-  // Exported permission: 'flag subscribe_user_off'.
-  $permissions['flag subscribe_user_off'] = array(
-    'name' => 'flag subscribe_user_off',
+  // Exported permission: 'flag follow_user'.
+  $permissions['flag follow_user'] = array(
+    'name' => 'flag follow_user',
     'roles' => array(
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'flag',
   );
 
-  // Exported permission: 'unflag subscribe_node_off'.
-  $permissions['unflag subscribe_node_off'] = array(
-    'name' => 'unflag subscribe_node_off',
+  // Exported permission: 'unflag follow_node'.
+  $permissions['unflag follow_node'] = array(
+    'name' => 'unflag follow_node',
     'roles' => array(
       'authenticated user' => 'authenticated user',
     ),
@@ -101,9 +101,9 @@ function collabco_message_feature_user_default_permissions() {
     'module' => 'flag',
   );
 
-  // Exported permission: 'unflag subscribe_og_off'.
-  $permissions['unflag subscribe_og_off'] = array(
-    'name' => 'unflag subscribe_og_off',
+  // Exported permission: 'unflag follow_og'.
+  $permissions['unflag follow_og'] = array(
+    'name' => 'unflag follow_og',
     'roles' => array(
       'authenticated user' => 'authenticated user',
     ),
@@ -117,9 +117,9 @@ function collabco_message_feature_user_default_permissions() {
     'module' => 'flag',
   );
 
-  // Exported permission: 'unflag subscribe_term_off'.
-  $permissions['unflag subscribe_term_off'] = array(
-    'name' => 'unflag subscribe_term_off',
+  // Exported permission: 'unflag follow_term'.
+  $permissions['unflag follow_term'] = array(
+    'name' => 'unflag follow_term',
     'roles' => array(),
     'module' => 'flag',
   );
@@ -131,9 +131,9 @@ function collabco_message_feature_user_default_permissions() {
     'module' => 'flag',
   );
 
-  // Exported permission: 'unflag subscribe_user_off'.
-  $permissions['unflag subscribe_user_off'] = array(
-    'name' => 'unflag subscribe_user_off',
+  // Exported permission: 'unflag follow_user'.
+  $permissions['unflag follow_user'] = array(
+    'name' => 'unflag follow_user',
     'roles' => array(
       'authenticated user' => 'authenticated user',
     ),
