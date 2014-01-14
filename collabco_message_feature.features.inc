@@ -120,6 +120,7 @@ function collabco_message_feature_flag_default_flags() {
     'show_on_form' => 0,
     'access_author' => '',
     'show_contextual_link' => 0,
+    'api_version' => 3,
     'module' => 'collabco_message_feature',
     'locked' => array(
       0 => 'name',

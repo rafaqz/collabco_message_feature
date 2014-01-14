@@ -52,6 +52,7 @@ features[field_instance][] = message_type-message_type-message_text
 features[flag][] = follow_node
 features[flag][] = follow_og
 features[flag][] = follow_user
+features[flag][] = follow_term
 features[message_type][] = create_comment
 features[message_type][] = create_node
 features[message_type][] = og_post_in_group
