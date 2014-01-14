@@ -14,7 +14,7 @@ function collabco_message_feature_default_fe_block_settings() {
 
   $export['views-recent_activity-block'] = array(
     'cache' => -1,
-    'css_class' => 'sidetheme hidden-phone',
+    'css_class' => 'hidden-phone',
     'custom' => 0,
     'delta' => 'recent_activity-block',
     'module' => 'views',
