@@ -483,6 +483,34 @@ function collabco_message_feature_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'message_follow_node';
+  $strongarm->value = 'subscribe_node:default';
+  $export['message_follow_node'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'message_follow_og';
+  $strongarm->value = 'subscribe_group:default';
+  $export['message_follow_og'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'message_follow_term';
+  $strongarm->value = 'subscribe_taxonomy_term_off:default';
+  $export['message_follow_term'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'message_follow_user';
+  $strongarm->value = 'subscribe_user:default';
+  $export['message_follow_user'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'message_subscribe_default_notifiers';
   $strongarm->value = array(
     'email' => 'email',
@@ -506,13 +534,6 @@ function collabco_message_feature_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'message_follow_node';
-  $strongarm->value = 'subscribe_node:default';
-  $export['message_follow_node'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'message_subscribe_notify_own_actions';
   $strongarm->value = 0;
   $export['message_subscribe_notify_own_actions'] = $strongarm;
@@ -527,13 +548,6 @@ function collabco_message_feature_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'message_follow_og';
-  $strongarm->value = 'subscribe_group:default';
-  $export['message_follow_og'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'message_subscribe_term';
   $strongarm->value = 'subscribe_taxonomy_term:default';
   $export['message_subscribe_term'] = $strongarm;
@@ -541,23 +555,9 @@ function collabco_message_feature_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'message_follow_term';
-  $strongarm->value = 'subscribe_taxonomy_term_off:default';
-  $export['message_follow_term'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'message_subscribe_user';
   $strongarm->value = 'subscribe_user:default';
   $export['message_subscribe_user'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'message_follow_user';
-  $strongarm->value = 'subscribe_user:default';
-  $export['message_follow_user'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
