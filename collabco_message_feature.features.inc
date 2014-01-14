@@ -58,11 +58,11 @@ function collabco_message_feature_flag_default_flags() {
     'access_author' => '',
     'show_contextual_link' => 0,
     'i18n' => 0,
+    'api_version' => 3,
     'module' => 'collabco_message_feature',
     'locked' => array(
       0 => 'name',
     ),
-    'api_version' => 3,
   );
   // Exported flag: "Groups".
   $flags['subscribe_og_off'] = array(
@@ -94,10 +94,6 @@ function collabco_message_feature_flag_default_flags() {
     'access_author' => '',
     'show_contextual_link' => 0,
     'i18n' => 0,
-    'module' => 'collabco_message_feature',
-    'locked' => array(
-      0 => 'name',
-    ),
     'api_version' => 3,
   );
   // Exported flag: "Terms".
@@ -128,7 +124,6 @@ function collabco_message_feature_flag_default_flags() {
     'locked' => array(
       0 => 'name',
     ),
-    'api_version' => 3,
   );
   // Exported flag: "Users".
   $flags['subscribe_user_off'] = array(
@@ -156,11 +151,11 @@ function collabco_message_feature_flag_default_flags() {
     'show_contextual_link' => 0,
     'show_on_profile' => 1,
     'access_uid' => '',
+    'api_version' => 3,
     'module' => 'collabco_message_feature',
     'locked' => array(
       0 => 'name',
     ),
-    'api_version' => 3,
   );
   return $flags;
 
