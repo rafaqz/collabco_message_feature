@@ -95,10 +95,10 @@ function collabco_message_feature_flag_default_flags() {
     'show_contextual_link' => 0,
     'i18n' => 0,
     'module' => 'collabco_message_feature',
-    'api_version' => 3,
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 3,
   );
   // Exported flag: "Terms".
   $flags['follow_term'] = array(
