@@ -8,6 +8,13 @@
 include_once('collabco_message_feature.features.inc');
 
 /**
+ * Implements hook_menu_alter().
+ */
+function collabco_message_feature_menu_alter(&$items) {
+  $items['user/%user/message-subscribe']['title'] = 'Following';
+}
+
+/**
  * Implements hook_node_insert().
  */
 function collabco_message_feature_node_insert($node) {
