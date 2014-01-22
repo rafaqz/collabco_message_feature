@@ -1,6 +1,6 @@
 <?php
 
-define('MESSAGE_NODE_INSERT','og_post_in_group');
+define('MESSAGE_NODE_INSERT','create_node');
 define('MESSAGE_NODE_UPDATE','update_node');
 define('MESSAGE_COMMENT_INSERT','create_comment');
 define('MESSAGE_USER_INSERT','user_register');

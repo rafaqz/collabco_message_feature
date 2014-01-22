@@ -206,33 +206,6 @@ function collabco_message_feature_default_message_type() {
   $items['create_node'] = entity_import('message_type', '{
     "name" : "create_node",
     "description" : "Create node",
-    "argument_keys" : [],
-    "argument" : [],
-    "category" : "message_type",
-    "data" : {
-      "token options" : { "clear" : 1 },
-      "purge" : { "override" : 0, "enabled" : 0, "quota" : "", "days" : "" }
-    },
-    "language" : "en",
-    "arguments" : [],
-    "message_text" : { "und" : [
-        {
-          "value" : "!{message:user:picture}\\u003Cdiv\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E posted @{message:field-node-ref:content-type:name} \\u003Ca href=!{message:field-node-ref:url}\\u003E[message:field-node-ref:title]\\u003C\\/a\\u003E\\u003Cbr\\u003E@{message:timestamp:medium}\\u003C\\/div\\u003E",
-          "format" : "php_code",
-          "safe_value" : "!{message:user:picture}\\u003Cdiv\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E posted @{message:field-node-ref:content-type:name} \\u003Ca href=!{message:field-node-ref:url}\\u003E[message:field-node-ref:title]\\u003C\\/a\\u003E\\u003Cbr\\u003E@{message:timestamp:medium}\\u003C\\/div\\u003E"
-        },
-        {
-          "value" : "[message:field-node-ref:body:value]",
-          "format" : "php_code",
-          "safe_value" : "[message:field-node-ref:body:value]"
-        }
-      ]
-    },
-    "rdf_mapping" : []
-  }');
-  $items['og_post_in_group'] = entity_import('message_type', '{
-    "name" : "og_post_in_group",
-    "description" : "OG post in group",
     "argument_keys" : [ "!groups" ],
     "argument" : [],
     "category" : "message_type",
