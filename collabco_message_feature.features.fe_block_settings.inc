@@ -27,12 +27,6 @@ user',
       'authenticated user' => 2,
     ),
     'themes' => array(
-      'custom_theme' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'custom_theme',
-        'weight' => 0,
-      ),
       'custom_zurb' => array(
         'region' => '',
         'status' => 0,
@@ -60,12 +54,6 @@ user',
     'pages' => '',
     'roles' => array(),
     'themes' => array(
-      'custom_theme' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'custom_theme',
-        'weight' => 0,
-      ),
       'custom_zurb' => array(
         'region' => '',
         'status' => 0,
