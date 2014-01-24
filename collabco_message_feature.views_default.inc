@@ -537,7 +537,7 @@ function collabco_message_feature_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '4';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '1';
-  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['quantity'] = '4';
   $handler->display->display_options['pager']['options']['tags']['first'] = '« ';
   $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ ';
   $handler->display->display_options['pager']['options']['tags']['next'] = '›';
