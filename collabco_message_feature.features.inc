@@ -244,9 +244,9 @@ function collabco_message_feature_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E joined \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E[message:field-node-groups-ref:0:title]\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:short}\\u003C\\/p\\u003E}\\u003C\\/div\\u003E",
+          "value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E joined \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E[message:field-node-groups-ref:0:title]\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:short}\\u003C\\/p\\u003E\\u003C\\/div\\u003E",
           "format" : "php_code",
-          "safe_value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E joined \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E[message:field-node-groups-ref:0:title]\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:short}\\u003C\\/p\\u003E}\\u003C\\/div\\u003E"
+          "safe_value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E joined \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E[message:field-node-groups-ref:0:title]\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:short}\\u003C\\/p\\u003E\\u003C\\/div\\u003E"
         }
       ]
     },
