@@ -534,7 +534,7 @@ function collabco_message_feature_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '4';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '1';
   $handler->display->display_options['pager']['options']['quantity'] = '4';
@@ -649,6 +649,17 @@ function collabco_message_feature_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['nid']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['nid']['validate']['type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['validate_options']['types'] = array(
+    'blog' => 'blog',
+    'conversation' => 'conversation',
+    'knowledge_object' => 'knowledge_object',
+    'organisation' => 'organisation',
+    'basic_page' => 'basic_page',
+    'idea' => 'idea',
+    'book' => 'book',
+  );
 
   /* Display: Group Integration Block */
   $handler = $view->new_display('block', 'Group Integration Block', 'group_integration_block');
@@ -684,8 +695,9 @@ function collabco_message_feature_views_default_views() {
   $handler->display->display_options['arguments']['type']['field'] = 'type';
   $handler->display->display_options['arguments']['type']['relationship'] = 'field_node_ref_target_id';
   $handler->display->display_options['arguments']['type']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['type']['default_argument_type'] = 'raw';
-  $handler->display->display_options['arguments']['type']['default_argument_options']['index'] = '2';
+  $handler->display->display_options['arguments']['type']['default_argument_type'] = 'context';
+  $handler->display->display_options['arguments']['type']['default_argument_options']['namespace'] = 'context';
+  $handler->display->display_options['arguments']['type']['default_argument_options']['attribute'] = 'integration';
   $handler->display->display_options['arguments']['type']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['type']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['type']['summary_options']['items_per_page'] = '25';
@@ -711,8 +723,9 @@ function collabco_message_feature_views_default_views() {
   $handler->display->display_options['arguments']['type']['field'] = 'type';
   $handler->display->display_options['arguments']['type']['relationship'] = 'field_node_ref_target_id';
   $handler->display->display_options['arguments']['type']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['type']['default_argument_type'] = 'raw';
-  $handler->display->display_options['arguments']['type']['default_argument_options']['index'] = '2';
+  $handler->display->display_options['arguments']['type']['default_argument_type'] = 'context';
+  $handler->display->display_options['arguments']['type']['default_argument_options']['namespace'] = 'context';
+  $handler->display->display_options['arguments']['type']['default_argument_options']['attribute'] = 'integration';
   $handler->display->display_options['arguments']['type']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['type']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['type']['summary_options']['items_per_page'] = '25';
