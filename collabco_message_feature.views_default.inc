@@ -553,6 +553,10 @@ function collabco_message_feature_views_default_views() {
   $handler->display->display_options['relationships']['user']['id'] = 'user';
   $handler->display->display_options['relationships']['user']['table'] = 'message';
   $handler->display->display_options['relationships']['user']['field'] = 'user';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_node_ref_target_id']['id'] = 'field_node_ref_target_id';
+  $handler->display->display_options['relationships']['field_node_ref_target_id']['table'] = 'field_data_field_node_ref';
+  $handler->display->display_options['relationships']['field_node_ref_target_id']['field'] = 'field_node_ref_target_id';
   /* Field: Message: Rendered Message */
   $handler->display->display_options['fields']['rendered_entity']['id'] = 'rendered_entity';
   $handler->display->display_options['fields']['rendered_entity']['table'] = 'views_entity_message';
@@ -588,34 +592,36 @@ function collabco_message_feature_views_default_views() {
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
 
-  /* Display: Profile Block */
-  $handler = $view->new_display('block', 'Profile Block', 'profile_block');
+  /* Display: User Block */
+  $handler = $view->new_display('block', 'User Block', 'user_block');
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Message: User uid */
-  $handler->display->display_options['arguments']['user_1']['id'] = 'user_1';
-  $handler->display->display_options['arguments']['user_1']['table'] = 'message';
-  $handler->display->display_options['arguments']['user_1']['field'] = 'user';
-  $handler->display->display_options['arguments']['user_1']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['user_1']['default_argument_type'] = 'user';
-  $handler->display->display_options['arguments']['user_1']['default_argument_options']['user'] = FALSE;
-  $handler->display->display_options['arguments']['user_1']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['user_1']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['user_1']['summary_options']['items_per_page'] = '25';
+  /* Contextual filter: Content: Author uid */
+  $handler->display->display_options['arguments']['uid']['id'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['table'] = 'node';
+  $handler->display->display_options['arguments']['uid']['field'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['relationship'] = 'field_node_ref_target_id';
+  $handler->display->display_options['arguments']['uid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['uid']['default_argument_type'] = 'user';
+  $handler->display->display_options['arguments']['uid']['default_argument_options']['user'] = FALSE;
+  $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
 
   /* Display: Group Block */
   $handler = $view->new_display('block', 'Group Block', 'group_block');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Recent Group Activity';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Message: User uid */
   $handler->display->display_options['relationships']['user']['id'] = 'user';
   $handler->display->display_options['relationships']['user']['table'] = 'message';
   $handler->display->display_options['relationships']['user']['field'] = 'user';
   /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_node_ref_target_id']['id'] = 'field_node_ref_target_id';
+  $handler->display->display_options['relationships']['field_node_ref_target_id']['table'] = 'field_data_field_node_ref';
+  $handler->display->display_options['relationships']['field_node_ref_target_id']['field'] = 'field_node_ref_target_id';
+  /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_node_groups_ref_target_id']['id'] = 'field_node_groups_ref_target_id';
   $handler->display->display_options['relationships']['field_node_groups_ref_target_id']['table'] = 'field_data_field_node_groups_ref';
   $handler->display->display_options['relationships']['field_node_groups_ref_target_id']['field'] = 'field_node_groups_ref_target_id';
-  $handler->display->display_options['relationships']['field_node_groups_ref_target_id']['required'] = TRUE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
@@ -623,10 +629,97 @@ function collabco_message_feature_views_default_views() {
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
   $handler->display->display_options['arguments']['nid']['relationship'] = 'field_node_groups_ref_target_id';
   $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'og_context';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['nid']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['nid']['validate']['type'] = 'og';
+
+  /* Display: Node Block */
+  $handler = $view->new_display('block', 'Node Block', 'node_block');
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['relationship'] = 'field_node_ref_target_id';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+
+  /* Display: Group Integration Block */
+  $handler = $view->new_display('block', 'Group Integration Block', 'group_integration_block');
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Message: User uid */
+  $handler->display->display_options['relationships']['user']['id'] = 'user';
+  $handler->display->display_options['relationships']['user']['table'] = 'message';
+  $handler->display->display_options['relationships']['user']['field'] = 'user';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_node_ref_target_id']['id'] = 'field_node_ref_target_id';
+  $handler->display->display_options['relationships']['field_node_ref_target_id']['table'] = 'field_data_field_node_ref';
+  $handler->display->display_options['relationships']['field_node_ref_target_id']['field'] = 'field_node_ref_target_id';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_node_groups_ref_target_id']['id'] = 'field_node_groups_ref_target_id';
+  $handler->display->display_options['relationships']['field_node_groups_ref_target_id']['table'] = 'field_data_field_node_groups_ref';
+  $handler->display->display_options['relationships']['field_node_groups_ref_target_id']['field'] = 'field_node_groups_ref_target_id';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['relationship'] = 'field_node_groups_ref_target_id';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['nid']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['nid']['validate']['type'] = 'og';
+  /* Contextual filter: Content: Type */
+  $handler->display->display_options['arguments']['type']['id'] = 'type';
+  $handler->display->display_options['arguments']['type']['table'] = 'node';
+  $handler->display->display_options['arguments']['type']['field'] = 'type';
+  $handler->display->display_options['arguments']['type']['relationship'] = 'field_node_ref_target_id';
+  $handler->display->display_options['arguments']['type']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['type']['default_argument_type'] = 'raw';
+  $handler->display->display_options['arguments']['type']['default_argument_options']['index'] = '2';
+  $handler->display->display_options['arguments']['type']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['type']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['type']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['type']['limit'] = '0';
+
+  /* Display: User Integration Block */
+  $handler = $view->new_display('block', 'User Integration Block', 'user_integration_block');
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Author uid */
+  $handler->display->display_options['arguments']['uid']['id'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['table'] = 'node';
+  $handler->display->display_options['arguments']['uid']['field'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['relationship'] = 'field_node_ref_target_id';
+  $handler->display->display_options['arguments']['uid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['uid']['default_argument_type'] = 'user';
+  $handler->display->display_options['arguments']['uid']['default_argument_options']['user'] = FALSE;
+  $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
+  /* Contextual filter: Content: Type */
+  $handler->display->display_options['arguments']['type']['id'] = 'type';
+  $handler->display->display_options['arguments']['type']['table'] = 'node';
+  $handler->display->display_options['arguments']['type']['field'] = 'type';
+  $handler->display->display_options['arguments']['type']['relationship'] = 'field_node_ref_target_id';
+  $handler->display->display_options['arguments']['type']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['type']['default_argument_type'] = 'raw';
+  $handler->display->display_options['arguments']['type']['default_argument_options']['index'] = '2';
+  $handler->display->display_options['arguments']['type']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['type']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['type']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['type']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['type']['validate']['type'] = 'php';
+  $handler->display->display_options['arguments']['type']['validate_options']['code'] = 'return True;';
+  $handler->display->display_options['arguments']['type']['limit'] = '0';
   $export['recent_activity'] = $view;
 
   $view = new view();
