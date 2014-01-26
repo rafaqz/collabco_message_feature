@@ -154,7 +154,7 @@ function collabco_message_feature_flag_default_flags() {
     'show_on_form' => 0,
     'access_author' => '',
     'show_contextual_link' => 0,
-    'show_on_profile' => 1,
+    'show_on_profile' => 0,
     'access_uid' => '',
     'module' => 'collabco_message_feature',
     'locked' => array(
