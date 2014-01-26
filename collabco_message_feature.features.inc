@@ -185,9 +185,9 @@ function collabco_message_feature_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "!{message:user:picture}\\u003Cdiv\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E \\u003Ca href=!{message:field-comment-ref:url}\\u003Ecommented\\u003C\\/a\\u003E on @{message:field-node-ref:content-type:name} [message:field-node-ref:title]\\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:short}\\u003C\\/p\\u003E\\u003C\\/div\\u003E",
+          "value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E \\u003Ca href=!{message:field-comment-ref:url}\\u003Ecommented\\u003C\\/a\\u003E on @{message:field-node-ref:content-type:name} [message:field-node-ref:title]\\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:short}\\u003C\\/p\\u003E\\u003C\\/div\\u003E",
           "format" : "php_code",
-          "safe_value" : "!{message:user:picture}\\u003Cdiv\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E \\u003Ca href=!{message:field-comment-ref:url}\\u003Ecommented\\u003C\\/a\\u003E on @{message:field-node-ref:content-type:name} [message:field-node-ref:title]\\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:short}\\u003C\\/p\\u003E\\u003C\\/div\\u003E"
+          "safe_value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E \\u003Ca href=!{message:field-comment-ref:url}\\u003Ecommented\\u003C\\/a\\u003E on @{message:field-node-ref:content-type:name} [message:field-node-ref:title]\\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:short}\\u003C\\/p\\u003E\\u003C\\/div\\u003E"
         },
         {
           "value" : "[message:field-comment-ref:body]\\r\\n",
@@ -217,9 +217,9 @@ function collabco_message_feature_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E posted @{message:field-node-ref:content-type:name} \\u003Ca href=!{message:field-node-ref:url}\\u003E\\u0022[message:field-node-ref:title]\\u0022\\u003C\\/a\\u003E!groups\\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:short}\\u003C\\/p\\u003E\\u003C\\/div\\u003E",
+          "value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E posted @{message:field-node-ref:content-type:name} \\u003Ca href=!{message:field-node-ref:url}\\u003E\\u0022[message:field-node-ref:title]\\u0022\\u003C\\/a\\u003E !groups\\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:short}\\u003C\\/p\\u003E\\u003C\\/div\\u003E",
           "format" : "php_code",
-          "safe_value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E posted @{message:field-node-ref:content-type:name} \\u003Ca href=!{message:field-node-ref:url}\\u003E\\u0022[message:field-node-ref:title]\\u0022\\u003C\\/a\\u003E!groups\\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:short}\\u003C\\/p\\u003E\\u003C\\/div\\u003E"
+          "safe_value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E posted @{message:field-node-ref:content-type:name} \\u003Ca href=!{message:field-node-ref:url}\\u003E\\u0022[message:field-node-ref:title]\\u0022\\u003C\\/a\\u003E !groups\\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:short}\\u003C\\/p\\u003E\\u003C\\/div\\u003E"
         },
         {
           "value" : "[message:field-node-ref:body:summary]\\r\\n",
@@ -266,9 +266,9 @@ function collabco_message_feature_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E updated @{message:field-node-ref:content-type:name} \\u003Ca href=!{message:field-node-ref:url}\\u003E\\u0022[message:field-node-ref:title]\\u0022\\u003C\\/a\\u003E!groups.\\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:short}\\u003C\\/p\\u003E\\u003C\\/div\\u003E",
+          "value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E updated @{message:field-node-ref:content-type:name} \\u003Ca href=!{message:field-node-ref:url}\\u003E\\u0022[message:field-node-ref:title]\\u0022\\u003C\\/a\\u003E !groups.\\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:short}\\u003C\\/p\\u003E\\u003C\\/div\\u003E",
           "format" : "php_code",
-          "safe_value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E updated @{message:field-node-ref:content-type:name} \\u003Ca href=!{message:field-node-ref:url}\\u003E\\u0022[message:field-node-ref:title]\\u0022\\u003C\\/a\\u003E!groups.\\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:short}\\u003C\\/p\\u003E\\u003C\\/div\\u003E"
+          "safe_value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E updated @{message:field-node-ref:content-type:name} \\u003Ca href=!{message:field-node-ref:url}\\u003E\\u0022[message:field-node-ref:title]\\u0022\\u003C\\/a\\u003E !groups.\\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:short}\\u003C\\/p\\u003E\\u003C\\/div\\u003E"
         },
         {
           "value" : "[message:field-node-ref:body:summary]\\r\\n",
