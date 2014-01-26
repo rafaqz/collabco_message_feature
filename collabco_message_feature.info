@@ -25,6 +25,7 @@ datestamp = 1377761539
 features[context][] = recent_activity_block
 features[context][] = recent_activity_group_block
 features[context][] = recent_activity_group_integration_block
+features[context][] = recent_activity_node_block
 features[context][] = recent_activity_user_block
 features[context][] = recent_activity_user_integration_block
 features[ctools][] = context:context:3
