@@ -132,8 +132,6 @@ function collabco_message_feature_node_view_alter(&$build) {
   else {
     unset($build['links']['flag']['#links']['flag-follow_node']);
   }
-
-  $a = 1;
 }
 
 /**
@@ -243,5 +241,5 @@ function collabco_message_feature_node_message($node, $message_bundle) {
   }
   $message_wrapper->save();
 
-  //collabco_message_feature_send_notifications('node', $node, $message);
+  collabco_message_feature_send_notifications('node', $node, $message);
 }
