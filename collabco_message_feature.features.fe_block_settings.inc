@@ -58,7 +58,7 @@ user',
         'region' => '',
         'status' => 0,
         'theme' => 'custom_zurb',
-        'weight' => 0,
+        'weight' => -28,
       ),
       'seven' => array(
         'region' => '',
