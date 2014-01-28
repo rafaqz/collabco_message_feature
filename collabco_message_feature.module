@@ -25,6 +25,10 @@ function collabco_message_feature_menu_alter(&$items) {
  */
 function collabco_message_feature_node_insert($node) {
   collabco_message_feature_node_message($node, MESSAGE_NODE_INSERT);
+  // Allways follow own content.
+  $flag = flag_get_flag('follow_node') or die('no "follow_node" flag defined');
+  $account = user_load($node->uid);
+  $flag->flag('flag', $node->nid, $account);
 }
 
 /**
@@ -61,6 +65,11 @@ function collabco_message_feature_comment_insert($comment) {
   $message_wrapper->save();
 
   collabco_message_feature_send_notifications('comment', $comment, $message);
+
+  // Allways follow content after you comment on it.
+  $flag = flag_get_flag('follow_node') or die('no "follow_node" flag defined');
+  $account = user_load($comment->uid);
+  $flag->flag('flag', $comment->nid, $account);
 }
 
 /**
