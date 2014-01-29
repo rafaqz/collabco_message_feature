@@ -21,6 +21,7 @@ dependencies[] = taxonomy
 dependencies[] = text
 dependencies[] = token
 dependencies[] = views
+dependencies[] = views_content_cache
 datestamp = 1377761539
 features[context][] = recent_activity_block
 features[context][] = recent_activity_group_block
