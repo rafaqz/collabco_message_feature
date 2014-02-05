@@ -47,7 +47,9 @@ function collabco_message_feature_user_default_permissions() {
   // Exported permission: 'flag follow_term'.
   $permissions['flag follow_term'] = array(
     'name' => 'flag follow_term',
-    'roles' => array(),
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
     'module' => 'flag',
   );
 
@@ -81,7 +83,9 @@ function collabco_message_feature_user_default_permissions() {
   // Exported permission: 'unflag follow_term'.
   $permissions['unflag follow_term'] = array(
     'name' => 'unflag follow_term',
-    'roles' => array(),
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
     'module' => 'flag',
   );
 
