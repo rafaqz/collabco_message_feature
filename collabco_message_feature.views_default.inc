@@ -36,7 +36,7 @@ function collabco_message_feature_views_default_views() {
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = 'Not subscribed to any item.';
+  $handler->display->display_options['empty']['area']['content'] = 'Not following any groups.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Relationship: Flags: follow_og */
   $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
@@ -53,11 +53,12 @@ function collabco_message_feature_views_default_views() {
   $handler->display->display_options['fields']['rendered_entity']['link_to_entity'] = 1;
   $handler->display->display_options['fields']['rendered_entity']['view_mode'] = 'full';
   $handler->display->display_options['fields']['rendered_entity']['bypass_access'] = 0;
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Sort criterion: Flags: Flagged time */
+  $handler->display->display_options['sorts']['timestamp']['id'] = 'timestamp';
+  $handler->display->display_options['sorts']['timestamp']['table'] = 'flagging';
+  $handler->display->display_options['sorts']['timestamp']['field'] = 'timestamp';
+  $handler->display->display_options['sorts']['timestamp']['relationship'] = 'flag_content_rel';
+  $handler->display->display_options['sorts']['timestamp']['order'] = 'DESC';
   /* Contextual filter: Flags: User uid */
   $handler->display->display_options['arguments']['uid']['id'] = 'uid';
   $handler->display->display_options['arguments']['uid']['table'] = 'flagging';
@@ -121,11 +122,12 @@ function collabco_message_feature_views_default_views() {
   $handler->display->display_options['fields']['rendered_entity']['display'] = 'view';
   $handler->display->display_options['fields']['rendered_entity']['view_mode'] = 'teaser';
   $handler->display->display_options['fields']['rendered_entity']['bypass_access'] = 0;
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Sort criterion: Flags: Flagged time */
+  $handler->display->display_options['sorts']['timestamp']['id'] = 'timestamp';
+  $handler->display->display_options['sorts']['timestamp']['table'] = 'flagging';
+  $handler->display->display_options['sorts']['timestamp']['field'] = 'timestamp';
+  $handler->display->display_options['sorts']['timestamp']['relationship'] = 'flag_content_rel';
+  $handler->display->display_options['sorts']['timestamp']['order'] = 'DESC';
   /* Contextual filter: Flags: User uid */
   $handler->display->display_options['arguments']['uid']['id'] = 'uid';
   $handler->display->display_options['arguments']['uid']['table'] = 'flagging';
@@ -164,26 +166,14 @@ function collabco_message_feature_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['style_plugin'] = 'table';
-  $handler->display->display_options['style_options']['columns'] = array(
-    'name' => 'name',
-  );
-  $handler->display->display_options['style_options']['default'] = 'name';
-  $handler->display->display_options['style_options']['info'] = array(
-    'name' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-  );
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = 'Not subscribed to any item.';
+  $handler->display->display_options['empty']['area']['content'] = 'Not following any terms.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Relationship: Flags: follow_term */
   $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
@@ -191,21 +181,21 @@ function collabco_message_feature_views_default_views() {
   $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
   $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'follow_term';
   $handler->display->display_options['relationships']['flag_content_rel']['user_scope'] = 'any';
-  /* Field: Taxonomy term: Name */
-  $handler->display->display_options['fields']['name']['id'] = 'name';
-  $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['label'] = '';
-  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['name']['link_to_taxonomy'] = TRUE;
-  /* Field: Flags: Flag link */
-  $handler->display->display_options['fields']['ops']['id'] = 'ops';
-  $handler->display->display_options['fields']['ops']['table'] = 'flagging';
-  $handler->display->display_options['fields']['ops']['field'] = 'ops';
-  $handler->display->display_options['fields']['ops']['relationship'] = 'flag_content_rel';
-  $handler->display->display_options['fields']['ops']['label'] = '';
-  $handler->display->display_options['fields']['ops']['element_label_colon'] = FALSE;
+  /* Field: Taxonomy term: Rendered Taxonomy term */
+  $handler->display->display_options['fields']['rendered_entity']['id'] = 'rendered_entity';
+  $handler->display->display_options['fields']['rendered_entity']['table'] = 'views_entity_taxonomy_term';
+  $handler->display->display_options['fields']['rendered_entity']['field'] = 'rendered_entity';
+  $handler->display->display_options['fields']['rendered_entity']['label'] = '';
+  $handler->display->display_options['fields']['rendered_entity']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['rendered_entity']['link_to_entity'] = 1;
+  $handler->display->display_options['fields']['rendered_entity']['view_mode'] = 'full';
+  $handler->display->display_options['fields']['rendered_entity']['bypass_access'] = 0;
+  /* Sort criterion: Flags: Flagged time */
+  $handler->display->display_options['sorts']['timestamp']['id'] = 'timestamp';
+  $handler->display->display_options['sorts']['timestamp']['table'] = 'flagging';
+  $handler->display->display_options['sorts']['timestamp']['field'] = 'timestamp';
+  $handler->display->display_options['sorts']['timestamp']['relationship'] = 'flag_content_rel';
+  $handler->display->display_options['sorts']['timestamp']['order'] = 'DESC';
   /* Contextual filter: Flags: User uid */
   $handler->display->display_options['arguments']['uid']['id'] = 'uid';
   $handler->display->display_options['arguments']['uid']['table'] = 'flagging';
@@ -257,7 +247,7 @@ function collabco_message_feature_views_default_views() {
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = 'Not subscribed to any item.';
+  $handler->display->display_options['empty']['area']['content'] = 'Not following any users.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Relationship: Flags: follow_user */
   $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
@@ -279,11 +269,12 @@ function collabco_message_feature_views_default_views() {
   $handler->display->display_options['fields']['ops']['relationship'] = 'flag_content_rel';
   $handler->display->display_options['fields']['ops']['label'] = '';
   $handler->display->display_options['fields']['ops']['element_label_colon'] = FALSE;
-  /* Sort criterion: User: Created date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'users';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Sort criterion: Flags: Flagged time */
+  $handler->display->display_options['sorts']['timestamp']['id'] = 'timestamp';
+  $handler->display->display_options['sorts']['timestamp']['table'] = 'flagging';
+  $handler->display->display_options['sorts']['timestamp']['field'] = 'timestamp';
+  $handler->display->display_options['sorts']['timestamp']['relationship'] = 'flag_content_rel';
+  $handler->display->display_options['sorts']['timestamp']['order'] = 'DESC';
   /* Contextual filter: Flags: User uid */
   $handler->display->display_options['arguments']['uid']['id'] = 'uid';
   $handler->display->display_options['arguments']['uid']['table'] = 'flagging';
@@ -529,7 +520,7 @@ function collabco_message_feature_views_default_views() {
   $handler->display->display_options['title'] = 'Activity';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'views_content_cache';
   $handler->display->display_options['cache']['results_min_lifespan'] = '-1';
   $handler->display->display_options['cache']['results_max_lifespan'] = '300';
