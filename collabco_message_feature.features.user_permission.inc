@@ -22,7 +22,9 @@ function collabco_message_feature_user_default_permissions() {
   // Exported permission: 'administer message subscribe'.
   $permissions['administer message subscribe'] = array(
     'name' => 'administer message subscribe',
-    'roles' => array(),
+    'roles' => array(
+      'Admin' => 'Admin',
+    ),
     'module' => 'message_subscribe',
   );
 
