@@ -530,14 +530,23 @@ function collabco_message_feature_views_default_views() {
     'comment' => array(
       'changed' => 'changed',
     ),
+    'flag' => array(
+      1 => 0,
+      7 => 0,
+      2 => 0,
+      3 => 0,
+      4 => 0,
+      5 => 0,
+      6 => 0,
+    ),
     'node' => array(
       'basic_page' => 0,
-      'blog' => 0,
       'closed_group' => 0,
       'conversation' => 0,
       'knowledge_object' => 0,
       'group' => 0,
       'idea' => 0,
+      'news' => 0,
       'organisation' => 0,
       'project' => 0,
       'book' => 0,
@@ -813,6 +822,22 @@ function collabco_message_feature_views_default_views() {
   $handler->display->display_options['arguments']['type']['validate']['type'] = 'php';
   $handler->display->display_options['arguments']['type']['validate_options']['code'] = 'return True;';
   $handler->display->display_options['arguments']['type']['limit'] = '0';
+
+  /* Display: Term Block */
+  $handler = $view->new_display('block', 'Term Block', 'term_block');
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Has taxonomy term ID */
+  $handler->display->display_options['arguments']['tid']['id'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['table'] = 'taxonomy_index';
+  $handler->display->display_options['arguments']['tid']['field'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['relationship'] = 'field_node_ref_target_id';
+  $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'taxonomy_tid';
+  $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['tid']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['tid']['validate']['type'] = 'taxonomy_term';
   $export['recent_activity'] = $view;
 
   $view = new view();
