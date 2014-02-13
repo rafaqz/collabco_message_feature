@@ -172,6 +172,43 @@ function collabco_message_feature_context_default_contexts() {
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'recent_activity_term_block';
+  $context->description = '';
+  $context->tag = 'message feature';
+  $context->conditions = array(
+    'context' => array(
+      'values' => array(
+        '~integration' => '~integration',
+      ),
+    ),
+    'path' => array(
+      'values' => array(
+        'taxonomy/term/*' => 'taxonomy/term/*',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-recent_activity-term_block' => array(
+          'module' => 'views',
+          'delta' => 'recent_activity-term_block',
+          'region' => 'sidebar_second',
+          'weight' => '1',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 1;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('message feature');
+  $export['recent_activity_term_block'] = $context;
+
+  $context = new stdClass();
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'recent_activity_user_block';
   $context->description = '';
   $context->tag = 'message feature';
