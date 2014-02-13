@@ -13,7 +13,7 @@ function collabco_message_feature_views_default_views() {
   $view = new view();
   $view->name = 'follow_group';
   $view->description = '';
-  $view->tag = 'Message-subscribe';
+  $view->tag = 'Message Feature';
   $view->base_table = 'node';
   $view->human_name = 'Follow group';
   $view->core = 7;
@@ -81,7 +81,7 @@ function collabco_message_feature_views_default_views() {
   $view = new view();
   $view->name = 'follow_node';
   $view->description = '';
-  $view->tag = 'Message-subscribe';
+  $view->tag = 'Message Feature';
   $view->base_table = 'node';
   $view->human_name = 'Follow node';
   $view->core = 7;
@@ -150,7 +150,7 @@ function collabco_message_feature_views_default_views() {
   $view = new view();
   $view->name = 'follow_taxonomy_term';
   $view->description = '';
-  $view->tag = 'Message-subscribe';
+  $view->tag = 'Message Feature';
   $view->base_table = 'taxonomy_term_data';
   $view->human_name = 'Follow taxonomy term';
   $view->core = 7;
@@ -211,7 +211,7 @@ function collabco_message_feature_views_default_views() {
   $view = new view();
   $view->name = 'follow_user';
   $view->description = '';
-  $view->tag = 'Message-subscribe';
+  $view->tag = 'Message Feature';
   $view->base_table = 'users';
   $view->human_name = 'Follow User';
   $view->core = 7;
@@ -843,7 +843,7 @@ function collabco_message_feature_views_default_views() {
   $view = new view();
   $view->name = 'subscribe_group';
   $view->description = '';
-  $view->tag = 'Message-subscribe';
+  $view->tag = 'Message Feature';
   $view->base_table = 'node';
   $view->human_name = 'Subscribe group';
   $view->core = 7;
