@@ -138,6 +138,7 @@ function collabco_message_feature_node_view_alter(&$build) {
   if (empty($build['#node']->{OG_GROUP_FIELD})) {
     unset($build['links']['flag']['#links']['flag-follow_og']);
   }
+  // Hide normal follow for groups, we dont follow them as nodes.
   else {
     unset($build['links']['flag']['#links']['flag-follow_node']);
   }
@@ -157,20 +158,9 @@ function collabco_message_feature_update_message_status($entity_type, $entity) {
     // status didn't change.
     return;
   }
-  list($id) = entity_extract_ids($entity_type, $entity);
-  $field_name = 'field_' . $entity_type . '_ref';
 
-  $query = new EntityFieldQuery();
-  $result = $query
-    ->entityCondition('entity_type', 'message')
-    ->fieldCondition($field_name, 'target_id',  $id, '=')
-    ->execute();
-
-  if (empty($result['message'])) {
-    return;
-  }
-
-  foreach (array_keys($result['message']) as $mid) {
+  $messages = collabco_message_feature_get_matching_messages($entity_type, $entity);
+  foreach (array_keys($messages) as $mid) {
     $message_wrapper = entity_metadata_wrapper('message', $mid);
     // If comment status changed, we still need to check the node as-well.
     if ($entity_type == 'comment') {
@@ -187,6 +177,69 @@ function collabco_message_feature_update_message_status($entity_type, $entity) {
       $message_wrapper->save();
     }
   }
+}
+
+function collabco_message_feature_get_matching_messages($entity_type, $entity, $bundle = NULL) {
+  list($id) = entity_extract_ids($entity_type, $entity);
+  $field_name = 'field_' . $entity_type . '_ref';
+
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'message')
+    ->fieldCondition($field_name, 'target_id',  $id, '=');
+
+  if (!empty($bundle)) {
+    $query->entityCondition('bundle', $bundle); 
+  }
+
+  $result = $query->execute();
+
+  return $result['message'];
+}
+
+
+function collabco_message_feature_node_message($node, $message_bundle) {
+  // Save the message and assign it to the user realm. Since another user,
+  // usually an admin might create the node, but populate the author field
+  // with another user, we make sure the user is populated with the
+  // node's author, instead of the acting user (although in most cases it
+  // would be the same user).
+  
+  $node_wrapper = entity_metadata_wrapper('node', $node);
+  if (($node_wrapper->__isset(OG_ACCESS_FIELD)) && ($node_wrapper->{OG_ACCESS_FIELD}->value() == '1')) {
+    // Dont add messages for the creation of private groups.
+    return;
+  }
+  $groups = og_get_entity_groups('node', $node);
+  // Create a "Post in group" message. We don't use a token replacement
+  // here as it needs to get the data from multiple values of the field.
+  // Furthermore, this replacement probably doesn't make sense outside of
+  // this message-type context, so we don't want to add another token,
+  // that will not be used.
+  $arguments['!groups'] = array(
+    'callback' => 'collabco_message_feature_group_list',
+    'pass message' => TRUE,
+  );
+
+  // Delete any earlier update messages, so the activity isn't filled with 
+  // multiple edits of one thing.
+  if ($message_bundle == MESSAGE_NODE_UPDATE) { 
+    $messages = collabco_message_feature_get_matching_messages('node', $node, MESSAGE_NODE_UPDATE); 
+    foreach (array_keys($messages) as $mid) {
+      $message_wrapper = entity_metadata_wrapper('message', $mid);
+      $message_wrapper->delete();
+    }
+  }
+
+  $message = message_create($message_bundle, array('arguments' => $arguments, 'uid' => $node->uid));
+  $message_wrapper = entity_metadata_wrapper('message', $message);
+  $message_wrapper->field_node_ref->set($node);
+  $message_wrapper->field_published->set($node->status);
+  if (!empty($groups['node'])) {
+    $message_wrapper->field_node_groups_ref->set($groups['node']);
+  }
+  $message_wrapper->save();
+
+  collabco_message_feature_send_notifications('node', $node, $message);
 }
 
 function collabco_message_feature_send_notifications($entity_type, $entity, $message) {
@@ -218,37 +271,3 @@ function collabco_message_feature_group_list(Message $message) {
   return t('in ') . implode(', ', $items);
 }
 
-function collabco_message_feature_node_message($node, $message_bundle) {
-  // Save the message and assign it to the user realm. Since another user,
-  // usually an admin might create the node, but populate the author field
-  // with another user, we make sure the user is populated with the
-  // node's author, instead of the acting user (although in most cases it
-  // would be the same user).
-  
-  $node_wrapper = entity_metadata_wrapper('node', $node);
-  if (($node_wrapper->__isset(OG_ACCESS_FIELD)) && ($node_wrapper->{OG_ACCESS_FIELD}->value() == '1')) {
-    // Dont add messages for the creation of private groups.
-    return;
-  }
-  $groups = og_get_entity_groups('node', $node);
-  // Create a "Post in group" message. We don't use a token replacement
-  // here as it needs to get the data from multiple values of the field.
-  // Furthermore, this replacement probably doesn't make sense outside of
-  // this message-type context, so we don't want to add another token,
-  // that will not be used.
-  $arguments['!groups'] = array(
-    'callback' => 'collabco_message_feature_group_list',
-    'pass message' => TRUE,
-  );
-
-  $message = message_create($message_bundle, array('arguments' => $arguments, 'uid' => $node->uid));
-  $message_wrapper = entity_metadata_wrapper('message', $message);
-  $message_wrapper->field_node_ref->set($node);
-  $message_wrapper->field_published->set($node->status);
-  if (!empty($groups['node'])) {
-    $message_wrapper->field_node_groups_ref->set($groups['node']);
-  }
-  $message_wrapper->save();
-
-  collabco_message_feature_send_notifications('node', $node, $message);
-}
