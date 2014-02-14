@@ -2,8 +2,8 @@
 
 /**
  * @file
- * Token integration for the message example module.
- */
+ * Token integration for the message feature 
+ **/
 
 /**
  * Implements hook_token_info().
