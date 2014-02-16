@@ -160,7 +160,7 @@ function collabco_message_feature_update_message_status($entity_type, $entity) {
   }
 
   $messages = collabco_message_feature_get_matching_messages($entity_type, $entity);
-  foreach (array_keys($messages) as $mid) {
+  foreach ($messages as $mid => $message) {
     $message_wrapper = entity_metadata_wrapper('message', $mid);
     // If comment status changed, we still need to check the node as-well.
     if ($entity_type == 'comment') {
@@ -224,7 +224,7 @@ function collabco_message_feature_node_message($node, $message_bundle) {
   // multiple edits of one thing.
   if ($message_bundle == MESSAGE_NODE_UPDATE) { 
     $messages = collabco_message_feature_get_matching_messages('node', $node, MESSAGE_NODE_UPDATE); 
-    foreach (array_keys($messages) as $mid) {
+    foreach ($messages as $mid => $message) {
       $message_wrapper = entity_metadata_wrapper('message', $mid);
       $message_wrapper->delete();
     }
