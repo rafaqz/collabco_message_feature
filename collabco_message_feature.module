@@ -271,3 +271,23 @@ function collabco_message_feature_group_list(Message $message) {
   return t('in ') . implode(', ', $items);
 }
 
+/**
+ * Implements hook_collabco_integration().
+ */
+function collabco_message_feature_collabco_integration() {
+  // Add links to views if a module wants to do that.
+  return array(
+    'collabco_message_feature' => array(
+      'views' => array(
+        'recent_activity' => array(
+          'group_integration_block' => array(
+            'tag_filter' => array(
+              'relationship' => 'field_node_ref_target_id',
+            ),
+          ),
+          'user_integration_block' => array(),
+        ),
+      ),
+    ),
+  );
+}
