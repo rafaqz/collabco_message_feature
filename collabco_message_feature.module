@@ -179,6 +179,11 @@ function collabco_message_feature_update_message_status($entity_type, $entity) {
   }
 }
 
+/**
+ * Find existing messages referencing and entity type and optional bundle.
+ *
+ * @return array().
+ */
 function collabco_message_feature_get_matching_messages($entity_type, $entity, $bundle = NULL) {
   list($id) = entity_extract_ids($entity_type, $entity);
   $field_name = 'field_' . $entity_type . '_ref';
@@ -186,14 +191,16 @@ function collabco_message_feature_get_matching_messages($entity_type, $entity, $
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', 'message')
     ->fieldCondition($field_name, 'target_id',  $id, '=');
-
   if (!empty($bundle)) {
     $query->entityCondition('bundle', $bundle); 
   }
-
   $result = $query->execute();
 
-  return $result['message'];
+  if (!empty($result['message'])) {
+    return $result['message'];
+  }
+
+  return array();
 }
 
 
