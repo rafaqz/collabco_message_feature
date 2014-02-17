@@ -530,15 +530,6 @@ function collabco_message_feature_views_default_views() {
     'comment' => array(
       'changed' => 'changed',
     ),
-    'flag' => array(
-      1 => 0,
-      7 => 0,
-      2 => 0,
-      3 => 0,
-      4 => 0,
-      5 => 0,
-      6 => 0,
-    ),
     'node' => array(
       'basic_page' => 0,
       'closed_group' => 0,
@@ -701,20 +692,20 @@ function collabco_message_feature_views_default_views() {
       'changed' => 'changed',
     ),
     'node' => array(
-      '__arg:type' => '__arg:type',
       'basic_page' => 0,
-      'blog' => 0,
       'closed_group' => 0,
       'conversation' => 0,
       'knowledge_object' => 0,
       'group' => 0,
       'idea' => 0,
+      'news' => 0,
       'organisation' => 0,
       'project' => 0,
       'book' => 0,
+      '__arg:type' => 0,
     ),
     'node_only' => array(
-      'node_changed' => 0,
+      'node_changed' => 'node_changed',
     ),
     'og' => array(
       'current' => 0,
@@ -764,36 +755,7 @@ function collabco_message_feature_views_default_views() {
   /* Display: User Integration Block */
   $handler = $view->new_display('block', 'User Integration Block', 'user_integration_block');
   $handler->display->display_options['defaults']['cache'] = FALSE;
-  $handler->display->display_options['cache']['type'] = 'views_content_cache';
-  $handler->display->display_options['cache']['results_min_lifespan'] = '-1';
-  $handler->display->display_options['cache']['results_max_lifespan'] = '300';
-  $handler->display->display_options['cache']['output_min_lifespan'] = '-1';
-  $handler->display->display_options['cache']['output_max_lifespan'] = '300';
-  $handler->display->display_options['cache']['keys'] = array(
-    'comment' => array(
-      'changed' => 'changed',
-    ),
-    'node' => array(
-      '__arg:type' => '__arg:type',
-      'basic_page' => 0,
-      'blog' => 0,
-      'closed_group' => 0,
-      'conversation' => 0,
-      'knowledge_object' => 0,
-      'group' => 0,
-      'idea' => 0,
-      'organisation' => 0,
-      'project' => 0,
-      'book' => 0,
-    ),
-    'node_only' => array(
-      'node_changed' => 0,
-    ),
-    'og' => array(
-      'current' => 0,
-      'user' => 0,
-    ),
-  );
+  $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Author uid */
   $handler->display->display_options['arguments']['uid']['id'] = 'uid';
