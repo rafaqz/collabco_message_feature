@@ -51,7 +51,8 @@ function collabco_message_feature_views_default_views() {
   $handler->display->display_options['fields']['rendered_entity']['label'] = '';
   $handler->display->display_options['fields']['rendered_entity']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['rendered_entity']['link_to_entity'] = 1;
-  $handler->display->display_options['fields']['rendered_entity']['view_mode'] = 'full';
+  $handler->display->display_options['fields']['rendered_entity']['display'] = 'view';
+  $handler->display->display_options['fields']['rendered_entity']['view_mode'] = 'teaser';
   $handler->display->display_options['fields']['rendered_entity']['bypass_access'] = 0;
   /* Sort criterion: Flags: Flagged time */
   $handler->display->display_options['sorts']['timestamp']['id'] = 'timestamp';
@@ -188,6 +189,7 @@ function collabco_message_feature_views_default_views() {
   $handler->display->display_options['fields']['rendered_entity']['label'] = '';
   $handler->display->display_options['fields']['rendered_entity']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['rendered_entity']['link_to_entity'] = 1;
+  $handler->display->display_options['fields']['rendered_entity']['display'] = 'view';
   $handler->display->display_options['fields']['rendered_entity']['view_mode'] = 'full';
   $handler->display->display_options['fields']['rendered_entity']['bypass_access'] = 0;
   /* Sort criterion: Flags: Flagged time */
@@ -506,7 +508,6 @@ function collabco_message_feature_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Activity';
-  $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'views_content_cache';
@@ -540,12 +541,15 @@ function collabco_message_feature_views_default_views() {
   );
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['pager']['type'] = 'mini';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
+  $handler->display->display_options['pager']['type'] = 'infinite_scroll';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '4';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '1';
+  $handler->display->display_options['pager']['options']['quantity'] = '4';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '«';
   $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ ';
   $handler->display->display_options['pager']['options']['tags']['next'] = '›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = '»';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['row_options']['inline'] = array(
