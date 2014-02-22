@@ -80,6 +80,21 @@ function collabco_message_feature_user_insert(&$edit, $account, $category) {
   $message_wrapper = entity_metadata_wrapper('message', $message);
   $message_wrapper->field_published->set($account->status);
   $message_wrapper->save();
+
+  // Notify all community moderators.
+  $role = user_role_load_by_name("Community Moderator");
+  $query = 'SELECT DISTINCT(ur.uid) 
+      FROM {users_roles} AS ur
+      WHERE ur.rid IN (:rids)';
+  $result = db_query($query, array(':rids' => array($role->rid)));
+  $uids = $result->fetchCol();
+
+  $entity_type = 'user';
+  $notify_options = array();
+  $subscribe_options = array(
+    'uids' => array($uids),
+  );
+  message_subscribe_send_message($entity_type, $account, $message, $notify_options, $subscribe_options);
 }
 
 /**

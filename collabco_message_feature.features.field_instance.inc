@@ -832,7 +832,7 @@ function collabco_message_feature_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'message_notify_email_subject' => array(
         'label' => 'above',
