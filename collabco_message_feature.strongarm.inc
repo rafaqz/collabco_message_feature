@@ -37,38 +37,22 @@ function collabco_message_feature_strongarm() {
       'display' => array(
         'message__message_text__0' => array(
           'message_notify_email_subject' => array(
-            'weight' => '0',
             'visible' => TRUE,
+            'weight' => 0,
           ),
           'message_notify_email_body' => array(
-            'weight' => '0',
-            'visible' => TRUE,
-          ),
-          'default' => array(
-            'weight' => '0',
-            'visible' => TRUE,
-          ),
-          'full' => array(
-            'weight' => '0',
-            'visible' => TRUE,
+            'visible' => FALSE,
+            'weight' => 0,
           ),
         ),
         'message__message_text__1' => array(
           'message_notify_email_subject' => array(
-            'weight' => '1',
             'visible' => FALSE,
+            'weight' => 0,
           ),
           'message_notify_email_body' => array(
-            'weight' => '1',
             'visible' => TRUE,
-          ),
-          'default' => array(
-            'weight' => '1',
-            'visible' => TRUE,
-          ),
-          'full' => array(
-            'weight' => '1',
-            'visible' => TRUE,
+            'weight' => 0,
           ),
         ),
         'message__message_text__2' => array(
@@ -125,16 +109,8 @@ function collabco_message_feature_strongarm() {
             'weight' => 0,
           ),
           'message_notify_email_body' => array(
-            'weight' => '0',
-            'visible' => TRUE,
-          ),
-          'default' => array(
-            'weight' => '0',
-            'visible' => TRUE,
-          ),
-          'full' => array(
-            'weight' => '0',
-            'visible' => TRUE,
+            'visible' => FALSE,
+            'weight' => 0,
           ),
         ),
         'message__message_text__1' => array(
@@ -143,16 +119,8 @@ function collabco_message_feature_strongarm() {
             'weight' => 0,
           ),
           'message_notify_email_body' => array(
-            'weight' => '1',
             'visible' => TRUE,
-          ),
-          'default' => array(
-            'weight' => '1',
-            'visible' => TRUE,
-          ),
-          'full' => array(
-            'weight' => '1',
-            'visible' => FALSE,
+            'weight' => 0,
           ),
         ),
       ),
@@ -187,16 +155,22 @@ function collabco_message_feature_strongarm() {
       'display' => array(
         'message__message_text__0' => array(
           'message_notify_email_subject' => array(
-            'weight' => '0',
             'visible' => TRUE,
+            'weight' => 0,
           ),
-          'default' => array(
-            'weight' => '0',
-            'visible' => TRUE,
+          'message_notify_email_body' => array(
+            'visible' => FALSE,
+            'weight' => 0,
           ),
-          'full' => array(
-            'weight' => '0',
+        ),
+        'message__message_text__1' => array(
+          'message_notify_email_subject' => array(
+            'visible' => FALSE,
+            'weight' => 0,
+          ),
+          'message_notify_email_body' => array(
             'visible' => TRUE,
+            'weight' => 0,
           ),
         ),
       ),
@@ -243,23 +217,7 @@ function collabco_message_feature_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_message__user_register';
   $strongarm->value = array(
-    'view_modes' => array(
-      'full' => array(
-        'custom_settings' => TRUE,
-      ),
-      'message_notify_email_subject' => array(
-        'custom_settings' => TRUE,
-      ),
-      'message_notify_email_body' => array(
-        'custom_settings' => TRUE,
-      ),
-      'diff_standard' => array(
-        'custom_settings' => FALSE,
-      ),
-      'token' => array(
-        'custom_settings' => FALSE,
-      ),
-    ),
+    'view_modes' => array(),
     'extra_fields' => array(
       'form' => array(),
       'display' => array(
@@ -269,16 +227,8 @@ function collabco_message_feature_strongarm() {
             'weight' => 0,
           ),
           'message_notify_email_body' => array(
-            'weight' => '0',
-            'visible' => TRUE,
-          ),
-          'default' => array(
-            'weight' => '0',
-            'visible' => TRUE,
-          ),
-          'full' => array(
-            'weight' => '0',
-            'visible' => TRUE,
+            'visible' => FALSE,
+            'weight' => 0,
           ),
         ),
         'message__message_text__1' => array(
@@ -287,10 +237,9 @@ function collabco_message_feature_strongarm() {
             'weight' => 0,
           ),
           'message_notify_email_body' => array(
-            'weight' => '1',
             'visible' => TRUE,
+            'weight' => 0,
           ),
-          'full' => NULL,
         ),
       ),
     ),

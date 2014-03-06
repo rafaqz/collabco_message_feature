@@ -4,160 +4,219 @@ define('MESSAGE_NODE_INSERT','create_node');
 define('MESSAGE_NODE_UPDATE','update_node');
 define('MESSAGE_COMMENT_INSERT','create_comment');
 define('MESSAGE_USER_INSERT','user_register');
-define('MESSAGE_OG_INSERT_USER','og_user_membership');
+define('MESSAGE_OG_USER','og_user_membership');
+define('MESSAGE_OG_USER_REQUEST','og_user_membership_request');
+define('MESSAGE_GROUPS_FIELD','field_node_groups_ref');
+define('MESSAGE_NODE_FIELD','field_node_ref');
+define('MESSAGE_COMMENT_FIELD','field_comment_ref');
 
 /**
  * @file
  * Collabco message feature.
  */
 
-include_once('collabco_message_feature.features.inc');
+//include_once('collabco_message_feature.features.inc');
 
 /**
  * Implements hook_menu_alter().
  */
-function collabco_message_feature_menu_alter(&$items) {
-  $items['user/%user/message-subscribe']['title'] = 'Following';
-}
-
-/**
- * Implements hook_node_insert().
- */
-function collabco_message_feature_node_insert($node) {
-  collabco_message_feature_node_message($node, MESSAGE_NODE_INSERT);
-  // Allways follow own content.
-  $flag = flag_get_flag('follow_node') or die('no "follow_node" flag defined');
-  $account = user_load($node->uid);
-  $flag->flag('flag', $node->nid, $account);
-}
-
-/**
- * Implements hook_node_update().
- */
-function collabco_message_feature_node_update($node) {
-  collabco_message_feature_update_message_status('node', $node);
-  collabco_message_feature_node_message($node, MESSAGE_NODE_UPDATE);
-}
-
-/**
- * Implements hook_comment_insert().
- */
-function collabco_message_feature_comment_insert($comment) {
-  $account = user_load($comment->uid);
-  $node = node_load($comment->nid);
-
-  $groups = og_get_entity_groups('node', $node);
-  $gids = $groups['node']; 
-  $message = message_create('create_comment', array(), $account);
-  // Save reference to the node in the node reference field, and the
-  // "publish" state (i.e. if the node is published or unpublished).
-  $message_wrapper = entity_metadata_wrapper('message', $message);
-  $message_wrapper->field_node_ref->set($node);
-  $message_wrapper->field_comment_ref->set($comment);
-  if (!empty($gids)) {
-    $message_wrapper->field_node_groups_ref->set($gids);
-  }
-
-  // The message should be published only if the node and the comment are
-  // both published.
-  $published = $node->status && $comment->status;
-  $message_wrapper->field_published->set($published);
-  $message_wrapper->save();
-
-  collabco_message_feature_send_notifications('comment', $comment, $message);
-
-  // Allways follow content after you comment on it.
-  $flag = flag_get_flag('follow_node') or die('no "follow_node" flag defined');
-  $account = user_load($comment->uid);
-  $flag->flag('flag', $comment->nid, $account);
-}
-
-/**
- * Implements hook_user_insert()
- */
-function collabco_message_feature_user_insert(&$edit, $account, $category) {
-  $message = message_create('user_register', array(), $account);
-  $message_wrapper = entity_metadata_wrapper('message', $message);
-  $message_wrapper->field_published->set($account->status);
-  $message_wrapper->save();
-
-  // Notify all community moderators.
-  $role = user_role_load_by_name("Community Moderator");
-  $query = 'SELECT DISTINCT(ur.uid) 
-      FROM {users_roles} AS ur
-      WHERE ur.rid IN (:rids)';
-  $result = db_query($query, array(':rids' => array($role->rid)));
-  $uids = $result->fetchCol();
-
-  $entity_type = 'user';
-  $notify_options = array();
-  $subscribe_options = array(
-    'uids' => array($uids),
-  );
-  message_subscribe_send_message($entity_type, $account, $message, $notify_options, $subscribe_options);
-}
-
-/**
- * Implements hook_comment_update().
- */
-function collabco_message_feature_comment_update($comment) {
-  collabco_message_feature_update_message_status('comment', $comment);
-}
-
-/**
- * Implements hook_og_membership_insert().
- */
-function collabco_message_feature_og_membership_insert($og_membership) {
-  if ($og_membership->state != OG_STATE_ACTIVE || $og_membership->entity_type != 'user') {
-    // Membership isn't active.
-    return;
-  }
-
-  if ($og_membership->group_type != 'node') {
-    // For simplicity we operate only on membership with node groups.
-    return;
-  }
-
-  if (!$og_membership->etid) {
-    // Don't capture membership of anonymous user, that might be caused
-    // when using Devel generate.
-    return;
-  }
-
-  $node = node_load($og_membership->gid);
-
-  $node_wrapper = entity_metadata_wrapper('node', $node);
-  if (($node_wrapper->__isset(OG_ACCESS_FIELD)) && ($node_wrapper->{OG_ACCESS_FIELD}->value() == '1')) {
-    // Dont add messages when users join private groups.
-    return;
-  }
-    // Create a "User joined" message.
-  $message = message_create(MESSAGE_OG_INSERT_USER, array('uid' => $og_membership->etid));
-  $message_wrapper = entity_metadata_wrapper('message', $message);
-  $message_wrapper->field_node_groups_ref[] = $node;
-  $message_wrapper->field_published->set($node->status);
-  $message_wrapper->save();
-
-  collabco_message_feature_send_notifications('node', $node, $message);
-}
+//function collabco_message_feature_menu_alter(&$items) {
+  //$items['user/%user/message-subscribe']['title'] = 'Following';
+//}
 
 /**
  * Implements hook_node_view_alter().
  */
-function collabco_message_feature_node_view_alter(&$build) {
-  // Only allow subscription if comments are open.
-  if (($build['#node']->comment !== '2')) {
-    unset($build['links']['flag']['#links']['flag-follow_node']);
-  }
-  // Only show group subscription if this is actually a group.
-  if (empty($build['#node']->{OG_GROUP_FIELD})) {
-    unset($build['links']['flag']['#links']['flag-follow_og']);
-  }
-  // Hide normal follow for groups, we dont follow them as nodes.
-  else {
-    unset($build['links']['flag']['#links']['flag-follow_node']);
-  }
-}
+//function collabco_message_feature_node_view_alter(&$build) {
+  //// Only allow subscription if comments are open.
+  //if (($build['#node']->comment !== '2')) {
+    //unset($build['links']['flag']['#links']['flag-follow_node']);
+  //}
+  //// Only show group subscription if this is actually a group.
+  //if (empty($build['#node']->{OG_GROUP_FIELD})) {
+    //unset($build['links']['flag']['#links']['flag-follow_og']);
+  //}
+  //// Hide normal follow for groups, we dont follow them as nodes.
+  //else {
+    //unset($build['links']['flag']['#links']['flag-follow_node']);
+  //}
+//}
+
+/**
+ * Implements hook_node_insert().
+ */
+//function collabco_message_feature_node_insert($node) {
+  //collabco_message_feature_node_message($node, MESSAGE_NODE_INSERT);
+  //// Allways follow own content.
+  //collabco_message_feature_follow_node($node->uid, $node->nid);
+//}
+
+/**
+ * Implements hook_node_update().
+ */
+//function collabco_message_feature_node_update($node) {
+  //collabco_message_feature_update_message_status('node', $node);
+  //collabco_message_feature_node_message($node, MESSAGE_NODE_UPDATE);
+//}
+
+/**
+ * Implements hook_comment_insert().
+ */
+//function collabco_message_feature_comment_insert($comment) {
+  //$account = user_load($comment->uid);
+  //$node = node_load($comment->nid);
+
+  //$groups = og_get_entity_groups('node', $node);
+  //$gids = $groups['node']; 
+  //$message = message_create('MESSAGE_COMMENT_INSERT', array(), $account);
+  //// Save reference to the node in the node reference field, and the
+  //// "publish" state (i.e. if the node is published or unpublished).
+  //$message_wrapper = entity_metadata_wrapper('message', $message);
+  //$message_wrapper->{MESSAGE_NODE_FIELD}->set($node);
+  //$message_wrapper->{MESSAGE_COMMENT_FIELD}->set($comment);
+  //if (!empty($gids)) {
+    //$message_wrapper->{MESSAGE_GROUPS_FIELD}->set($gids);
+  //}
+
+  //// The message should be published only if the node and the comment are
+  //// both published.
+  //$published = $node->status && $comment->status;
+  //$message_wrapper->field_published->set($published);
+  //$message_wrapper->save();
+
+  //collabco_message_feature_send_notifications('comment', $comment, $message);
+
+  //// Allways follow content after you comment on it.
+  //$flag = flag_get_flag('follow_node') or die('no "follow_node" flag defined');
+  //$account = user_load($comment->uid);
+  //$flag->flag('flag', $comment->nid, $account);
+//}
+
+/**
+ * Implements hook_comment_update().
+ */
+//function collabco_message_feature_comment_update($comment) {
+  //collabco_message_feature_update_message_status('comment', $comment);
+//}
+
+/**
+ * Implements hook_user_insert()
+ */
+//function collabco_message_feature_user_insert(&$edit, $account, $category) {
+  //$message = message_create('user_register', array(), $account);
+  //$message_wrapper = entity_metadata_wrapper('message', $message);
+  //$message_wrapper->field_published->set($account->status);
+  //$message_wrapper->save();
+
+  //// Notify all community moderators.
+  //$role = user_role_load_by_name("Community Moderator");
+  //$query = 'SELECT DISTINCT(ur.uid) 
+      //FROM {users_roles} AS ur
+      //WHERE ur.rid IN (:rids)';
+  //$result = db_query($query, array(':rids' => array($role->rid)));
+  //$uids = $result->fetchCol();
+
+  //$entity_type = 'user';
+  //$notify_options = array();
+  //$subscribe_options = array(
+    //'uids' => array($uids),
+  //);
+  //collabco_message_feature_send_notifications('user', $account, $message, $notify_options, $subscribe_options); 
+//}
+
+/**
+ * Implements hook_og_membership_insert().
+ */
+//function collabco_message_feature_og_membership_insert($og_membership) {
+  //if ($og_membership->state != OG_STATE_ACTIVE ) {
+    //// Membership isn't active, send a message to group moderators.
+    //$message_type = MESSAGE_OG_USER_REQUEST;
+    //collabco_message_feature_og_user_message($og_membership, $message_type);
+  //}
+  //// Create a normal user membership message. It may be initially unpublished.
+  //$message_type = MESSAGE_OG_USER;
+  //collabco_message_feature_og_user_message($og_membership, $message_type);
+//}
+
+//function collabco_message_feature_og_membership_update($og_membership) {
+  ////collabco_message_feature_update_user_message_status('node', $node);
+//}
+
+/**
+ * Create messages for user group memberships.
+ */
+//function collabco_message_feature_og_user_message($og_membership, $message_type) {
+  //if ($og_membership->group_type != 'node') {
+    //// For simplicity we operate only on membership with node groups.
+    //return;
+  //}
+  //if (!$og_membership->etid) {
+    //// Don't capture membership of anonymous user, that might be caused
+    //// when using Devel generate.
+    //return;
+  //}
+  //if ($og_membership->entity_type != 'user') {
+    //// We ignore content, as node insert/update hooks take care of that.
+    //return;
+  //}
+
+  //$group = node_load($og_membership->gid);
+  //$account = user_load($og_membership->etid);
+
+  //if ($message_type == MESSAGE_OG_USER) {
+    //// Dont add public messages when users join private groups.
+    //$group_wrapper = entity_metadata_wrapper('node', $group);
+    //if (($group_wrapper->__isset(OG_ACCESS_FIELD)) && ($group_wrapper->{OG_ACCESS_FIELD}->value() == '1')) {
+      //return;
+    //}
+  //}
+  //$message = message_create($message_type, array(), $account);
+  //$message_wrapper = entity_metadata_wrapper('message', $message);
+  //$message_wrapper->{MESSAGE_GROUPS_FIELD}->set(array($og_membership->gid));
+  //if ($og_membership->state === OG_STATE_ACTIVE) {
+    //$published = $group->status;
+  //}
+  //else {
+    //$published = FALSE;
+  //}
+  //$message_wrapper->field_published->set($published);
+  //$message_wrapper->save();
+
+  //// Notify moderators. There should be a variable to set or unset this at some stage.
+  //$notify_options = array();
+  //$subscribe_options = array();
+  //if ($message_type = MESSAGE_OG_USER_REQUEST) {
+    //// Notify group admins.
+    //$uids = collabco_message_feature_get_role_users($og_membership->gid, 'administrator member');
+    //if (!empty($uids)) {
+      //$subscribe_options = array(
+        //'uids' => array($uids),
+      //);
+    //}
+  //}
+  //collabco_message_feature_send_notifications('user', $account, $message, $notify_options, $subscribe_options); 
+//}
+
+//function collabco_message_feature_get_role_users($gid, $role_name) {
+  //// Get role ids for all group types. 
+  //$query = db_select('og_role', 'ogr')
+    //->fields('ogr', array('rid'))
+    //->condition('name', $role_name, '=');
+  //$rids = array_keys($query
+    //->execute()
+    //->fetchAllkeyed());
+  
+  //// Get users with the role in the group.
+  //$query = db_select('og_users_roles', 'ogur');
+  //$query
+    //->fields('ogur', array('uid'))
+    //->condition('gid', $gid, '=')
+    //->condition('rid', $rids, 'IN');
+  //$uids = array_keys($query
+    //->execute()
+    //->fetchAllkeyed());
+  //return $uids;
+//}
 
 /**
  * Update the "published" field in the message entity, when it changes in the
@@ -168,108 +227,153 @@ function collabco_message_feature_node_view_alter(&$build) {
  * @param $entity
  *   The entity object.
  */
-function collabco_message_feature_update_message_status($entity_type, $entity) {
-  if ($entity->status == $entity->original->status) {
-    // status didn't change.
-    return;
-  }
+//function collabco_message_feature_update_message_status($entity_type, $entity) {
+  //if ($entity->status == $entity->original->status) {
+    //// status didn't change.
+    //return;
+  //}
 
-  $messages = collabco_message_feature_get_matching_messages($entity_type, $entity);
-  foreach ($messages as $mid => $message) {
-    $message_wrapper = entity_metadata_wrapper('message', $mid);
-    // If comment status changed, we still need to check the node as-well.
-    if ($entity_type == 'comment') {
-      $node = node_load($entity->nid);
-      $status = intval($entity->status && $node->status);
-    }
-    else {
-      // The entity is the node.
-      $status = $entity->status;
-    }
-    if ($message_wrapper->field_published->value() != $status) {
-      // Status changed, so update the message entity.
-      $message_wrapper->field_published->set($status);
-      $message_wrapper->save();
-    }
-  }
-}
+  //$messages = collabco_message_feature_get_matching_messages($entity_type, $entity);
+  //foreach ($messages as $mid => $message) {
+    //$message_wrapper = entity_metadata_wrapper('message', $mid);
+    //// If comment status changed, we still need to check the node as-well.
+    //if ($entity_type == 'comment') {
+      //$node = node_load($entity->nid);
+      //$status = intval($entity->status && $node->status);
+    //}
+    //else {
+      //// The entity is the node.
+      //$status = $entity->status;
+    //}
+    //if ($message_wrapper->field_published->value() != $status) {
+      //// Status changed, so update the message entity.
+      //$message_wrapper->field_published->set($status);
+      //$message_wrapper->save();
+    //}
+  //}
+//}
 
 /**
- * Find existing messages referencing and entity type and optional bundle.
+ * Update the "published" field in the message entity, when it changes in the
+ * related entity.
+ *
+ * @param $entity_type
+ *   The entity type (node or comment).
+ * @param $entity
+ *   The entity object.
+ */
+//function collabco_message_feature_update_memberhip_message_state($account, $message_type, $gid) {
+  //if ($og_membership->state == $og_membership->original->state) {
+    //// status didn't change.
+    //return;
+  //}
+
+  //$messages = collabco_message_feature_get_matching_messages(NULL, NULL, $account, $message_type, $gid);
+  //foreach ($messages as $mid => $message) {
+    //$message_wrapper = entity_metadata_wrapper('message', $mid);
+    //// If comment status changed, we still need to check the node as-well.
+    //if ($entity_type == 'comment') {
+      //$node = node_load($entity->nid);
+      //$status = intval($entity->status && $node->status);
+    //}
+    //else {
+      //// The entity is the node.
+      //$status = $entity->status;
+    //}
+    //if ($message_wrapper->field_published->value() != $status) {
+      //// Status changed, so update the message entity.
+      //$message_wrapper->field_published->set($status);
+      //$message_wrapper->save();
+    //}
+  //}
+//}
+
+/**
+ * Find existing messages referencing an entity, or with a user, group or
+ * message type.
  *
  * @return array().
  */
-function collabco_message_feature_get_matching_messages($entity_type, $entity, $bundle = NULL) {
-  list($id) = entity_extract_ids($entity_type, $entity);
-  $field_name = 'field_' . $entity_type . '_ref';
+//function collabco_message_feature_get_matching_messages($entity_type = NULL, $entity = NULL, $uid = NULL, $message_type = NULL, $gid = NULL) {
+  //$query = new EntityFieldQuery();
 
-  $query = new EntityFieldQuery();
-  $query->entityCondition('entity_type', 'message')
-    ->fieldCondition($field_name, 'target_id',  $id, '=');
-  if (!empty($bundle)) {
-    $query->entityCondition('bundle', $bundle); 
-  }
-  $result = $query->execute();
+  //if (!empty($entity) && !empty($entity_type)) {
+    //list($id) = entity_extract_ids($entity_type, $entity);
+    //// Comment or node ref field.
+    //$field_name = 'field_' . $entity_type . '_ref';
+    //$query->entityCondition('entity_type', 'message')
+      //->fieldCondition($field_name, 'target_id',  $id, '=');
+  //}
 
-  if (!empty($result['message'])) {
-    return $result['message'];
-  }
+  //// Specific user if required.
+  //if (!empty($uid)) {
+    //$query->entityCondition('uid', $uid);
+  //}
 
-  return array();
-}
+  //// Find specific message type if required.
+  //if (!empty($message_type)) {
+    //$query->entityCondition('type', $message_type);
+  //}
 
+  //// Find specific gid if required.
+  //if (!empty($gid)) {
+    //$query->fieldCondition('MESSAGE_GROUPS_FIELD', 'target_id',  $gid, '=');
+  //}
+  //$result = $query->execute();
 
-function collabco_message_feature_node_message($node, $message_bundle) {
-  // Save the message and assign it to the user realm. Since another user,
-  // usually an admin might create the node, but populate the author field
-  // with another user, we make sure the user is populated with the
-  // node's author, instead of the acting user (although in most cases it
-  // would be the same user).
+  //if (!empty($result['message'])) {
+    //return $result['message'];
+  //}
+
+  //return array();
+//}
+
+//function collabco_message_feature_node_message($node, $message_type) {
   
-  $node_wrapper = entity_metadata_wrapper('node', $node);
-  if (($node_wrapper->__isset(OG_ACCESS_FIELD)) && ($node_wrapper->{OG_ACCESS_FIELD}->value() == '1')) {
-    // Dont add messages for the creation of private groups.
-    return;
-  }
-  $groups = og_get_entity_groups('node', $node);
-  // Create a "Post in group" message. We don't use a token replacement
-  // here as it needs to get the data from multiple values of the field.
-  // Furthermore, this replacement probably doesn't make sense outside of
-  // this message-type context, so we don't want to add another token,
-  // that will not be used.
-  $arguments['!groups'] = array(
-    'callback' => 'collabco_message_feature_group_list',
-    'pass message' => TRUE,
-  );
+  //$node_wrapper = entity_metadata_wrapper('node', $node);
+  //if (($node_wrapper->__isset(OG_ACCESS_FIELD)) && ($node_wrapper->{OG_ACCESS_FIELD}->value() == '1')) {
+    //// Dont add messages for the creation of private groups.
+    //return;
+  //}
+  //$groups = og_get_entity_groups('node', $node);
+  //// Create a "Post in group" message. We don't use a token replacement
+  //// here as it needs to get the data from multiple values of the field.
+  //// Furthermore, this replacement probably doesn't make sense outside of
+  //// this message-type context, so we don't want to add another token,
+  //// that will not be used.
+  //$arguments['!groups'] = array(
+    //'callback' => 'collabco_message_feature_group_list',
+    //'pass message' => TRUE,
+  //);
 
-  // Delete any earlier update messages, so the activity isn't filled with 
-  // multiple edits of one thing.
-  if ($message_bundle == MESSAGE_NODE_UPDATE) { 
-    $messages = collabco_message_feature_get_matching_messages('node', $node, MESSAGE_NODE_UPDATE); 
-    foreach ($messages as $mid => $message) {
-      $message_wrapper = entity_metadata_wrapper('message', $mid);
-      $message_wrapper->delete();
-    }
-  }
+  //// Delete any earlier update messages, so the activity isn't filled with 
+  //// multiple edits of one thing.
+  //if ($message_type == MESSAGE_NODE_UPDATE) { 
+    //$messages = collabco_message_feature_get_matching_messages('node', $node, NULL, MESSAGE_NODE_UPDATE); 
+    //foreach ($messages as $mid => $message) {
+      //$message_wrapper = entity_metadata_wrapper('message', $mid);
+      //$message_wrapper->delete();
+    //}
+  //}
 
-  $message = message_create($message_bundle, array('arguments' => $arguments, 'uid' => $node->uid));
-  $message_wrapper = entity_metadata_wrapper('message', $message);
-  $message_wrapper->field_node_ref->set($node);
-  $message_wrapper->field_published->set($node->status);
-  if (!empty($groups['node'])) {
-    $message_wrapper->field_node_groups_ref->set($groups['node']);
-  }
-  $message_wrapper->save();
+  //$message = message_create($message_type, array('arguments' => $arguments, 'uid' => $node->uid));
+  //$message_wrapper = entity_metadata_wrapper('message', $message);
+  //$message_wrapper->{MESSAGE_NODE_FIELD}->set($node);
+  //$message_wrapper->field_published->set($node->status);
+  //if (!empty($groups['node'])) {
+    //$message_wrapper->{MESSAGE_GROUPS_FIELD}->set($groups['node']);
+  //}
+  //$message_wrapper->save();
 
-  collabco_message_feature_send_notifications('node', $node, $message);
-}
+  //collabco_message_feature_send_notifications('node', $node, $message);
+//}
 
-function collabco_message_feature_send_notifications($entity_type, $entity, $message) {
-  // Send email subscriptions if they are enabled.
-  if (module_exists('message_subscribe')) {
-    message_subscribe_send_message($entity_type, $entity, $message);
-  }
-}
+//function collabco_message_feature_send_notifications($entity_type, $entity, $message, $notify_options = array(), $subscribe_options = array()) {
+  //// Send email subscriptions if they are enabled.
+  //if (module_exists('message_subscribe')) {
+    ////message_subscribe_send_message($entity_type, $entity, $message, $notify_options, $subscribe_options);
+  //}
+//}
 
 /**
  * Message callback; Show a comma separated list of groups.
@@ -277,39 +381,49 @@ function collabco_message_feature_send_notifications($entity_type, $entity, $mes
  * @param $message
  *   The message entity.
  */
-function collabco_message_feature_group_list(Message $message) {
-  $message_wrapper = entity_metadata_wrapper('message', $message);
-  $items = array();
-  foreach ($message_wrapper->field_node_groups_ref->value() as $node) {
-    if (!node_access('view', $node)) {
-      // User doesn't have access to view the group.
-      continue;
-    }
-    $url = entity_uri('node', $node);
-    $label = entity_label('node', $node);
-    $items[] = l($label, $url['path'], $url['options']);
-  }
-  if (!empty($items))
-  return t('in ') . implode(', ', $items);
-}
+//function collabco_message_feature_group_list(Message $message) {
+  //$message_wrapper = entity_metadata_wrapper('message', $message);
+  //$items = array();
+  //foreach ($message_wrapper->{MESSAGE_GROUPS_FIELD}->value() as $node) {
+    //if (!node_access('view', $node)) {
+      //// User doesn't have access to view the group.
+      //continue;
+    //}
+    //$url = entity_uri('node', $node);
+    //$label = entity_label('node', $node);
+    //$items[] = l($label, $url['path'], $url['options']);
+  //}
+  //if (!empty($items))
+  //return t('in ') . implode(', ', $items);
+//}
+
+/**
+ * Sets node follow flags for a user.
+ */
+//function collabco_message_feature_follow_node($uid, $nid) {
+  //$flag = flag_get_flag('follow_node') or die('no "follow_node" flag defined');
+  //$account = user_load($uid);
+  //$flag->flag('flag', $nid, $account);
+//}
 
 /**
  * Implements hook_collabco_integration().
  */
-function collabco_message_feature_collabco_integration() {
-  // Add links to views if a module wants to do that.
-  return array(
-    'collabco_message_feature' => array(
-      'views' => array(
-        'recent_activity' => array(
-          'group_integration_block' => array(
-            'tag_filter' => array(
-              'relationship' => 'field_node_ref_target_id',
-            ),
-          ),
-          'user_integration_block' => array(),
-        ),
-      ),
-    ),
-  );
-}
+//function collabco_message_feature_collabco_integration() {
+  //// Add links to views if a module wants to do that.
+  //return array(
+    //'collabco_message_feature' => array(
+      //'views' => array(
+        //'recent_activity' => array(
+          //'group_integration_block' => array(
+            //'tag_filter' => array(
+              //'relationship' => '{MESSAGE_NODE_FIELD}_target_id',
+            //),
+          //),
+          //'user_integration_block' => array(),
+        //),
+      //),
+    //),
+  //);
+//}
+
