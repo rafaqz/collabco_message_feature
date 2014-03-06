@@ -58,11 +58,11 @@ function collabco_message_feature_flag_default_flags() {
     'access_author' => '',
     'show_contextual_link' => 0,
     'i18n' => 0,
+    'api_version' => 3,
     'module' => 'collabco_message_feature',
     'locked' => array(
       0 => 'name',
     ),
-    'api_version' => 3,
   );
   // Exported flag: "Groups".
   $flags['follow_og'] = array(
@@ -94,11 +94,11 @@ function collabco_message_feature_flag_default_flags() {
     'access_author' => '',
     'show_contextual_link' => 0,
     'i18n' => 0,
+    'api_version' => 3,
     'module' => 'collabco_message_feature',
     'locked' => array(
       0 => 'name',
     ),
-    'api_version' => 3,
   );
   // Exported flag: "Terms".
   $flags['follow_term'] = array(
@@ -124,11 +124,11 @@ function collabco_message_feature_flag_default_flags() {
     'show_on_form' => 0,
     'access_author' => '',
     'show_contextual_link' => 0,
+    'api_version' => 3,
     'module' => 'collabco_message_feature',
     'locked' => array(
       0 => 'name',
     ),
-    'api_version' => 3,
   );
   // Exported flag: "Users".
   $flags['follow_user'] = array(
@@ -156,11 +156,11 @@ function collabco_message_feature_flag_default_flags() {
     'show_contextual_link' => 0,
     'show_on_profile' => 0,
     'access_uid' => '',
+    'api_version' => 3,
     'module' => 'collabco_message_feature',
     'locked' => array(
       0 => 'name',
     ),
-    'api_version' => 3,
   );
   return $flags;
 
