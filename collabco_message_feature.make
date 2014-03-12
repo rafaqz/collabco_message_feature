@@ -13,7 +13,7 @@ projects[message_subscribe][subdir] = "contrib"
 projects[message_subscribe][version] = "1.0-rc1"
 
 projects[views_infinite_scroll][subdir] = "contrib"
-projects[views_infinite_scroll][version] = "1.0-rc1"
+projects[views_infinite_scroll][version] = "1.1"
 
 libraries[autopager][download][type] = "get"
 libraries[autopager][download][url] = "http://jquery-autopager.googlecode.com/files/jquery.autopager-1.0.0.js"
