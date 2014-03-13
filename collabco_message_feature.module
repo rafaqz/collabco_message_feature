@@ -55,7 +55,13 @@ function collabco_message_feature_node_insert($node) {
  * Implements hook_node_update().
  */
 function collabco_message_feature_node_update($node) {
+  global $user;
+  // Delete any earlier update messages by this user, so the activity isn't 
+  // filled with multiple edits of one thing.
+  collabco_message_feature_delete_matching_messages('node', $node, $user->uid, MESSAGE_NODE_UPDATE); 
+  // Update existing message status.
   collabco_message_feature_update_message_status('node', $node);
+  //Create message.
   collabco_message_feature_node_message($node, MESSAGE_NODE_UPDATE);
 }
 
@@ -294,25 +300,39 @@ function collabco_message_feature_update_memberhip_message_state($account, $mess
  *
  * @return array().
  */
+function collabco_message_feature_delete_matching_messages($entity_type = NULL, $entity = NULL, $uid = NULL, $message_type = NULL, $gid = NULL) {
+  $messages = collabco_message_feature_get_matching_messages($entity_type, $entity, $uid, $message_type, $gid); 
+  foreach ($messages as $mid => $message) {
+    $message_wrapper = entity_metadata_wrapper('message', $mid);
+    $message_wrapper->delete();
+  }
+}
+
+/**
+ * Find existing messages referencing an entity, or with a user, group or
+ * message type.
+ *
+ * @return array().
+ */
 function collabco_message_feature_get_matching_messages($entity_type = NULL, $entity = NULL, $uid = NULL, $message_type = NULL, $gid = NULL) {
   $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'message');
 
   if (!empty($entity) && !empty($entity_type)) {
     list($id) = entity_extract_ids($entity_type, $entity);
     // Comment or node ref field.
     $field_name = 'field_' . $entity_type . '_ref';
-    $query->entityCondition('entity_type', 'message')
-      ->fieldCondition($field_name, 'target_id',  $id, '=');
+    $query->fieldCondition($field_name, 'target_id',  $id, '=');
   }
 
   // Specific user if required.
   if (!empty($uid)) {
-    $query->entityCondition('uid', $uid);
+    $query->propertyCondition('uid', $uid);
   }
 
   // Find specific message type if required.
   if (!empty($message_type)) {
-    $query->entityCondition('type', $message_type);
+    $query->entityCondition('bundle', $message_type, '=');
   }
 
   // Find specific gid if required.
@@ -345,16 +365,6 @@ function collabco_message_feature_node_message($node, $message_type) {
     'callback' => 'collabco_message_feature_group_list',
     'pass message' => TRUE,
   );
-
-  // Delete any earlier update messages, so the activity isn't filled with 
-  // multiple edits of one thing.
-  if ($message_type == MESSAGE_NODE_UPDATE) { 
-    $messages = collabco_message_feature_get_matching_messages('node', $node, NULL, MESSAGE_NODE_UPDATE); 
-    foreach ($messages as $mid => $message) {
-      $message_wrapper = entity_metadata_wrapper('message', $mid);
-      $message_wrapper->delete();
-    }
-  }
 
   $message = message_create($message_type, array('arguments' => $arguments, 'uid' => $node->uid));
   $message_wrapper = entity_metadata_wrapper('message', $message);
