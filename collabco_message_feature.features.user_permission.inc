@@ -28,6 +28,26 @@ function collabco_message_feature_user_default_permissions() {
     'module' => 'message_subscribe',
   );
 
+  // Exported permission: 'administer message types'.
+  $permissions['administer message types'] = array(
+    'name' => 'administer message types',
+    'roles' => array(
+      'Admin' => 'Admin',
+    ),
+    'module' => 'message',
+  );
+
+  // Exported permission: 'create messages'.
+  $permissions['create messages'] = array(
+    'name' => 'create messages',
+    'roles' => array(
+      'Admin' => 'Admin',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'message',
+  );
+
   // Exported permission: 'flag follow_node'.
   $permissions['flag follow_node'] = array(
     'name' => 'flag follow_node',
