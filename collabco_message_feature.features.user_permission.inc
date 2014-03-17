@@ -84,6 +84,34 @@ function collabco_message_feature_user_default_permissions() {
     'module' => 'flag',
   );
 
+  // Exported permission: 'show format selection for message'.
+  $permissions['show format selection for message'] = array(
+    'name' => 'show format selection for message',
+    'roles' => array(
+      'Admin' => 'Admin',
+    ),
+    'module' => 'better_formats',
+  );
+
+  // Exported permission: 'show format selection for message_type'.
+  $permissions['show format selection for message_type'] = array(
+    'name' => 'show format selection for message_type',
+    'roles' => array(
+      'Admin' => 'Admin',
+    ),
+    'module' => 'better_formats',
+  );
+
+  // Exported permission: 'show format selection for message_type_category'.
+  $permissions['show format selection for message_type_category'] = array(
+    'name' => 'show format selection for message_type_category',
+    'roles' => array(
+      'Admin' => 'Admin',
+    ),
+    'module' => 'better_formats',
+  );
+
+
   // Exported permission: 'unflag follow_node'.
   $permissions['unflag follow_node'] = array(
     'name' => 'unflag follow_node',
