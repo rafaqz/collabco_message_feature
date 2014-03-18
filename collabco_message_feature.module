@@ -427,7 +427,7 @@ function collabco_message_feature_collabco_integration() {
         'recent_activity' => array(
           'group_integration_block' => array(
             'tag_filter' => array(
-              'relationship' => '{MESSAGE_NODE_FIELD}_target_id',
+              'relationship' => MESSAGE_NODE_FIELD . '_target_id',
             ),
           ),
           'user_integration_block' => array(),
