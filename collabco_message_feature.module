@@ -114,19 +114,19 @@ function collabco_message_feature_user_insert(&$edit, $account, $category) {
   $message_wrapper->field_published->set($account->status);
   $message_wrapper->save();
 
+  $subscribe_options = array();
+  $notify_options = array();
+  $entity_type = 'user';
   // Notify all community moderators.
   $role = user_role_load_by_name("Community Moderator");
   $query = 'SELECT DISTINCT(ur.uid) 
       FROM {users_roles} AS ur
       WHERE ur.rid IN (:rids)';
   $result = db_query($query, array(':rids' => array($role->rid)));
-  $uids = $result->fetchCol();
+  foreach($result as $row) {
+    $subscribe_options['uids'][$row->uid] = array();
+  }
 
-  $entity_type = 'user';
-  $notify_options = array();
-  $subscribe_options = array(
-    'uids' => array($uids[0]),
-  );
   collabco_message_feature_send_notifications('user', $account, $message, $notify_options, $subscribe_options); 
 }
 
@@ -191,14 +191,12 @@ function collabco_message_feature_og_user_message($og_membership, $message_type)
   // Notify moderators. There should be a variable to set or unset this at some stage.
   $notify_options = array();
   $subscribe_options = array();
-  if ($message_type = MESSAGE_OG_USER_REQUEST) {
+  if ($message_type === MESSAGE_OG_USER_REQUEST) {
     // Notify group admins.
     $uids = collabco_message_feature_get_role_users($og_membership->gid, 'administrator member');
-    $uids[] = $group->uid;
-    if (!empty($uids)) {
-      $subscribe_options = array(
-        'uids' => array($uids),
-      );
+    $uids[$group->uid] = $group->uid;
+    foreach($uids as $key => $uid) {
+      $subscribe_options['uids'][$uid] = array();
     }
   }
   collabco_message_feature_send_notifications('user', $account, $message, $notify_options, $subscribe_options); 
@@ -208,20 +206,22 @@ function collabco_message_feature_get_role_users($gid, $role_name) {
   // Get role ids for all group types. 
   $query = db_select('og_role', 'ogr')
     ->fields('ogr', array('rid'))
-    ->condition('name', $role_name, '=');
-  $rids = array_keys($query
-    ->execute()
-    ->fetchAllkeyed());
+    ->condition('name', $role_name, '=')
+    ->execute();
+  foreach($query as $row) { 
+    $rids[$row->rid] = $row->rid;
+  }
   
   // Get users with the role in the group.
-  $query = db_select('og_users_roles', 'ogur');
-  $query
+  $query = db_select('og_users_roles', 'ogur')
     ->fields('ogur', array('uid'))
     ->condition('gid', $gid, '=')
-    ->condition('rid', $rids, 'IN');
-  $uids = array_keys($query
-    ->execute()
-    ->fetchAllkeyed());
+    ->condition('rid', $rids, 'IN')
+    ->execute();
+  $uids = array();
+  foreach($query as $row) {
+    $uids[$row->uid] = $row->uid;
+  }
   return $uids;
 }
 
