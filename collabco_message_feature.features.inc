@@ -58,11 +58,11 @@ function collabco_message_feature_flag_default_flags() {
     'access_author' => '',
     'show_contextual_link' => 0,
     'i18n' => 0,
-    'api_version' => 3,
     'module' => 'collabco_message_feature',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 3,
   );
   // Exported flag: "Groups".
   $flags['follow_og'] = array(
@@ -94,11 +94,11 @@ function collabco_message_feature_flag_default_flags() {
     'access_author' => '',
     'show_contextual_link' => 0,
     'i18n' => 0,
-    'api_version' => 3,
     'module' => 'collabco_message_feature',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 3,
   );
   // Exported flag: "Terms".
   $flags['follow_term'] = array(
@@ -124,11 +124,11 @@ function collabco_message_feature_flag_default_flags() {
     'show_on_form' => 0,
     'access_author' => '',
     'show_contextual_link' => 0,
-    'api_version' => 3,
     'module' => 'collabco_message_feature',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 3,
   );
   // Exported flag: "Users".
   $flags['follow_user'] = array(
@@ -156,11 +156,11 @@ function collabco_message_feature_flag_default_flags() {
     'show_contextual_link' => 0,
     'show_on_profile' => 0,
     'access_uid' => '',
-    'api_version' => 3,
     'module' => 'collabco_message_feature',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 3,
   );
   return $flags;
 
@@ -247,6 +247,33 @@ function collabco_message_feature_default_message_type() {
           "value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E joined \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E[message:field-node-groups-ref:0:title]\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:medium}\\u003C\\/p\\u003E\\u003C\\/div\\u003E",
           "format" : "php_code",
           "safe_value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E joined \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E[message:field-node-groups-ref:0:title]\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:medium}\\u003C\\/p\\u003E\\u003C\\/div\\u003E"
+        }
+      ]
+    },
+    "rdf_mapping" : []
+  }');
+  $items['og_user_membership_request'] = entity_import('message_type', '{
+    "name" : "og_user_membership_request",
+    "description" : "OG user membership request",
+    "argument_keys" : [],
+    "argument" : [],
+    "category" : "message_type",
+    "data" : {
+      "token options" : { "clear" : 0 },
+      "purge" : { "override" : 0, "enabled" : 0, "quota" : "", "days" : "" }
+    },
+    "language" : "en",
+    "arguments" : null,
+    "message_text" : { "und" : [
+        {
+          "value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E Requested to join \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E[message:field-node-groups-ref:0:title]\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:medium}\\u003C\\/p\\u003E\\u003C\\/div\\u003E",
+          "format" : "php_code",
+          "safe_value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E Requested to join \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E[message:field-node-groups-ref:0:title]\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:medium}\\u003C\\/p\\u003E\\u003C\\/div\\u003E"
+        },
+        {
+          "value" : "\\u003Cp\\u003E\\u003Ca href=\\u0022drupal\\/group\\/node\\/!{message:field-node-groups-ref:0}\\/admin\\/people\\u0022\\u003EManage group members\\u003C\\/a\\u003E\\u003C\\/p\\u003E",
+          "format" : "php_code",
+          "safe_value" : "\\u003Cp\\u003E\\u003Ca href=\\u0022drupal\\/group\\/node\\/!{message:field-node-groups-ref:0}\\/admin\\/people\\u0022\\u003EManage group members\\u003C\\/a\\u003E\\u003C\\/p\\u003E"
         }
       ]
     },

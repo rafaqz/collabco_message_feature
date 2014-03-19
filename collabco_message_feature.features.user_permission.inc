@@ -111,7 +111,6 @@ function collabco_message_feature_user_default_permissions() {
     'module' => 'better_formats',
   );
 
-
   // Exported permission: 'unflag follow_node'.
   $permissions['unflag follow_node'] = array(
     'name' => 'unflag follow_node',
