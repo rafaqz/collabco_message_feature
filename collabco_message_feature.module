@@ -125,7 +125,7 @@ function collabco_message_feature_user_insert(&$edit, $account, $category) {
   $entity_type = 'user';
   $notify_options = array();
   $subscribe_options = array(
-    'uids' => array($uids),
+    'uids' => array($uids[0]),
   );
   collabco_message_feature_send_notifications('user', $account, $message, $notify_options, $subscribe_options); 
 }
@@ -194,6 +194,7 @@ function collabco_message_feature_og_user_message($og_membership, $message_type)
   if ($message_type = MESSAGE_OG_USER_REQUEST) {
     // Notify group admins.
     $uids = collabco_message_feature_get_role_users($og_membership->gid, 'administrator member');
+    $uids[] = $group->uid;
     if (!empty($uids)) {
       $subscribe_options = array(
         'uids' => array($uids),
