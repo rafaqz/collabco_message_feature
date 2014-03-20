@@ -124,7 +124,7 @@ function collabco_message_feature_user_insert(&$edit, $account, $category) {
       WHERE ur.rid IN (:rids)';
   $result = db_query($query, array(':rids' => array($role->rid)));
   foreach($result as $row) {
-    $subscribe_options['uids'][$row->uid] = array();
+    $subscribe_options['uids'][$row->uid] = array('notifiers' => array('email'));
   }
 
   collabco_message_feature_send_notifications('user', $account, $message, $notify_options, $subscribe_options); 
@@ -196,7 +196,7 @@ function collabco_message_feature_og_user_message($og_membership, $message_type)
     $uids = collabco_message_feature_get_role_users($og_membership->gid, 'administrator member');
     $uids[$group->uid] = $group->uid;
     foreach($uids as $key => $uid) {
-      $subscribe_options['uids'][$uid] = array();
+      $subscribe_options['uids'][$uid] = array('notifiers' => array('email'));
     }
   }
   collabco_message_feature_send_notifications('user', $account, $message, $notify_options, $subscribe_options); 
