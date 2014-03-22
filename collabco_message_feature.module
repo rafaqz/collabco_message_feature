@@ -338,7 +338,7 @@ function collabco_message_feature_get_matching_messages($entity_type = NULL, $en
 
   // Find specific gid if required.
   if (!empty($gid)) {
-    $query->fieldCondition('MESSAGE_GROUPS_FIELD', 'target_id',  $gid, '=');
+    $query->fieldCondition(MESSAGE_GROUPS_FIELD, 'target_id',  $gid, '=');
   }
   $result = $query->execute();
 
