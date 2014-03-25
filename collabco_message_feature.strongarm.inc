@@ -41,8 +41,8 @@ function collabco_message_feature_strongarm() {
             'weight' => 0,
           ),
           'message_notify_email_body' => array(
-            'visible' => FALSE,
-            'weight' => 0,
+            'weight' => '0',
+            'visible' => TRUE,
           ),
         ),
         'message__message_text__1' => array(
@@ -51,8 +51,8 @@ function collabco_message_feature_strongarm() {
             'weight' => 0,
           ),
           'message_notify_email_body' => array(
+            'weight' => '1',
             'visible' => TRUE,
-            'weight' => 0,
           ),
         ),
         'message__message_text__2' => array(
