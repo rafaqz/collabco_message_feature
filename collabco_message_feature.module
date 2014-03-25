@@ -74,7 +74,13 @@ function collabco_message_feature_comment_insert($comment) {
 
   $groups = og_get_entity_groups('node', $node);
   $gids = $groups['node']; 
-  $message = message_create(MESSAGE_COMMENT_INSERT, array(), $account);
+
+  $arguments['!groups'] = array(
+    'callback' => 'collabco_message_feature_group_list',
+    'pass message' => TRUE,
+  );
+
+  $message = message_create(MESSAGE_COMMENT_INSERT, array('arguments' => $arguments), $account);
   // Save reference to the node in the node reference field, and the
   // "publish" state (i.e. if the node is published or unpublished).
   $message_wrapper = entity_metadata_wrapper('message', $message);

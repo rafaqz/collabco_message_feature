@@ -174,7 +174,7 @@ function collabco_message_feature_default_message_type() {
   $items['create_comment'] = entity_import('message_type', '{
     "name" : "create_comment",
     "description" : "Create comment",
-    "argument_keys" : [ "!teaser" ],
+    "argument_keys" : [ "!groups" ],
     "argument" : [],
     "category" : "message_type",
     "data" : {
