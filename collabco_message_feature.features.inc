@@ -259,21 +259,21 @@ function collabco_message_feature_default_message_type() {
     "argument" : [],
     "category" : "message_type",
     "data" : {
-      "token options" : { "clear" : 0 },
+      "token options" : { "clear" : 1 },
       "purge" : { "override" : 0, "enabled" : 0, "quota" : "", "days" : "" }
     },
     "language" : "en",
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E Requested to join \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E[message:field-node-groups-ref:0:title]\\u003C\\/a\\u003E \\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:medium}\\u003C\\/p\\u003E\\u003C\\/div\\u003E",
+          "value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E Requested to join \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E!{message:field-node-groups-ref:0:title}\\u003C\\/a\\u003E \\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:medium}\\u003C\\/p\\u003E\\u003C\\/div\\u003E",
           "format" : "php_code",
-          "safe_value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E Requested to join \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E[message:field-node-groups-ref:0:title]\\u003C\\/a\\u003E \\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:medium}\\u003C\\/p\\u003E\\u003C\\/div\\u003E"
+          "safe_value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E Requested to join \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E!{message:field-node-groups-ref:0:title}\\u003C\\/a\\u003E \\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:medium}\\u003C\\/p\\u003E\\u003C\\/div\\u003E"
         },
         {
-          "value" : "\\u003Cp\\u003E\\u003Ca href=\\u0022drupal\\/group\\/node\\/!{message:field-node-groups-ref:0}\\/admin\\/people\\u0022\\u003EManage people\\u003C\\/a\\u003E in \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E[message:field-node-groups-ref:0:title]\\u003C\\/a\\u003E\\u003C\\/p\\u003E",
+          "value" : "\\u003Cp\\u003E@{message:field-og-membership-ref:og_membership_request}\\u003Cp\\u003E\\r\\n\\u003Cp\\u003E\\u003Ca href=\\u0022drupal\\/group\\/node\\/!{message:field-node-groups-ref:0}\\/admin\\/people\\u0022\\u003EManage people\\u003C\\/a\\u003E in \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E[message:field-node-groups-ref:0:title]\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\r\\n\\r\\n",
           "format" : "php_code",
-          "safe_value" : "\\u003Cp\\u003E\\u003Ca href=\\u0022drupal\\/group\\/node\\/!{message:field-node-groups-ref:0}\\/admin\\/people\\u0022\\u003EManage people\\u003C\\/a\\u003E in \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E[message:field-node-groups-ref:0:title]\\u003C\\/a\\u003E\\u003C\\/p\\u003E"
+          "safe_value" : "\\u003Cp\\u003E@{message:field-og-membership-ref:og_membership_request}\\u003Cp\\u003E\\n\\u003Cp\\u003E\\u003Ca href=\\u0022drupal\\/group\\/node\\/!{message:field-node-groups-ref:0}\\/admin\\/people\\u0022\\u003EManage people\\u003C\\/a\\u003E in \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E[message:field-node-groups-ref:0:title]\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\n\\n"
         }
       ]
     },
