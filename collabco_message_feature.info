@@ -25,7 +25,6 @@ dependencies[] = views
 dependencies[] = views_content_cache
 dependencies[] = views_infinite_scroll
 datestamp = 1377761539
-features[context][] = recent_activity_block
 features[context][] = recent_activity_group_block
 features[context][] = recent_activity_group_integration_block
 features[context][] = recent_activity_node_block
