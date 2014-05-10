@@ -8,6 +8,7 @@ define('MESSAGE_OG_USER','og_user_membership');
 define('MESSAGE_OG_USER_REQUEST','og_user_membership_request');
 define('MESSAGE_GROUPS_FIELD','field_node_groups_ref');
 define('MESSAGE_NODE_FIELD','field_node_ref');
+define('MESSAGE_FOLLOWERS_FIELD','field_subscriber');
 define('MESSAGE_COMMENT_FIELD','field_comment_ref');
 
 /**
@@ -72,8 +73,9 @@ function collabco_message_feature_comment_insert($comment) {
   $account = user_load($comment->uid);
   $node = node_load($comment->nid);
 
-  $groups = og_get_entity_groups('node', $node);
-  $gids = $groups['node']; 
+  if ($groups = og_get_entity_groups('node', $node)) {
+    $gids = $groups['node']; 
+  }
 
   $arguments['!groups'] = array(
     'callback' => 'collabco_message_feature_group_list',
