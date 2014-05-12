@@ -445,6 +445,38 @@ function collabco_message_feature_follow_node($uid, $nid) {
 }
 
 /**
+ * Returns flag markup if a flag available for the current entity.
+ */
+function collabco_message_feature_flag_links() {
+  switch (arg(0)) {
+    case 'node' :
+      $flag_name = 'follow_node';
+      $entity_id = arg(1);
+      break;
+    case 'taxonomy' :
+      $flag_name = 'follow_term';
+      $entity_id = arg(2);
+      break;
+    case 'user' :
+      $flag_name = 'follow_user';
+      $entity_id = arg(1);
+      break;
+    default : 
+      return;
+  }
+  return flag_create_link($flag_name, $entity_id);
+}
+
+/**
+ * Returns flag markup if a flag available for the current entity.
+ */
+function collabco_message_feature_og_flag_links() {
+  if ($group = og_context()) {
+    return flag_create_link('follow_og', $group['gid']);
+  }
+}
+
+/**
  * Implements hook_collabco_integration().
  */
 function collabco_message_feature_collabco_integration() {
