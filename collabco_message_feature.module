@@ -142,24 +142,6 @@ function collabco_message_feature_user_insert(&$edit, $account, $category) {
  * Implements hook_og_membership_insert().
  */
 function collabco_message_feature_og_membership_insert($og_membership) {
-  if ($og_membership->state != OG_STATE_ACTIVE ) {
-    // Membership isn't active, send a message to group moderators.
-    $message_type = MESSAGE_OG_USER_REQUEST;
-    collabco_message_feature_og_user_message($og_membership, $message_type);
-  }
-  // Create a normal user membership message. It may be initially unpublished.
-  $message_type = MESSAGE_OG_USER;
-  collabco_message_feature_og_user_message($og_membership, $message_type);
-}
-
-function collabco_message_feature_og_membership_update($og_membership) {
-  //collabco_message_feature_update_user_message_status('node', $node);
-}
-
-/**
- * Create messages for user group memberships.
- */
-function collabco_message_feature_og_user_message($og_membership, $message_type) {
   if ($og_membership->group_type != 'node') {
     // For simplicity we operate only on membership with node groups.
     return;
@@ -174,6 +156,43 @@ function collabco_message_feature_og_user_message($og_membership, $message_type)
     return;
   }
 
+  if ($og_membership->state != OG_STATE_ACTIVE ) {
+    // Membership isn't active, send a message to group moderators.
+    $message_type = MESSAGE_OG_USER_REQUEST;
+    collabco_message_feature_og_user_message($og_membership, $message_type);
+  }
+  // Create a normal user membership message. It may be initially unpublished.
+  $message_type = MESSAGE_OG_USER;
+  collabco_message_feature_og_user_message($og_membership, $message_type);
+
+  // Allways follow a group after you comment on it.
+  $flag = flag_get_flag('follow_og') or die('no "follow_og" flag defined');
+  $account = user_load($og_membership->etid);
+  $flag->flag('flag', $og_membership->gid, $account);
+}
+
+function collabco_message_feature_og_membership_update($og_membership) {
+  if ($og_membership->group_type != 'node') {
+    // For simplicity we operate only on membership with node groups.
+    return;
+  }
+  if (!$og_membership->etid) {
+    // Don't capture membership of anonymous user, that might be caused
+    // when using Devel generate.
+    return;
+  }
+  if ($og_membership->entity_type != 'user') {
+    // We ignore content, as node insert/update hooks take care of that.
+    return;
+  }
+
+  //collabco_message_feature_update_user_message_status('node', $node);
+}
+
+/**
+ * Create messages for user group memberships.
+ */
+function collabco_message_feature_og_user_message($og_membership, $message_type) {
   $group = node_load($og_membership->gid);
   $account = user_load($og_membership->etid);
 
