@@ -12,6 +12,142 @@ function collabco_message_feature_default_fe_block_settings() {
 
   $export['version'] = '2.0';
 
+  $export['views-follow_group-block'] = array(
+    'cache' => -1,
+    'css_class' => '',
+    'custom' => 0,
+    'delta' => 'follow_group-block',
+    'module' => 'views',
+    'node_types' => array(),
+    'pages' => 'user
+user/*',
+    'roles' => array(),
+    'themes' => array(
+      'custom_zurb' => array(
+        'region' => 'split_second',
+        'status' => 1,
+        'theme' => 'custom_zurb',
+        'weight' => 0,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+      'zurb_foundation' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'zurb_foundation',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 1,
+  );
+
+  $export['views-follow_node-block'] = array(
+    'cache' => -1,
+    'css_class' => '',
+    'custom' => 0,
+    'delta' => 'follow_node-block',
+    'module' => 'views',
+    'node_types' => array(),
+    'pages' => 'user
+user/*',
+    'roles' => array(),
+    'themes' => array(
+      'custom_zurb' => array(
+        'region' => 'split_first',
+        'status' => 1,
+        'theme' => 'custom_zurb',
+        'weight' => 0,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+      'zurb_foundation' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'zurb_foundation',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 1,
+  );
+
+  $export['views-follow_taxonomy_term-block'] = array(
+    'cache' => -1,
+    'css_class' => '',
+    'custom' => 0,
+    'delta' => 'follow_taxonomy_term-block',
+    'module' => 'views',
+    'node_types' => array(),
+    'pages' => 'user
+user/*',
+    'roles' => array(),
+    'themes' => array(
+      'custom_zurb' => array(
+        'region' => 'split_second',
+        'status' => 1,
+        'theme' => 'custom_zurb',
+        'weight' => 0,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+      'zurb_foundation' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'zurb_foundation',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 1,
+  );
+
+  $export['views-follow_user-block'] = array(
+    'cache' => -1,
+    'css_class' => '',
+    'custom' => 0,
+    'delta' => 'follow_user-block',
+    'module' => 'views',
+    'node_types' => array(),
+    'pages' => 'user
+user/*',
+    'roles' => array(),
+    'themes' => array(
+      'custom_zurb' => array(
+        'region' => 'split_second',
+        'status' => 1,
+        'theme' => 'custom_zurb',
+        'weight' => 0,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+      'zurb_foundation' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'zurb_foundation',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 1,
+  );
+
   $export['views-recent_activity-block'] = array(
     'cache' => -1,
     'css_class' => 'hidden-phone',
@@ -37,6 +173,12 @@ user',
         'region' => '',
         'status' => 0,
         'theme' => 'seven',
+        'weight' => 0,
+      ),
+      'zurb_foundation' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'zurb_foundation',
         'weight' => 0,
       ),
     ),
@@ -65,6 +207,12 @@ user',
         'status' => 0,
         'theme' => 'seven',
         'weight' => 0,
+      ),
+      'zurb_foundation' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'zurb_foundation',
+        'weight' => -28,
       ),
     ),
     'title' => 'Activity',

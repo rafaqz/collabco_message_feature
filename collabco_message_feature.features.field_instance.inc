@@ -71,6 +71,65 @@ function collabco_message_feature_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'message-create_comment-field_follower'
+  $field_instances['message-create_comment-field_follower'] = array(
+    'bundle' => 'create_comment',
+    'default_value' => NULL,
+    'default_value_function' => '',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 7,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'message_notify_email_body' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'message_notify_email_subject' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'message',
+    'entityconnect_unload_add' => 1,
+    'entityconnect_unload_edit' => 1,
+    'field_name' => 'field_follower',
+    'label' => 'Follower',
+    'required' => 0,
+    'settings' => array(
+      'behaviors' => array(
+        'prepopulate' => array(
+          'status' => 0,
+        ),
+      ),
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 5,
+    ),
+  );
+
   // Exported field_instance: 'message-create_comment-field_node_groups_ref'
   $field_instances['message-create_comment-field_node_groups_ref'] = array(
     'bundle' => 'create_comment',
@@ -249,9 +308,9 @@ function collabco_message_feature_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'message-create_comment-field_follower'
-  $field_instances['message-create_comment-field_follower'] = array(
-    'bundle' => 'create_comment',
+  // Exported field_instance: 'message-create_node-field_follower'
+  $field_instances['message-create_node-field_follower'] = array(
+    'bundle' => 'create_node',
     'default_value' => NULL,
     'default_value_function' => '',
     'deleted' => 0,
@@ -264,7 +323,7 @@ function collabco_message_feature_field_default_field_instances() {
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 7,
+        'weight' => 5,
       ),
       'full' => array(
         'label' => 'above',
@@ -286,8 +345,8 @@ function collabco_message_feature_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'message',
-    'entityconnect_unload_add' => 1,
-    'entityconnect_unload_edit' => 1,
+    'entityconnect_unload_add' => 0,
+    'entityconnect_unload_edit' => 0,
     'field_name' => 'field_follower',
     'label' => 'Follower',
     'required' => 0,
@@ -304,7 +363,7 @@ function collabco_message_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -460,65 +519,6 @@ function collabco_message_feature_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'message-create_node-field_follower'
-  $field_instances['message-create_node-field_follower'] = array(
-    'bundle' => 'create_node',
-    'default_value' => NULL,
-    'default_value_function' => '',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 5,
-      ),
-      'full' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'message_notify_email_body' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'message_notify_email_subject' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'message',
-    'entityconnect_unload_add' => 0,
-    'entityconnect_unload_edit' => 0,
-    'field_name' => 'field_follower',
-    'label' => 'Follower',
-    'required' => 0,
-    'settings' => array(
-      'behaviors' => array(
-        'prepopulate' => array(
-          'status' => 0,
-        ),
-      ),
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 4,
-    ),
-  );
-
   // Exported field_instance: 'message-og_post_in_group-field_node_groups_ref'
   $field_instances['message-og_post_in_group-field_node_groups_ref'] = array(
     'bundle' => 'og_post_in_group',
@@ -668,6 +668,65 @@ function collabco_message_feature_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_buttons',
       'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'message-og_user_membership-field_follower'
+  $field_instances['message-og_user_membership-field_follower'] = array(
+    'bundle' => 'og_user_membership',
+    'default_value' => NULL,
+    'default_value_function' => '',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 4,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'message_notify_email_body' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'message_notify_email_subject' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'message',
+    'entityconnect_unload_add' => 0,
+    'entityconnect_unload_edit' => 0,
+    'field_name' => 'field_follower',
+    'label' => 'Follower',
+    'required' => 0,
+    'settings' => array(
+      'behaviors' => array(
+        'prepopulate' => array(
+          'status' => 0,
+        ),
+      ),
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 6,
     ),
   );
 
@@ -838,9 +897,9 @@ function collabco_message_feature_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'message-og_user_membership-field_follower'
-  $field_instances['message-og_user_membership-field_follower'] = array(
-    'bundle' => 'og_user_membership',
+  // Exported field_instance: 'message-og_user_membership_request-field_follower'
+  $field_instances['message-og_user_membership_request-field_follower'] = array(
+    'bundle' => 'og_user_membership_request',
     'default_value' => NULL,
     'default_value_function' => '',
     'deleted' => 0,
@@ -854,12 +913,6 @@ function collabco_message_feature_field_default_field_instances() {
         ),
         'type' => 'entityreference_label',
         'weight' => 4,
-      ),
-      'full' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
       ),
       'message_notify_email_body' => array(
         'label' => 'above',
@@ -1064,9 +1117,9 @@ function collabco_message_feature_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'message-og_user_membership_request-field_follower'
-  $field_instances['message-og_user_membership_request-field_follower'] = array(
-    'bundle' => 'og_user_membership_request',
+  // Exported field_instance: 'message-update_node-field_follower'
+  $field_instances['message-update_node-field_follower'] = array(
+    'bundle' => 'update_node',
     'default_value' => NULL,
     'default_value_function' => '',
     'deleted' => 0,
@@ -1079,7 +1132,7 @@ function collabco_message_feature_field_default_field_instances() {
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'message_notify_email_body' => array(
         'label' => 'above',
@@ -1113,7 +1166,7 @@ function collabco_message_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 4,
     ),
   );
 
@@ -1269,11 +1322,10 @@ function collabco_message_feature_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'message-update_node-field_follower'
-  $field_instances['message-update_node-field_follower'] = array(
-    'bundle' => 'update_node',
+  // Exported field_instance: 'message-user_register-field_follower'
+  $field_instances['message-user_register-field_follower'] = array(
+    'bundle' => 'user_register',
     'default_value' => NULL,
-    'default_value_function' => '',
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -1284,7 +1336,7 @@ function collabco_message_feature_field_default_field_instances() {
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 5,
+        'weight' => 1,
       ),
       'message_notify_email_body' => array(
         'label' => 'above',
@@ -1300,21 +1352,13 @@ function collabco_message_feature_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'message',
-    'entityconnect_unload_add' => 0,
-    'entityconnect_unload_edit' => 0,
     'field_name' => 'field_follower',
     'label' => 'Follower',
-    'required' => 0,
+    'required' => FALSE,
     'settings' => array(
-      'behaviors' => array(
-        'prepopulate' => array(
-          'status' => 0,
-        ),
-      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
@@ -1365,50 +1409,6 @@ function collabco_message_feature_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'message-user_register-field_follower'
-  $field_instances['message-user_register-field_follower'] = array(
-    'bundle' => 'user_register',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 1,
-      ),
-      'message_notify_email_body' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'message_notify_email_subject' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'message',
-    'field_name' => 'field_follower',
-    'label' => 'Follower',
-    'required' => FALSE,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 4,
-    ),
-  );
-
   // Exported field_instance: 'message_type-message_type-message_text'
   $field_instances['message_type-message_type-message_text'] = array(
     'bundle' => 'message_type',
@@ -1445,12 +1445,12 @@ function collabco_message_feature_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Comment reference');
+  t('Follower');
   t('Groups reference');
   t('Membership reference');
   t('Message text');
   t('Node reference');
   t('Published');
-  t('Follower');
   t('This is the text of all messages of this type.');
 
   return $field_instances;
