@@ -450,6 +450,10 @@ function collabco_message_feature_follow_node($uid, $nid) {
 function collabco_message_feature_flag_links() {
   switch (arg(0)) {
     case 'node' :
+      if (arg(1) === 'add') {
+        // No flags for node add page;
+        return;
+      }
       $flag_name = 'follow_node';
       $entity_id = arg(1);
       break;
