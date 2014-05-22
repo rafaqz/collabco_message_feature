@@ -10,7 +10,7 @@ projects[message_notify][subdir] = "contrib"
 projects[message_notify][version] = "2.5"
 
 projects[message_subscribe][subdir] = "contrib"
-projects[message_subscribe][version] = "1.0-rc1"
+projects[message_subscribe][version] = "1.0-rc2"
 
 projects[views_infinite_scroll][subdir] = "contrib"
 projects[views_infinite_scroll][version] = "1.1"
