@@ -244,9 +244,9 @@ function collabco_message_feature_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E joined \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E[message:field-node-groups-ref:0:title]\\u003C\\/a\\u003E \\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:medium}\\u003C\\/p\\u003E\\u003C\\/div\\u003E",
+          "value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E joined \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E@{message:field-node-groups-ref:0:title}\\u003C\\/a\\u003E \\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:medium}\\u003C\\/p\\u003E\\u003C\\/div\\u003E",
           "format" : "php_code",
-          "safe_value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E joined \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E[message:field-node-groups-ref:0:title]\\u003C\\/a\\u003E \\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:medium}\\u003C\\/p\\u003E\\u003C\\/div\\u003E"
+          "safe_value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E joined \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E@{message:field-node-groups-ref:0:title}\\u003C\\/a\\u003E \\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:medium}\\u003C\\/p\\u003E\\u003C\\/div\\u003E"
         }
       ]
     },
@@ -266,9 +266,9 @@ function collabco_message_feature_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E Requested to join \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E!{message:field-node-groups-ref:0:title}\\u003C\\/a\\u003E \\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:medium}\\u003C\\/p\\u003E\\u003C\\/div\\u003E",
+          "value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E Requested to join \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E@{message:field-node-groups-ref:0:title}\\u003C\\/a\\u003E \\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:medium}\\u003C\\/p\\u003E\\u003C\\/div\\u003E",
           "format" : "php_code",
-          "safe_value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E Requested to join \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E!{message:field-node-groups-ref:0:title}\\u003C\\/a\\u003E \\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:medium}\\u003C\\/p\\u003E\\u003C\\/div\\u003E"
+          "safe_value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u003E@{message:user:name}\\u003C\\/a\\u003E Requested to join \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E@{message:field-node-groups-ref:0:title}\\u003C\\/a\\u003E \\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:medium}\\u003C\\/p\\u003E\\u003C\\/div\\u003E"
         },
         {
           "value" : "\\u003Cp\\u003E@{message:field-og-membership-ref:og_membership_request}\\u003Cp\\u003E\\r\\n\\u003Cp\\u003E\\u003Ca href=\\u0022drupal\\/group\\/node\\/!{message:field-node-groups-ref:0}\\/admin\\/people\\u0022\\u003EManage people\\u003C\\/a\\u003E in \\u003Ca href=!{message:field-node-groups-ref:0:url}\\u0022\\u003E[message:field-node-groups-ref:0:title]\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\r\\n\\r\\n",
@@ -325,9 +325,9 @@ function collabco_message_feature_default_message_type() {
           "safe_value" : "!{message:user:picture}\\u003Cdiv class=\\u0022message-details\\u0022\\u003E\\u003Cp\\u003E\\u003Ca href=!{message:user:url}\\u0022\\u003E@{message:user:name}\\u003C\\/a\\u003E registered. \\u003C\\/p\\u003E\\u003Cp class=\\u0022timestamp\\u0022\\u003E@{message:timestamp:medium}\\u003C\\/p\\u003E\\u003C\\/div\\u003E"
         },
         {
-          "value" : "\\u003Cp\\u003E\\u003Ca href=\\u0022!{site:url}\\/admin\\/people\\/\\u0022\\u003EManage users\\u003C\\/a\\u003Eon !{site:name}.\\u003Cp\\u003E",
+          "value" : "\\u003Cp\\u003E\\u003Ca href=\\u0022!{site:url}\\/admin\\/people\\/\\u0022\\u003EManage users\\u003C\\/a\\u003E on @{site:name}.\\u003Cp\\u003E",
           "format" : "php_code",
-          "safe_value" : "\\u003Cp\\u003E\\u003Ca href=\\u0022!{site:url}\\/admin\\/people\\/\\u0022\\u003EManage users\\u003C\\/a\\u003Eon !{site:name}.\\u003Cp\\u003E"
+          "safe_value" : "\\u003Cp\\u003E\\u003Ca href=\\u0022!{site:url}\\/admin\\/people\\/\\u0022\\u003EManage users\\u003C\\/a\\u003E on @{site:name}.\\u003Cp\\u003E"
         }
       ]
     },
