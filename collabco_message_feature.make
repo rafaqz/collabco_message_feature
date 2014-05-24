@@ -12,7 +12,6 @@ projects[message_notify][version] = "2.5"
 projects[message_subscribe][subdir] = "contrib"
 projects[message_subscribe][download][type] = "git"
 projects[message_subscribe][download][branch] = "7.x-1.x"
-projects[message_subscribe][download][revision] = "0a12b384481a8c648a8a810d81012e32e4e2f090"
 projects[message_subscribe][download][url] = "http://git.drupal.org/project/views_arg_context.git"
 projects[message_subscribe][patch][1] = https://gist.githubusercontent.com/rafaqz/e204bed024f6e8e8f463/raw/8e228629f3aaf9243d551c669a45995bd5aa84eb/fix_queue.patch
 
