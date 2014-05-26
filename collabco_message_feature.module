@@ -576,26 +576,28 @@ function collabco_message_feature_build_followers_block() {
     $user_pics .= theme('user_picture', array('account' => $account));
   }
 
-  $block = array();
-  $block['og_context'] = $og_context ;
-  $block['content'] = array(
-    '#type' => 'container',
-    '#attributes' => array('class' => array('followers')),
-    'title' => array(
-      '#type' => 'markup',
-      '#markup' => t('Following this content'),
-      '#weight' => 0,
-    ),
-    'follower-strip' => array(
+  if (!empty($user_pics)) {
+    $block = array();
+    $block['og_context'] = $og_context ;
+    $block['content'] = array(
       '#type' => 'container',
       '#attributes' => array('class' => array('followers')),
-      '#weight' => 2,
-      'user_pics' => array(
+      'title' => array(
         '#type' => 'markup',
-        '#markup' => $user_pics,
+        '#markup' => '<span class="following-label">' . t('Following this content:') . '</span>',
+        '#weight' => 0,
       ),
-    ),
-  );
+      'follower-strip' => array(
+        '#type' => 'container',
+        '#attributes' => array('class' => array('followers')),
+        '#weight' => 2,
+        'user_pics' => array(
+          '#type' => 'markup',
+          '#markup' => $user_pics,
+        ),
+      ),
+    );
+  }
   return $block;
 }
 
@@ -608,9 +610,12 @@ function collabco_message_feature_form_node_form_alter(&$form, &$form_state, $fo
     '#autocomplete_path' => "collabco_message_feature/user/autocomplete/{$form['nid']['#value']}",
     '#weight' => -50,
   );
+  dsm($form);
 }
 
 function collabco_message_feature_custom_submit($form, &$form_state) {
+  dsm($form);
+  dsm($form_state);
   $flag = flag_get_flag('follow_node') or die('no "follow_node" flag defined');
   $string = $form['add_follow']['#value'];
   $user_strings = drupal_explode_tags($string);
