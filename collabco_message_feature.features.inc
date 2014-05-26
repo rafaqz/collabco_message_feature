@@ -74,7 +74,7 @@ function collabco_message_feature_flag_default_flags() {
     'flag_long' => 'Receive email notifications for all activity in this group',
     'flag_message' => 'You are now following this group.',
     'unflag_short' => 'Unfollow Group',
-    'unflag_long' => 'Cancel notifications',
+    'unflag_long' => 'Cancel notifications for this group.',
     'unflag_message' => 'You are no longer following this group.',
     'unflag_denied_text' => '',
     'link_type' => 'toggle',
