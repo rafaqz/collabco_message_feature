@@ -603,14 +603,13 @@ function collabco_message_feature_build_followers_block() {
 
 function collabco_message_feature_form_node_form_alter(&$form, &$form_state, $form_id) { // Add user autocomplete field.
   $form['#submit'][] = 'collabco_message_feature_custom_submit';
-  $form['add_follow'] = array(
+  $form['add_followers'] = array(
     '#type' => 'textfield',
     '#title' => t('Include user:'),
     '#description' => t('Add users to this conversation'),
     '#autocomplete_path' => "collabco_message_feature/user/autocomplete/{$form['nid']['#value']}",
     '#weight' => -50,
   );
-  dsm($form);
 }
 
 function collabco_message_feature_custom_submit($form, &$form_state) {
