@@ -536,7 +536,6 @@ function collabco_message_feature_build_followers_block() {
   $uids = array();
   $og_context = og_context();
   $flags = flag_get_flags();
-  dpm($flags);
 
   // Get all users following current group.
   //if ($og_context['group_type'] === $entity_type) {
@@ -609,19 +608,17 @@ function collabco_message_feature_form_node_form_alter(&$form, &$form_state, $fo
     '#autocomplete_path' => "collabco_message_feature/user/autocomplete/{$form['nid']['#value']}",
     '#weight' => -50,
   );
-  dsm($form);
 }
 
 function collabco_message_feature_custom_submit($form, &$form_state) {
-  dsm($form);
-  dsm($form_state);
   $flag = flag_get_flag('follow_node') or die('no "follow_node" flag defined');
   $string = $form['add_follow']['#value'];
   $user_strings = drupal_explode_tags($string);
+  $skip_permission_check = FALSE;
   foreach ($user_strings as $user_string) {
     $uid = filter_var($user_string, FILTER_SANITIZE_NUMBER_INT);
     $account = user_load($uid);
-    $flag->flag('flag', $form['nid']['#value'], $account);
+    $flag->flag('flag', $form['nid']['#value'], $account, $skip_permission_check);
   }
 }
 
