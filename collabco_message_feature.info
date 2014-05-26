@@ -34,6 +34,7 @@ features[context][] = recent_activity_user_integration_block
 features[ctools][] = context:context:3
 features[ctools][] = strongarm:strongarm:1
 features[ctools][] = views:views_default:3.0
+features[fe_block_settings][] = collabco_message_feature-followers
 features[fe_block_settings][] = views-follow_group-block
 features[fe_block_settings][] = views-follow_node-block
 features[fe_block_settings][] = views-follow_taxonomy_term-block
