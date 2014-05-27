@@ -70,6 +70,7 @@ function collabco_message_feature_node_view_alter(&$build) {
  * Implements hook_node_insert().
  */
 function collabco_message_feature_node_insert($node) {
+  collabco_message_feature_add_followers($node->nid, $node->add_followers);
   collabco_message_feature_node_message($node, MESSAGE_NODE_INSERT);
   // Allways follow own content.
   collabco_message_feature_follow_node($node->uid, $node->nid);
@@ -80,6 +81,7 @@ function collabco_message_feature_node_insert($node) {
  * Implements hook_node_update().
  */
 function collabco_message_feature_node_update($node) {
+  collabco_message_feature_add_followers($node->nid, $node->add_followers);
   global $user;
   // Delete any earlier update messages by this user, so the activity isn't 
   // filled with multiple edits of one thing.
@@ -538,7 +540,7 @@ function collabco_message_feature_build_followers_block() {
   $flags = flag_get_flags();
 
   // Get all users following current group.
-  if ($og_context['group_type'] === $entity_type) {
+  if (!empty($og_context) && $og_context['group_type'] === $entity_type) {
     $entity_id = $og_context['gid'];
     $query = db_select('flagging', 'f')
     ->fields('f', array('uid'))
@@ -602,36 +604,40 @@ function collabco_message_feature_build_followers_block() {
 }
 
 function collabco_message_feature_form_node_form_alter(&$form, &$form_state, $form_id) { // Add user autocomplete field.
-  $form['#submit'][] = 'collabco_message_feature_custom_submit';
   $form['add_followers'] = array(
     '#type' => 'textfield',
-    '#title' => t('Include users:'),
-    '#description' => t('Add users, separated by commas'),
+    '#title' => t('Include users (separated byb commas):'),
+    '#description' => t('Add users to follow this content, separated by commas'),
     '#autocomplete_path' => "collabco_message_feature/user/autocomplete/{$form['nid']['#value']}",
     '#weight' => -50,
   );
 }
 
-function collabco_message_feature_form_comment_form_alter(&$form, &$form_state, $form_id) { // Add user autocomplete field.
-  $form['#submit'][] = 'collabco_message_feature_custom_submit';
+function collabco_message_feature_form_comment_form_alter(&$form, &$form_state, $form_id) {
+  $form['#submit'][] = 'collabco_message_feature_comment_form_submit';
   $form['add_followers'] = array(
     '#type' => 'textfield',
-    '#title' => t('Include users:'),
+    '#title' => t('Include users (separated byb commas):'),
     '#description' => t('Add users, separated by commas'),
     '#autocomplete_path' => "collabco_message_feature/user/autocomplete/{$form['nid']['#value']}",
     '#weight' => 10,
   );
 }
 
-function collabco_message_feature_custom_submit($form, &$form_state) {
+function collabco_message_feature_comment_form_submit($form, &$form_state) {
+  collabco_message_feature_add_followers($form['nid']['#value'], $form['add_followers']['#value']);
+}
+
+
+function collabco_message_feature_add_followers($nid, $string) {
   $flag = flag_get_flag('follow_node') or die('no "follow_node" flag defined');
-  $string = $form['add_followers']['#value'];
   $user_strings = drupal_explode_tags($string);
   $skip_permission_check = FALSE;
   foreach ($user_strings as $user_string) {
-    $uid = filter_var($user_string, FILTER_SANITIZE_NUMBER_INT);
-    $account = user_load($uid);
-    $flag->flag('flag', $form['nid']['#value'], $account, $skip_permission_check);
+    if ($uid = filter_var($user_string, FILTER_SANITIZE_NUMBER_INT)) {
+      $account = user_load($uid);
+      $flag->flag('flag', $nid, $account, $skip_permission_check);
+    }
   }
 }
 
