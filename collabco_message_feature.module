@@ -605,16 +605,14 @@ function collabco_message_feature_form_node_form_alter(&$form, &$form_state, $fo
   $form['#submit'][] = 'collabco_message_feature_custom_submit';
   $form['add_followers'] = array(
     '#type' => 'textfield',
-    '#title' => t('Include user:'),
-    '#description' => t('Add users to this conversation'),
+    '#title' => t('Include users:'),
+    '#description' => t('Add users, separated by commas'),
     '#autocomplete_path' => "collabco_message_feature/user/autocomplete/{$form['nid']['#value']}",
     '#weight' => -50,
   );
 }
 
 function collabco_message_feature_custom_submit($form, &$form_state) {
-  dsm($form);
-  dsm($form_state);
   $flag = flag_get_flag('follow_node') or die('no "follow_node" flag defined');
   $string = $form['add_follow']['#value'];
   $user_strings = drupal_explode_tags($string);
