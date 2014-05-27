@@ -538,20 +538,20 @@ function collabco_message_feature_build_followers_block() {
   $flags = flag_get_flags();
 
   // Get all users following current group.
-  //if ($og_context['group_type'] === $entity_type) {
-    //$entity_id = $og_context['gid'];
-    //$query = db_select('flagging', 'f')
-    //->fields('f', array('uid'))
-    //->condition('entity_type', $entity_type, '=')
-    //->condition('fid', $flags['follow_og']->fid, '=')
-    //->condition('entity_id', $entity_id, '=');
-    //$result = $query->execute();
-    ////dpm($result);
+  if ($og_context['group_type'] === $entity_type) {
+    $entity_id = $og_context['gid'];
+    $query = db_select('flagging', 'f')
+    ->fields('f', array('uid'))
+    ->condition('entity_type', $entity_type, '=')
+    ->condition('fid', $flags['follow_og']->fid, '=')
+    ->condition('entity_id', $entity_id, '=');
+    $result = $query->execute();
+    //dpm($result);
     
-    //foreach ($result as $row) {
-      //$uids[$row->uid] = $row->uid;
-    //}
-  //}
+    foreach ($result as $row) {
+      $uids[$row->uid] = $row->uid;
+    }
+  }
 
   // Get all users following current node.
   if ($node = menu_get_object('node', 1)) {
@@ -560,8 +560,8 @@ function collabco_message_feature_build_followers_block() {
     $query = db_select('flagging', 'f')
     ->fields('f', array('uid'))
     ->condition('entity_type', $entity_type, '=')
-    ->condition('fid', $flags['follow_node']->fid, '=');
-    //->condition('entity_id', $node->nid, '=');
+    ->condition('fid', $flags['follow_node']->fid, '=')
+    ->condition('entity_id', $node->nid, '=');
     $result = $query->execute();
 
     foreach ($result as $row) {
@@ -576,8 +576,8 @@ function collabco_message_feature_build_followers_block() {
     $user_pics .= theme('user_picture', array('account' => $account));
   }
 
+  $block = array();
   if (!empty($user_pics)) {
-    $block = array();
     $block['og_context'] = $og_context ;
     $block['content'] = array(
       '#type' => 'container',
@@ -612,9 +612,20 @@ function collabco_message_feature_form_node_form_alter(&$form, &$form_state, $fo
   );
 }
 
+function collabco_message_feature_form_comment_form_alter(&$form, &$form_state, $form_id) { // Add user autocomplete field.
+  $form['#submit'][] = 'collabco_message_feature_custom_submit';
+  $form['add_followers'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Include users:'),
+    '#description' => t('Add users, separated by commas'),
+    '#autocomplete_path' => "collabco_message_feature/user/autocomplete/{$form['nid']['#value']}",
+    '#weight' => 10,
+  );
+}
+
 function collabco_message_feature_custom_submit($form, &$form_state) {
   $flag = flag_get_flag('follow_node') or die('no "follow_node" flag defined');
-  $string = $form['add_follow']['#value'];
+  $string = $form['add_followers']['#value'];
   $user_strings = drupal_explode_tags($string);
   $skip_permission_check = FALSE;
   foreach ($user_strings as $user_string) {
