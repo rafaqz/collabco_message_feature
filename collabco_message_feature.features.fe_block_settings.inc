@@ -18,10 +18,19 @@ function collabco_message_feature_default_fe_block_settings() {
     'custom' => 0,
     'delta' => 'followers',
     'module' => 'collabco_message_feature',
-    'node_types' => array(),
+    'node_types' => array(
+      0 => 'basic_page',
+      1 => 'book',
+      2 => 'conversation',
+      3 => 'front_icons',
+      4 => 'knowledge_object',
+      5 => 'news',
+    ),
     'pages' => 'node/*
 node/add/*',
-    'roles' => array(),
+    'roles' => array(
+      'authenticated user' => 2,
+    ),
     'themes' => array(
       'custom_zurb' => array(
         'region' => 'content',
