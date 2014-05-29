@@ -89,7 +89,7 @@ function collabco_message_feature_node_update($node) {
   // Update existing message status.
   collabco_message_feature_update_message_status('node', $node);
   //Create message.
-  collabco_message_feature_node_message($node, MESSAGE_NODE_UPDATE);
+  collabco_message_feature_node_message($node, MESSAGE_NODE_UPDATE, $user->uid);
 }
 
 /**
@@ -402,13 +402,16 @@ function collabco_message_feature_get_matching_messages($entity_type = NULL, $en
   return array();
 }
 
-function collabco_message_feature_node_message($node, $message_type) {
-  
+function collabco_message_feature_node_message($node, $message_type, $uid = NULL) {
   $node_wrapper = entity_metadata_wrapper('node', $node);
   if (($node_wrapper->__isset(OG_ACCESS_FIELD)) && ($node_wrapper->{OG_ACCESS_FIELD}->value() == '1')) {
     // Dont add messages for the creation of private groups.
     return;
   }
+  if (empty($uid)) {
+    $uid = $node->uid;
+  }
+
   $groups = og_get_entity_groups('node', $node);
   // Create a "Post in group" message. We don't use a token replacement
   // here as it needs to get the data from multiple values of the field.
@@ -419,8 +422,7 @@ function collabco_message_feature_node_message($node, $message_type) {
     'callback' => 'collabco_message_feature_group_list',
     'pass message' => TRUE,
   );
-
-  $message = message_create($message_type, array('arguments' => $arguments, 'uid' => $node->uid));
+  $message = message_create($message_type, array('arguments' => $arguments, 'uid' => $uid));
   $message_wrapper = entity_metadata_wrapper('message', $message);
   $message_wrapper->{MESSAGE_NODE_FIELD}->set($node);
   $message_wrapper->field_published->set($node->status);
