@@ -83,13 +83,15 @@ function collabco_message_feature_node_insert($node) {
 function collabco_message_feature_node_update($node) {
   collabco_message_feature_add_followers($node->nid, $node->add_followers);
   global $user;
-  // Delete any earlier update messages by this user, so the activity isn't 
+  // Find any earlier similar update messages by this user, so the activity isn't 
   // filled with multiple edits of one thing.
-  collabco_message_feature_delete_matching_messages('node', $node, $user->uid, MESSAGE_NODE_UPDATE); 
+  $matching = collabco_message_feature_get_matching_messages('node', $node, $user->uid, MESSAGE_NODE_UPDATE); 
+  if (empty($matching)) {
+    //Create message.
+    collabco_message_feature_node_message($node, MESSAGE_NODE_UPDATE, $user->uid);
+  }
   // Update existing message status.
   collabco_message_feature_update_message_status('node', $node);
-  //Create message.
-  collabco_message_feature_node_message($node, MESSAGE_NODE_UPDATE, $user->uid);
 }
 
 /**
