@@ -606,7 +606,7 @@ function collabco_message_feature_build_followers_block() {
 function collabco_message_feature_form_node_form_alter(&$form, &$form_state, $form_id) { // Add user autocomplete field.
   $form['add_followers'] = array(
     '#type' => 'textfield',
-    '#title' => t('Include users (separated byb commas):'),
+    '#title' => t('Include users (separated by commas):'),
     '#description' => t('Add users to follow this content, separated by commas'),
     '#autocomplete_path' => "collabco_message_feature/user/autocomplete/{$form['nid']['#value']}",
     '#weight' => -50,
@@ -617,8 +617,8 @@ function collabco_message_feature_form_comment_form_alter(&$form, &$form_state, 
   $form['#submit'][] = 'collabco_message_feature_comment_form_submit';
   $form['add_followers'] = array(
     '#type' => 'textfield',
-    '#title' => t('Include users (separated byb commas):'),
-    '#description' => t('Add users, separated by commas'),
+    '#title' => t('Include users (separated by commas):'),
+    '#description' => t('Add users to follow this content, separated by commas'),
     '#autocomplete_path' => "collabco_message_feature/user/autocomplete/{$form['nid']['#value']}",
     '#weight' => 10,
   );
