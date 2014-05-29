@@ -71,9 +71,12 @@ function collabco_message_feature_node_view_alter(&$build) {
  */
 function collabco_message_feature_node_insert($node) {
   collabco_message_feature_add_followers($node->nid, $node->add_followers);
-  collabco_message_feature_node_message($node, MESSAGE_NODE_INSERT);
   // Allways follow own content.
   collabco_message_feature_follow_node($node->uid, $node->nid);
+  if (!$node->send_notifications) {
+    return;
+  }
+  collabco_message_feature_node_message($node, MESSAGE_NODE_INSERT);
 }
 
 
@@ -82,6 +85,9 @@ function collabco_message_feature_node_insert($node) {
  */
 function collabco_message_feature_node_update($node) {
   collabco_message_feature_add_followers($node->nid, $node->add_followers);
+  if (!$node->send_notifications) {
+    return;
+  }
   global $user;
   // Find any earlier similar update messages by this user, so the activity isn't 
   // filled with multiple edits of one thing.
@@ -614,6 +620,13 @@ function collabco_message_feature_form_node_form_alter(&$form, &$form_state, $fo
     '#description' => t('Add users to follow this content, separated by commas'),
     '#autocomplete_path' => "collabco_message_feature/user/autocomplete/{$form['nid']['#value']}",
     '#weight' => -50,
+  );
+  $form['send_notifications'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Send notifications'),
+    '#default_value' => 1,
+    '#description' => t('Send email notifications and record in activity streams'),
+    '#weight' => -40,
   );
 }
 
