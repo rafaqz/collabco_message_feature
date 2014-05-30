@@ -625,7 +625,7 @@ function collabco_message_feature_form_node_form_alter(&$form, &$form_state, $fo
     '#type' => 'checkbox',
     '#title' => t('Send notifications'),
     '#default_value' => 1,
-    '#description' => t('Send email notifications and record in activity streams'),
+    '#description' => t('Send email notifications about this change and record it in activity streams'),
     '#weight' => -40,
   );
 }
