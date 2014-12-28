@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * collabco_message_feature.views_default.inc
+ * message_feature.views_default.inc
  */
 
 /**
  * Implements hook_views_default_views().
  */
-function collabco_message_feature_views_default_views() {
+function message_feature_views_default_views() {
   $export = array();
 
   $view = new view();

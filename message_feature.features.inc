@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * collabco_message_feature.features.inc
+ * message_feature.features.inc
  */
 
 /**
  * Implements hook_ctools_plugin_api().
  */
-function collabco_message_feature_ctools_plugin_api($module = NULL, $api = NULL) {
+function message_feature_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "context" && $api == "context") {
     return array("version" => "3");
   }
@@ -19,14 +19,14 @@ function collabco_message_feature_ctools_plugin_api($module = NULL, $api = NULL)
 /**
  * Implements hook_views_api().
  */
-function collabco_message_feature_views_api($module = NULL, $api = NULL) {
+function message_feature_views_api($module = NULL, $api = NULL) {
   return array("api" => "3.0");
 }
 
 /**
  * Implements hook_flag_default_flags().
  */
-function collabco_message_feature_flag_default_flags() {
+function message_feature_flag_default_flags() {
   $flags = array();
   // Exported flag: "Content".
   $flags['follow_node'] = array(
@@ -58,7 +58,7 @@ function collabco_message_feature_flag_default_flags() {
     'access_author' => '',
     'show_contextual_link' => 0,
     'i18n' => 0,
-    'module' => 'collabco_message_feature',
+    'module' => 'message_feature',
     'locked' => array(
       0 => 'name',
     ),
@@ -94,7 +94,7 @@ function collabco_message_feature_flag_default_flags() {
     'access_author' => '',
     'show_contextual_link' => 0,
     'i18n' => 0,
-    'module' => 'collabco_message_feature',
+    'module' => 'message_feature',
     'locked' => array(
       0 => 'name',
     ),
@@ -124,7 +124,7 @@ function collabco_message_feature_flag_default_flags() {
     'show_on_form' => 0,
     'access_author' => '',
     'show_contextual_link' => 0,
-    'module' => 'collabco_message_feature',
+    'module' => 'message_feature',
     'locked' => array(
       0 => 'name',
     ),
@@ -156,7 +156,7 @@ function collabco_message_feature_flag_default_flags() {
     'show_contextual_link' => 0,
     'show_on_profile' => 0,
     'access_uid' => '',
-    'module' => 'collabco_message_feature',
+    'module' => 'message_feature',
     'locked' => array(
       0 => 'name',
     ),
@@ -169,7 +169,7 @@ function collabco_message_feature_flag_default_flags() {
 /**
  * Implements hook_default_message_type().
  */
-function collabco_message_feature_default_message_type() {
+function message_feature_default_message_type() {
   $items = array();
   $items['create_comment'] = entity_import('message_type', '{
     "name" : "create_comment",

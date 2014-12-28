@@ -16,12 +16,12 @@ define('MESSAGE_COMMENT_FIELD','field_comment_ref');
  * Collabco message feature.
  */
 
-include_once('collabco_message_feature.features.inc');
+include_once('message_feature.features.inc');
 
 /**
  * Implements hook_block_info().
  */
-function collabco_message_feature_block_info() {
+function message_feature_block_info() {
   $blocks = array(
     'followers' => array(
       'info' => t('Followers'),
@@ -33,10 +33,10 @@ function collabco_message_feature_block_info() {
 /**
  * Implements hook_block_view().
  */
-function collabco_message_feature_block_view($delta='') {
+function message_feature_block_view($delta='') {
   switch($delta) {
     case 'followers' :
-      $block = collabco_message_feature_build_followers_block();
+      $block = message_feature_build_followers_block();
       return $block;
   }
 } 
@@ -44,14 +44,14 @@ function collabco_message_feature_block_view($delta='') {
 /**
  * Implements hook_menu_alter().
  */
-function collabco_message_feature_menu_alter(&$items) {
+function message_feature_menu_alter(&$items) {
   $items['user/%user/message-subscribe']['title'] = 'Following';
 }
 
 /**
  * Implements hook_node_view_alter().
  */
-function collabco_message_feature_node_view_alter(&$build) {
+function message_feature_node_view_alter(&$build) {
   // Only allow subscription if comments are open.
   if (($build['#node']->comment !== '2')) {
     unset($build['links']['flag']['#links']['flag-follow_node']);
@@ -69,41 +69,41 @@ function collabco_message_feature_node_view_alter(&$build) {
 /**
  * Implements hook_node_insert().
  */
-function collabco_message_feature_node_insert($node) {
-  collabco_message_feature_add_followers($node->nid, $node->add_followers);
+function message_feature_node_insert($node) {
+  message_feature_add_followers($node->nid, $node->add_followers);
   // Allways follow own content.
-  collabco_message_feature_follow_node($node->uid, $node->nid);
+  message_feature_follow_node($node->uid, $node->nid);
   if (!$node->send_notifications) {
     return;
   }
-  collabco_message_feature_node_message($node, MESSAGE_NODE_INSERT);
+  message_feature_node_message($node, MESSAGE_NODE_INSERT);
 }
 
 
 /**
  * Implements hook_node_update().
  */
-function collabco_message_feature_node_update($node) {
-  collabco_message_feature_add_followers($node->nid, $node->add_followers);
+function message_feature_node_update($node) {
+  message_feature_add_followers($node->nid, $node->add_followers);
   if (!$node->send_notifications) {
     return;
   }
   global $user;
   // Find any earlier similar update messages by this user, so the activity isn't 
   // filled with multiple edits of one thing.
-  $matching = collabco_message_feature_get_matching_messages('node', $node, $user->uid, MESSAGE_NODE_UPDATE); 
+  $matching = message_feature_get_matching_messages('node', $node, $user->uid, MESSAGE_NODE_UPDATE); 
   if (empty($matching)) {
     //Create message.
-    collabco_message_feature_node_message($node, MESSAGE_NODE_UPDATE, $user->uid);
+    message_feature_node_message($node, MESSAGE_NODE_UPDATE, $user->uid);
   }
   // Update existing message status.
-  collabco_message_feature_update_message_status('node', $node);
+  message_feature_update_message_status('node', $node);
 }
 
 /**
  * Implements hook_comment_insert().
  */
-function collabco_message_feature_comment_insert($comment) {
+function message_feature_comment_insert($comment) {
   $account = user_load($comment->uid);
   $node = node_load($comment->nid);
 
@@ -112,7 +112,7 @@ function collabco_message_feature_comment_insert($comment) {
   }
 
   $arguments['!groups'] = array(
-    'callback' => 'collabco_message_feature_group_list',
+    'callback' => 'message_feature_group_list',
     'pass message' => TRUE,
   );
 
@@ -132,7 +132,7 @@ function collabco_message_feature_comment_insert($comment) {
   $message_wrapper->field_published->set($published);
   $message_wrapper->save();
 
-  collabco_message_feature_send_notifications('comment', $comment, $message);
+  message_feature_send_notifications('comment', $comment, $message);
 
   // Allways follow content after you comment on it.
   $flag = flag_get_flag('follow_node') or die('no "follow_node" flag defined');
@@ -143,14 +143,14 @@ function collabco_message_feature_comment_insert($comment) {
 /**
  * Implements hook_comment_update().
  */
-function collabco_message_feature_comment_update($comment) {
-  collabco_message_feature_update_message_status('comment', $comment);
+function message_feature_comment_update($comment) {
+  message_feature_update_message_status('comment', $comment);
 }
 
 /**
  * Implements hook_user_insert()
  */
-function collabco_message_feature_user_insert(&$edit, $account, $category) {
+function message_feature_user_insert(&$edit, $account, $category) {
   $message = message_create('user_register', array(), $account);
   $message_wrapper = entity_metadata_wrapper('message', $message);
   $message_wrapper->field_published->set($account->status);
@@ -169,13 +169,13 @@ function collabco_message_feature_user_insert(&$edit, $account, $category) {
     $subscribe_options['uids'][$row->uid] = array('notifiers' => array('email'));
   }
 
-  collabco_message_feature_send_notifications('user', $account, $message, $notify_options, $subscribe_options); 
+  message_feature_send_notifications('user', $account, $message, $notify_options, $subscribe_options); 
 }
 
 /**
  * Implements hook_og_membership_insert().
  */
-function collabco_message_feature_og_membership_insert($og_membership) {
+function message_feature_og_membership_insert($og_membership) {
   if ($og_membership->group_type != 'node') {
     // For simplicity we operate only on membership with node groups.
     return;
@@ -193,11 +193,11 @@ function collabco_message_feature_og_membership_insert($og_membership) {
   if ($og_membership->state != OG_STATE_ACTIVE ) {
     // Membership isn't active, send a message to group moderators.
     $message_type = MESSAGE_OG_USER_REQUEST;
-    collabco_message_feature_og_user_message($og_membership, $message_type);
+    message_feature_og_user_message($og_membership, $message_type);
   }
   // Create a normal user membership message. It may be initially unpublished.
   $message_type = MESSAGE_OG_USER;
-  collabco_message_feature_og_user_message($og_membership, $message_type);
+  message_feature_og_user_message($og_membership, $message_type);
 
   // Allways follow a group after you comment on it.
   $flag = flag_get_flag('follow_og') or die('no "follow_og" flag defined');
@@ -205,7 +205,7 @@ function collabco_message_feature_og_membership_insert($og_membership) {
   $flag->flag('flag', $og_membership->gid, $account);
 }
 
-function collabco_message_feature_og_membership_update($og_membership) {
+function message_feature_og_membership_update($og_membership) {
   if ($og_membership->group_type != 'node') {
     // For simplicity we operate only on membership with node groups.
     return;
@@ -220,13 +220,13 @@ function collabco_message_feature_og_membership_update($og_membership) {
     return;
   }
 
-  //collabco_message_feature_update_user_message_status('node', $node);
+  //message_feature_update_user_message_status('node', $node);
 }
 
 /**
  * Create messages for user group memberships.
  */
-function collabco_message_feature_og_user_message($og_membership, $message_type) {
+function message_feature_og_user_message($og_membership, $message_type) {
   $group = node_load($og_membership->gid);
   $account = user_load($og_membership->etid);
 
@@ -254,16 +254,16 @@ function collabco_message_feature_og_user_message($og_membership, $message_type)
   $subscribe_options = array();
   if ($message_type === MESSAGE_OG_USER_REQUEST) {
     // Notify group admins.
-    $uids = collabco_message_feature_get_role_users($og_membership->gid, 'administrator member');
+    $uids = message_feature_get_role_users($og_membership->gid, 'administrator member');
     $uids[$group->uid] = $group->uid;
     foreach($uids as $key => $uid) {
       $subscribe_options['uids'][$uid] = array('notifiers' => array('email'));
     }
   }
-  collabco_message_feature_send_notifications('user', $account, $message, $notify_options, $subscribe_options); 
+  message_feature_send_notifications('user', $account, $message, $notify_options, $subscribe_options); 
 }
 
-function collabco_message_feature_get_role_users($gid, $role_name) {
+function message_feature_get_role_users($gid, $role_name) {
   // Get role ids for all group types. 
   $query = db_select('og_role', 'ogr')
     ->fields('ogr', array('rid'))
@@ -295,13 +295,13 @@ function collabco_message_feature_get_role_users($gid, $role_name) {
  * @param $entity
  *   The entity object.
  */
-function collabco_message_feature_update_message_status($entity_type, $entity) {
+function message_feature_update_message_status($entity_type, $entity) {
   if ($entity->status == $entity->original->status) {
     // status didn't change.
     return;
   }
 
-  $messages = collabco_message_feature_get_matching_messages($entity_type, $entity);
+  $messages = message_feature_get_matching_messages($entity_type, $entity);
   foreach ($messages as $mid => $message) {
     $message_wrapper = entity_metadata_wrapper('message', $mid);
     // If comment status changed, we still need to check the node as-well.
@@ -330,13 +330,13 @@ function collabco_message_feature_update_message_status($entity_type, $entity) {
  * @param $entity
  *   The entity object.
  */
-function collabco_message_feature_update_memberhip_message_state($account, $message_type, $gid) {
+function message_feature_update_memberhip_message_state($account, $message_type, $gid) {
   if ($og_membership->state == $og_membership->original->state) {
     // status didn't change.
     return;
   }
 
-  $messages = collabco_message_feature_get_matching_messages(NULL, NULL, $account, $message_type, $gid);
+  $messages = message_feature_get_matching_messages(NULL, NULL, $account, $message_type, $gid);
   foreach ($messages as $mid => $message) {
     $message_wrapper = entity_metadata_wrapper('message', $mid);
     // If comment status changed, we still need to check the node as-well.
@@ -362,8 +362,8 @@ function collabco_message_feature_update_memberhip_message_state($account, $mess
  *
  * @return array().
  */
-function collabco_message_feature_delete_matching_messages($entity_type = NULL, $entity = NULL, $uid = NULL, $message_type = NULL, $gid = NULL) {
-  $messages = collabco_message_feature_get_matching_messages($entity_type, $entity, $uid, $message_type, $gid); 
+function message_feature_delete_matching_messages($entity_type = NULL, $entity = NULL, $uid = NULL, $message_type = NULL, $gid = NULL) {
+  $messages = message_feature_get_matching_messages($entity_type, $entity, $uid, $message_type, $gid); 
   foreach ($messages as $mid => $message) {
     $message_wrapper = entity_metadata_wrapper('message', $mid);
     $message_wrapper->delete();
@@ -376,7 +376,7 @@ function collabco_message_feature_delete_matching_messages($entity_type = NULL, 
  *
  * @return array().
  */
-function collabco_message_feature_get_matching_messages($entity_type = NULL, $entity = NULL, $uid = NULL, $message_type = NULL, $gid = NULL) {
+function message_feature_get_matching_messages($entity_type = NULL, $entity = NULL, $uid = NULL, $message_type = NULL, $gid = NULL) {
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', 'message');
 
@@ -410,7 +410,7 @@ function collabco_message_feature_get_matching_messages($entity_type = NULL, $en
   return array();
 }
 
-function collabco_message_feature_node_message($node, $message_type, $uid = NULL) {
+function message_feature_node_message($node, $message_type, $uid = NULL) {
   $node_wrapper = entity_metadata_wrapper('node', $node);
   if (($node_wrapper->__isset(OG_ACCESS_FIELD)) && ($node_wrapper->{OG_ACCESS_FIELD}->value() == '1')) {
     // Dont add messages for the creation of private groups.
@@ -427,7 +427,7 @@ function collabco_message_feature_node_message($node, $message_type, $uid = NULL
   // this message-type context, so we don't want to add another token,
   // that will not be used.
   $arguments['!groups'] = array(
-    'callback' => 'collabco_message_feature_group_list',
+    'callback' => 'message_feature_group_list',
     'pass message' => TRUE,
   );
   $message = message_create($message_type, array('arguments' => $arguments, 'uid' => $uid));
@@ -439,10 +439,10 @@ function collabco_message_feature_node_message($node, $message_type, $uid = NULL
   }
   $message_wrapper->save();
 
-  collabco_message_feature_send_notifications('node', $node, $message);
+  message_feature_send_notifications('node', $node, $message);
 }
 
-function collabco_message_feature_send_notifications($entity_type, $entity, $message, $notify_options = array(), $subscribe_options = array()) {
+function message_feature_send_notifications($entity_type, $entity, $message, $notify_options = array(), $subscribe_options = array()) {
   // Send email subscriptions if they are enabled.
   if (module_exists('message_subscribe')) {
     message_subscribe_send_message($entity_type, $entity, $message, $notify_options, $subscribe_options);
@@ -455,7 +455,7 @@ function collabco_message_feature_send_notifications($entity_type, $entity, $mes
  * @param $message
  *   The message entity.
  */
-function collabco_message_feature_group_list(Message $message) {
+function message_feature_group_list(Message $message) {
   $message_wrapper = entity_metadata_wrapper('message', $message);
   $items = array();
   foreach ($message_wrapper->{MESSAGE_GROUPS_FIELD}->value() as $node) {
@@ -474,7 +474,7 @@ function collabco_message_feature_group_list(Message $message) {
 /**
  * Sets node follow flags for a user.
  */
-function collabco_message_feature_follow_node($uid, $nid) {
+function message_feature_follow_node($uid, $nid) {
   $flag = flag_get_flag('follow_node') or die('no "follow_node" flag defined');
   $account = user_load($uid);
   $flag->flag('flag', $nid, $account);
@@ -483,7 +483,7 @@ function collabco_message_feature_follow_node($uid, $nid) {
 /**
  * Returns flag markup if a flag available for the current entity.
  */
-function collabco_message_feature_flag_links() {
+function message_feature_flag_links() {
   switch (arg(0)) {
     case 'node' :
       if (arg(1) === 'add') {
@@ -510,19 +510,19 @@ function collabco_message_feature_flag_links() {
 /**
  * Returns flag markup if a flag available for the current entity.
  */
-function collabco_message_feature_og_flag_links() {
+function message_feature_og_flag_links() {
   if ($group = og_context()) {
     return flag_create_link('follow_og', $group['gid']);
   }
 }
 
 /**
- * Implements hook_collabco_integration().
+ * Implements hook_integration().
  */
-function collabco_message_feature_collabco_integration() {
+function message_feature_integration() {
   // Add links to views if a module wants to do that.
   return array(
-    'collabco_message_feature' => array(
+    'message_feature' => array(
       'views' => array(
         'recent_activity' => array(
           'group_integration_block' => array(
@@ -541,7 +541,7 @@ function collabco_message_feature_collabco_integration() {
   );
 }
 
-function collabco_message_feature_build_followers_block() {
+function message_feature_build_followers_block() {
   global $user;
   $page_uid = $user->uid;
   $entity_type = 'node';
@@ -613,12 +613,12 @@ function collabco_message_feature_build_followers_block() {
   return $block;
 }
 
-function collabco_message_feature_form_node_form_alter(&$form, &$form_state, $form_id) { // Add user autocomplete field.
+function message_feature_form_node_form_alter(&$form, &$form_state, $form_id) { // Add user autocomplete field.
   $form['add_followers'] = array(
     '#type' => 'textfield',
     '#title' => t('Include users (separated by commas):'),
     '#description' => t('Add users to follow this content, separated by commas'),
-    '#autocomplete_path' => "collabco_message_feature/user/autocomplete/{$form['nid']['#value']}",
+    '#autocomplete_path' => "message_feature/user/autocomplete/{$form['nid']['#value']}",
     '#weight' => -50,
   );
   $form['send_notifications'] = array(
@@ -630,23 +630,23 @@ function collabco_message_feature_form_node_form_alter(&$form, &$form_state, $fo
   );
 }
 
-function collabco_message_feature_form_comment_form_alter(&$form, &$form_state, $form_id) {
-  $form['#submit'][] = 'collabco_message_feature_comment_form_submit';
+function message_feature_form_comment_form_alter(&$form, &$form_state, $form_id) {
+  $form['#submit'][] = 'message_feature_comment_form_submit';
   $form['add_followers'] = array(
     '#type' => 'textfield',
     '#title' => t('Include users (separated by commas):'),
     '#description' => t('Add users to follow this content, separated by commas'),
-    '#autocomplete_path' => "collabco_message_feature/user/autocomplete/{$form['nid']['#value']}",
+    '#autocomplete_path' => "message_feature/user/autocomplete/{$form['nid']['#value']}",
     '#weight' => 10,
   );
 }
 
-function collabco_message_feature_comment_form_submit($form, &$form_state) {
-  collabco_message_feature_add_followers($form['nid']['#value'], $form['add_followers']['#value']);
+function message_feature_comment_form_submit($form, &$form_state) {
+  message_feature_add_followers($form['nid']['#value'], $form['add_followers']['#value']);
 }
 
 
-function collabco_message_feature_add_followers($nid, $string) {
+function message_feature_add_followers($nid, $string) {
   $flag = flag_get_flag('follow_node') or die('no "follow_node" flag defined');
   $user_strings = drupal_explode_tags($string);
   $skip_permission_check = FALSE;
@@ -661,12 +661,12 @@ function collabco_message_feature_add_followers($nid, $string) {
 /**
  * Implements hook_menu().
  */
-function collabco_message_feature_menu() {
+function message_feature_menu() {
   $items = array();
 
-  $items['collabco_message_feature/user/autocomplete/%'] = array(
+  $items['message_feature/user/autocomplete/%'] = array(
     'title' => 'User Autocomplete',
-    'page callback' => 'collabco_message_feature_user_autocomplete_callback',
+    'page callback' => 'message_feature_user_autocomplete_callback',
     'page arguments' => array(3),
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
@@ -675,7 +675,7 @@ function collabco_message_feature_menu() {
   return $items;
 }
 
-function collabco_message_feature_user_autocomplete_callback($entity_id, $string) {
+function message_feature_user_autocomplete_callback($entity_id, $string) {
   $matches = array();
   $args = func_get_args();
 

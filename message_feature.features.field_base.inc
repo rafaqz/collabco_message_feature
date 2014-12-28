@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * collabco_message_feature.features.field_base.inc
+ * message_feature.features.field_base.inc
  */
 
 /**
  * Implements hook_field_default_field_bases().
  */
-function collabco_message_feature_field_default_field_bases() {
+function message_feature_field_default_field_bases() {
   $field_bases = array();
 
   // Exported field_base: 'field_comment_ref'

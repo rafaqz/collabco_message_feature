@@ -8,7 +8,7 @@
 /**
  * Implements hook_token_info().
  */
-function collabco_message_feature_token_info() {
+function message_feature_token_info() {
   $info['tokens']['comment']['comment-teaser'] = array(
     'name' => t('Comment teaser'),
     'description' => t('Display a comment teaser.'),
@@ -24,7 +24,7 @@ function collabco_message_feature_token_info() {
 /**
  * Implements hook_tokens().
  */
-function collabco_message_feature_tokens($type, $tokens, array $data = array(), array $options = array()) {
+function message_feature_tokens($type, $tokens, array $data = array(), array $options = array()) {
   $replacements = array();
 
   // Only handeling comment and nodes.
@@ -38,7 +38,7 @@ function collabco_message_feature_tokens($type, $tokens, array $data = array(), 
       continue;
     }
 
-    $replacements[$original] = collabco_message_feature_trim_body($type, $data[$type]);
+    $replacements[$original] = message_feature_trim_body($type, $data[$type]);
   }
 
   return $replacements;
@@ -56,7 +56,7 @@ function collabco_message_feature_tokens($type, $tokens, array $data = array(), 
  * @return
  *   Body field text trimmed to 50 chars, with a "...Read more" suffix.
  */
-function collabco_message_feature_trim_body($entity_type, $entity) {
+function message_feature_trim_body($entity_type, $entity) {
   $wrapper = entity_metadata_wrapper($entity_type, $entity);
 
   // Select the right field acoring to the entity type.

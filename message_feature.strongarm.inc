@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * collabco_message_feature.strongarm.inc
+ * message_feature.strongarm.inc
  */
 
 /**
  * Implements hook_strongarm().
  */
-function collabco_message_feature_strongarm() {
+function message_feature_strongarm() {
   $export = array();
 
   $strongarm = new stdClass();

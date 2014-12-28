@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * collabco_message_feature.features.user_permission.inc
+ * message_feature.features.user_permission.inc
  */
 
 /**
  * Implements hook_user_default_permissions().
  */
-function collabco_message_feature_user_default_permissions() {
+function message_feature_user_default_permissions() {
   $permissions = array();
 
   // Exported permission: 'administer flags'.

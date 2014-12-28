@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * collabco_message_feature.context.inc
+ * message_feature.context.inc
  */
 
 /**
  * Implements hook_context_default_contexts().
  */
-function collabco_message_feature_context_default_contexts() {
+function message_feature_context_default_contexts() {
   $export = array();
 
   $context = new stdClass();

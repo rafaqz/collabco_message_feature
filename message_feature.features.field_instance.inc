@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * collabco_message_feature.features.field_instance.inc
+ * message_feature.features.field_instance.inc
  */
 
 /**
  * Implements hook_field_default_field_instances().
  */
-function collabco_message_feature_field_default_field_instances() {
+function message_feature_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance: 'message-create_comment-field_comment_ref'
