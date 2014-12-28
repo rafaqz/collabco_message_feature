@@ -1,7 +1,6 @@
-name = Collabco Message Feature
-description = Collabco message feature.
+name = Message Feature
 core = 7.x
-package = Collabco
+package = Features
 project = message_feature
 dependencies[] = better_formats
 dependencies[] = context

@@ -13,7 +13,7 @@ define('MESSAGE_COMMENT_FIELD','field_comment_ref');
 
 /**
  * @file
- * Collabco message feature.
+ * message feature.
  */
 
 include_once('message_feature.features.inc');
